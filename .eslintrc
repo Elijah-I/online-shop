@@ -2,6 +2,9 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": { "ecmaVersion": 2022 },
+  "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off"
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
