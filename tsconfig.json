@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "target": "ES5",
+    "target": "ES2015",
     "outDir": "../build/",
     "removeComments": true,
     "sourceMap": true,
