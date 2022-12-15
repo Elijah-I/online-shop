@@ -1,3 +1,3 @@
 export const state = {
-    counterValue: 0,
+  route: window.location.hash
 };

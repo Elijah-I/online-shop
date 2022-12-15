@@ -18,7 +18,7 @@ interface IUtils {
 
   id(selector: string): NodeListOf<ExtendedElement> | ExtendedElement | null;
 
-  create(cls: string, type?: string): HTMLElement;
+  create<T extends HTMLElement>(cls: string, type?: string): T;
 }
 
 export const Utils: IUtils = {
@@ -43,7 +43,7 @@ export const Utils: IUtils = {
     const elems: NodeListOf<ExtendedElement> =
       document.querySelectorAll(selector);
 
-    for (let elem of elems) {
+    for (const elem of elems) {
       elem.css = (s) => {
         if (s) elem.setAttribute("style", s);
         else elem.removeAttribute("style");
@@ -77,10 +77,10 @@ export const Utils: IUtils = {
     return null;
   },
 
-  create(classNM = "", type = "div") {
-    const item: HTMLElement = document.createElement(type);
+  create<T extends HTMLElement>(classNM = "", type = "div"): T {
+    const item = document.createElement(type);
     item.className = classNM;
 
-    return item;
+    return item as T;
   }
 };

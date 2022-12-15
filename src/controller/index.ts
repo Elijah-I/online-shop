@@ -1,19 +1,9 @@
-import {Model} from "../model";
-import {CounterController} from "./counter.controller";
+import { Model } from "../model/index";
 
 export class Controller {
+  constructor(private model: Model) {}
 
-    counter: CounterController;
-
-    constructor(private model: Model) {
-        this.counter = new CounterController(model);
-    }
-
-    decrement() {
-        this.counter.decrement();
-    }
-
-    increment() {
-        this.counter.increment();
-    }
+  updateRoute() {
+    this.model.updateRoute(window.location.hash);
+  }
 }

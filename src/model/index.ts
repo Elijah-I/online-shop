@@ -1,26 +1,22 @@
-import {Observer} from "../utils/observer";
-import {CounterModel} from "./counter.model";
-import {state} from "../store";
+import { Observer } from "../utils/observer";
 
-export class Model extends Observer{
-    counter: CounterModel;
+import { state } from "../store/index";
 
-    constructor() {
-        super();
-        this.counter = new CounterModel();
-    }
+export class Model extends Observer {
+  constructor() {
+    super();
+  }
 
-    get counterValue() {
-        return state.counterValue;
-    }
+  updateRoute(route: string) {
+    state.route = route;
+    this.emmit("route");
+  }
 
-    decrement() {
-        this.counter.decrement();
-        this.emmit('change.value')
-    }
+  get route() {
+    return state.route;
+  }
 
-    increment() {
-        this.counter.increment();
-        this.emmit('change.value')
-    }
+  get productId() {
+    return state.route.split("-").pop()!;
+  }
 }
