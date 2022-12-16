@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "ES2015",
-    "outDir": "../build/",
+    "outDir": "../../online-shop-release/",
     "removeComments": true,
     "sourceMap": true,
     "watch": true,

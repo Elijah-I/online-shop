@@ -1,5 +1,5 @@
-import { Path } from "./path.js"
-import { isProd } from "./env.js"
+import { Path } from "./path.js";
+import { isProd } from "./env.js";
 
 export const server = isProd
   ? false
@@ -11,12 +11,12 @@ export const server = isProd
       historyApiFallback: true,
 
       static: {
-        directory: Path("build")
+        directory: Path("../online-shop-release")
       },
 
       client: {
         logging: "none"
       }
-    }
+    };
 
-export const tool = isProd ? false : "source-map"
+export const tool = isProd ? false : "source-map";
