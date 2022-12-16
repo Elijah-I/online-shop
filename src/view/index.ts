@@ -22,9 +22,9 @@ export class View {
   }
 
   init() {
+    this.addListeners();
     this.render();
     this.addHandlers();
-    this.addListeners();
   }
 
   render() {
@@ -56,8 +56,6 @@ export class View {
   }
 
   addListeners() {
-    //window.addEventListener("popstate", () => {});
-
     this.model.on("route", () => {
       this.renderRoute();
     });
@@ -83,9 +81,6 @@ export class View {
       case Routing.PRODUCTS:
         this.productView.render(main, id);
         break;
-
-      default:
-        console.log("404");
     }
   }
 
