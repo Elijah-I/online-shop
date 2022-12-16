@@ -1,5 +1,3 @@
-//type Callback = <T>(...args: T[]) => void;
-//type Callback = <T extends number | string >(args: T) => void;
 type Callback = <T>(args: T) => void;
 
 interface IObject {
