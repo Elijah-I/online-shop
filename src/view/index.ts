@@ -30,6 +30,18 @@ export class View {
   render() {
     this.renderHeader();
     this.renderContent();
+    this.checkRestoreRoute();
+  }
+
+  checkRestoreRoute() {
+    const route = localStorage.getItem("restore");
+
+    if (route) {
+      localStorage.removeItem("restore");
+      this.controller.route(route);
+      return;
+    }
+
     this.renderRoute();
   }
 
@@ -38,7 +50,7 @@ export class View {
       ".header__link"
     ) as NodeListOf<ExtendedElement>) {
       link.addEventListener("click", (e: Event) => {
-        this.controller.route(e, link.href!);
+        this.controller.route(link.href!, e);
       });
     }
   }

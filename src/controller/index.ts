@@ -9,8 +9,8 @@ export class Controller {
     this.routerController = new RouterController(model);
   }
 
-  route(event: Event, route: string) {
-    this.routerController.route(event, route);
+  route(route: string, event: Event | false = false) {
+    this.routerController.route(route, event);
   }
 
   addSearchParam(params: SearchParamsArray) {

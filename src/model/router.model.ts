@@ -8,6 +8,7 @@ export class RouterModel {
 
   get route() {
     const route = new URL(State.route);
+
     const searchParams: SearchParamsObject = {};
     const searchString: Array<string> = [];
     const { host, origin } = route;
@@ -27,7 +28,7 @@ export class RouterModel {
       origin,
       searchParams,
       searchString: searchString.join("&"),
-      path: route.pathname.split("/")
+      path: route.pathname.replace(State.deployPath, "/").split("/")
     };
   }
 }

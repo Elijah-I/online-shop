@@ -1,13 +1,16 @@
-import { SearchParamsArray } from "types/searchParams";
+import { State } from "store/index";
 import { Model } from "../model/index";
+import { SearchParamsArray } from "types/searchParams";
 
 export class RouterController {
   constructor(private model: Model) {}
 
-  route(event: Event, route: string) {
-    event.preventDefault();
+  route(route: string, event: Event | false) {
+    if (event) {
+      event.preventDefault();
+    }
 
-    window.history.pushState({}, "", route);
+    window.history.pushState({}, "", this.makeRoute(route));
 
     this.model.setRoute(route);
   }
@@ -25,8 +28,21 @@ export class RouterController {
 
     const newRoute = `${route.origin}?${params}`;
 
-    window.history.replaceState({}, "", newRoute);
+    window.history.replaceState({}, "", this.makeRoute(newRoute));
 
     this.model.setRoute(newRoute);
+  }
+
+  private makeRoute(route: string) {
+    const { host, origin } = this.model.route;
+
+    if (host.indexOf("github.io") > 0) {
+      route = route.replace(
+        origin.replace(State.deployPath, ""),
+        origin + State.deployPath
+      );
+    }
+
+    return route;
   }
 }
