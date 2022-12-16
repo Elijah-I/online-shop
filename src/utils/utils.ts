@@ -5,13 +5,15 @@ export interface ExtendedElement extends Element {
   html(html: string): ExtendedElement;
   clear(): ExtendedElement;
   class(cls: string, rm?: boolean): ExtendedElement;
+  value?: string;
+  href?: string;
 }
 
 interface IUtils {
   actions: Record<string, Callback>;
 
   addEvent<T extends keyof WindowEventMap>(
-    elem: string | ExtendedElement,
+    elem: string | ExtendedElement | HTMLElement,
     action: T,
     cb: Callback
   ): void;

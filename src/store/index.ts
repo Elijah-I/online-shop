@@ -1,3 +1,7 @@
-export const state = {
-  route: window.location.hash
+interface IState {
+  route: string;
+}
+
+export const State: IState = {
+  route: window.location.href
 };

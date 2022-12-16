@@ -1,22 +1,39 @@
+import { State } from "store/index";
 import { Observer } from "../utils/observer";
-
-import { state } from "../store/index";
+import { SearchParams, SearchParamsObject } from "types/searchParams";
 
 export class Model extends Observer {
   constructor() {
     super();
   }
 
-  updateRoute(route: string) {
-    state.route = route;
+  setRoute(route: string) {
+    State.route = route;
     this.emmit("route");
   }
 
   get route() {
-    return state.route;
-  }
+    const route = new URL(State.route);
+    const searchParams: SearchParamsObject = {};
+    const searchString: Array<string> = [];
+    const { host, origin } = route;
 
-  get productId() {
-    return state.route.split("-").pop()!;
+    for (const param of Object.values(SearchParams)) {
+      const value = route.searchParams.get(param);
+
+      searchParams[param] = value;
+
+      if (value) {
+        searchString.push(`${param}=${value}`);
+      }
+    }
+
+    return {
+      host,
+      origin,
+      searchParams,
+      searchString: searchString.join("&"),
+      path: route.pathname.split("/")
+    };
   }
 }

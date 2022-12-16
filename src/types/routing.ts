@@ -1,5 +1,5 @@
 export enum Routing {
-  MAIN = "#",
-  CART = "#cart",
-  PRODUCT = "#product-"
+  MAIN = "/",
+  CART = "cart",
+  PRODUCTS = "product"
 }
