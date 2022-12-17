@@ -1,3 +1,1 @@
-const a = "hello"
-
-console.log(a)
+import "./app";

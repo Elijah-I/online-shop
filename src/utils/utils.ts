@@ -1,52 +1,88 @@
-type NodeList = NodeListOf<Element>
+type Callback = (e: Event) => void;
 
-export const Utils = {
-  /*
-  actions: [],
+export interface ExtendedElement extends Element {
+  css(style?: string): ExtendedElement;
+  html(html: string): ExtendedElement;
+  clear(): ExtendedElement;
+  class(cls: string, rm?: boolean): ExtendedElement;
+  value?: string;
+  href?: string;
+}
 
-  addEvent(elem: string | NodeList, action: string, func) {
-    if (typeof elem === "string") elem = this.id(elem)
+interface IUtils {
+  actions: Record<string, Callback>;
 
-    const params = { passive: true }
-    const uniqKey = `${elem.className}-${action}-${func}`
-    const callback = (e) => func(e)
+  addEvent<T extends keyof WindowEventMap>(
+    elem: string | ExtendedElement | HTMLElement,
+    action: T,
+    cb: Callback
+  ): void;
+
+  id(selector: string): NodeListOf<ExtendedElement> | ExtendedElement | null;
+
+  create<T extends HTMLElement>(cls: string, type?: string): T;
+}
+
+export const Utils: IUtils = {
+  actions: {},
+
+  addEvent(el, action, cb) {
+    const elem = (typeof el === "string" ? this.id(el) : el) as ExtendedElement;
+
+    const params = { passive: true };
+    const callback = (e: Event) => cb(e);
+    const uniqKey = `${elem.className}-${action}-${cb}`;
 
     if (this.actions[uniqKey])
-      elem.removeEventListener(action, this.actions[uniqKey])
+      elem.removeEventListener(action, this.actions[uniqKey]);
 
-    elem.addEventListener(action, callback, params)
+    elem.addEventListener(action, callback, params);
 
-    this.actions[uniqKey] = callback
+    this.actions[uniqKey] = callback;
   },
-  */
 
-  id(selector: string) {
-    const elems: NodeList = document.querySelectorAll(selector)
+  id(selector) {
+    const elems: NodeListOf<ExtendedElement> =
+      document.querySelectorAll(selector);
 
-    for (let elem of elems) {
+    for (const elem of elems) {
       elem.css = (s) => {
-        if (s) elem.setAttribute("style", s)
-        else elem.removeAttribute("style")
-        return elem
-      }
+        if (s) elem.setAttribute("style", s);
+        else elem.removeAttribute("style");
+
+        return elem;
+      };
+
       elem.html = (h) => {
-        elem.innerHTML = h
-        return elem
-      }
+        elem.innerHTML = h;
+
+        return elem;
+      };
+
       elem.clear = () => {
-        while (elem.firstChild) elem.removeChild(elem.firstChild)
-        return elem
-      }
+        while (elem.firstChild) {
+          elem.removeChild(elem.firstChild);
+        }
+
+        return elem;
+      };
+
+      elem.class = (c, rm = false) => {
+        elem.classList[rm ? "remove" : "add"](c);
+
+        return elem;
+      };
     }
 
-    return elems.length === 1 ? elems[0] : elems.length ? elems : null
-  }
+    if (elems.length === 1) return elems[0];
+    if (elems.length) return elems;
+    return null;
+  },
 
-  /*
-  create(classNM = "", type = "div") {
-    const item = document.createElement(type)
-    item.className = classNM
-    return item
+  create<T extends HTMLElement>(classNM = "", type = "div"): T {
+    const item = document.createElement(type);
+    item.className = classNM;
+
+    return item as T;
   }
-  */
-}
+};
