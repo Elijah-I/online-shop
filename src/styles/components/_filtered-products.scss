@@ -1,0 +1,71 @@
+@use "../abstract" as *;
+
+
+.filtered-products {
+	flex-basis: 70%;
+
+	// .filtered-products__wrapper
+	&__wrapper {
+	}
+
+	// .filtered-products__header
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 30px;
+		margin-bottom: 40px;
+	}
+
+	// .filtered-products__sort-by
+	&__sort-by {
+	}
+
+	// .filtered-products__products
+	&__products {
+	}
+}
+
+.search {
+	@extend %border;
+	border-radius: 20px;
+	padding: 10px;
+
+	&__form {
+		display: flex;
+		align-items: center;
+	}
+
+	&__input {
+		outline: none;
+		padding: 0 10px;
+	}
+
+	&__button {
+		background-color: inherit;
+	}
+}
+
+.sort-by {
+
+	&__select {
+		@extend %border;
+		border-radius: 20px;
+		padding: 12px 10px;
+		outline: none;
+		&:hover {
+			color: $color-primary;
+			cursor: pointer;
+		}
+	}
+}
+
+.products {
+	// .products__wrapper
+	&__wrapper {
+	}
+
+	// .products__item
+	&__item {
+	}
+}

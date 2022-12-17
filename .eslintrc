@@ -3,7 +3,8 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": { "ecmaVersion": 2022 },
   "rules": {
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-var-requires": "off"
   },
   "extends": [
     "eslint:recommended",

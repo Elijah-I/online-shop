@@ -1,0 +1,47 @@
+@use "../abstract" as *;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+.html {
+	font-size: 10px;
+	scroll-behavior: smooth;
+}
+
+.body {
+	font-family: $font-family;
+	@include font(1.6rem, 2.6rem, normal);
+}
+
+.main {
+	&__wrapper {
+		display: flex;
+		gap: 50px;
+	}
+}
+
+h1 {
+	@include font(4.4rem, 5.4rem);
+	@include media-mobile-big {
+		@include font(3.2rem, 4.2rem);
+	}
+}
+
+h2 {
+	@include font(3.4rem, 4.6rem);
+	@include media-mobile-big {
+		@include font(2.4rem, 3.3rem);
+	}
+}
+
+h3 {
+	@include font(2.0rem, 2.0rem);
+	@include media-mobile-big {
+		@include font(2.1rem, 3.1rem);
+	}
+}
+
+h4 {
+	@include font(2.2rem, 3.0rem, 600);
+	@include media-tablet {
+		@include font(2.0rem, 3.0rem, 600);
+	}
+}
