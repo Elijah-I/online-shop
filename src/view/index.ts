@@ -86,13 +86,13 @@ export class View {
   renderHeader() {
     const header = Utils.create<HTMLElement>("header", "header");
 
-    header.innerHTML = `<div class="wrapper header__wrapper">
+    header.innerHTML = `
+            <div class="wrapper header__wrapper">
                 <a href="#" class="header__logo logo"><img src="${logo}" alt="Hobbies Art Logo"></a>
                 <nav class="header__nav nav">
                     <ul class="nav__list">
                         <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
                         <li class="nav__item cart">
-
                             <a href="/cart" class="nav__link">
                                 <div class="cart__wrapper">
                                     <div class="cart__content">

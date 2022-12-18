@@ -109,9 +109,9 @@ export class RangeSlider {
   fillColorBetween() {
     const distance: number =
       parseInt(this.rangeControlFrom.max) - parseInt(this.rangeControlTo.min);
-    const current =
+    const current: number =
       parseInt(this.rangeControlFrom.value) - parseInt(this.rangeControlTo.min);
-    const to =
+    const to: number =
       parseInt(this.rangeControlTo.value) - parseInt(this.rangeControlTo.min);
     this.rangeControlTo.style.background = `linear-gradient(
       to right, #C6C6C6 0%,

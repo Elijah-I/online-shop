@@ -4,24 +4,27 @@ import { FilterMainView } from "./filter.main.view";
 import { FilteredProductsMainView } from "./filteredProducts.main.view";
 
 export class MainView {
+  filters: FilterMainView;
+  filteredProducts: FilteredProductsMainView;
+
+  constructor() {
+    this.filters = new FilterMainView();
+    this.filteredProducts = new FilteredProductsMainView();
+  }
+
   render(root: ExtendedElement, searchParams: SearchParamsObject) {
     root.html("");
     console.log("Search Params", searchParams);
 
     this.renderFilters(root);
-    //this.renderSearchHead(root);
     this.renderFilteredProducts(root);
   }
 
   renderFilters(root: ExtendedElement) {
-    const filters = new FilterMainView();
-    filters.render(root);
+    this.filters.render(root);
   }
 
-  //renderSearchHead(root: ExtendedElement) {}
-
   renderFilteredProducts(root: ExtendedElement) {
-    const filteredProducts = new FilteredProductsMainView();
-    filteredProducts.render(root);
+    this.filteredProducts.render(root);
   }
 }
