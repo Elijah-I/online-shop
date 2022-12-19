@@ -1,0 +1,66 @@
+@use "../abstract" as *;
+
+.range-filter {
+	// .range-filter__wrapper
+	&__wrapper {
+	}
+
+	// .range-filter__controls
+	&__controls {
+	}
+
+	// .range-filter__range
+	&__range {
+		-webkit-appearance: none;
+		appearance: none;
+		height: 2px;
+		width: 25%;
+		position: absolute;
+		background-color: $color-border;
+		pointer-events: none;
+	}
+
+	// .range-filter__values
+	&__values {
+		display: flex;
+		justify-content: space-between;
+		padding: 30px 0;
+	}
+
+	// .range-filter__min
+	&__min,
+	&__max {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	// .range-filter__text
+	&__text {
+	}
+
+	// .range-filter__value
+	&__value {
+	}
+
+	// .range-filter__max
+	&__max {
+	}
+}
+
+.range-filter__range::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	position: relative;
+	z-index: 1;
+	pointer-events: all;
+	width: 18px;
+	height: 18px;
+	background-color: $color-primary;
+	border-radius: 18px;
+
+	cursor: pointer;
+}
+
+.range-filter__range::-webkit-slider-thumb:hover {
+	box-shadow: inset 0 0 3px $color-primary, 0 0 9px $color-primary;
+}

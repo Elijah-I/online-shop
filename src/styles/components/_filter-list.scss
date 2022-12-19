@@ -1,0 +1,64 @@
+@use "../abstract" as *;
+
+.filter-list {
+	padding: 20px 0 30px;
+
+	// .filter-list__item
+	&__item {
+		display: flex;
+		align-items: center;
+		padding: 10px;
+		list-style: none;
+		// .filter-list__item-check
+		&-check {
+			position: relative;
+			width: 20px;
+			height: 18px;
+			@extend %border;
+			border-radius: 3px;
+			appearance: none;
+			outline: 0;
+			cursor: pointer;
+
+			&:before {
+				position: absolute;
+				content: '';
+				display: block;
+				top: -1px;
+				left: 5px;
+				width: 6px;
+				height: 14px;
+				border-style: solid;
+				border-color: $color-light;
+				border-width: 0 2px 2px 0;
+				transform: rotate(45deg);
+				opacity: 0;
+			}
+
+			&:checked {
+				color: white;
+				border-color: $color-primary;
+				background: $color-primary;
+			}
+		}
+	}
+
+	// .filter-list__item-label
+	&__item-label {
+		width: 100%;
+		cursor: pointer;
+		padding: 0 6px 0;
+		user-select: none;
+		text-decoration: none;
+		opacity: 1;
+		transition-duration: 1s;
+	}
+}
+
+.filter-list__item-check:checked::before {
+	opacity: 1;
+}
+
+.filter-list__item-check:checked ~ .filter-list__item-label::before {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}

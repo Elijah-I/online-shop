@@ -1,0 +1,90 @@
+@use "../abstract" as *;
+
+.filter {
+	flex-basis: 30%;
+
+	// .filter__wrapper
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	// .filter__categories
+	&__categories {
+	}
+
+	// .filter__brands
+	&__brands {
+	}
+
+	// .filter__price
+	&__price {
+	}
+
+	// .filter__stock
+	&__stock {
+	}
+
+	&__buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+}
+
+.categories-filter {
+	@extend %border-bottom;
+
+	// .categories-filter__title
+	&__title {
+	}
+
+	// .categories-filter__list
+	&__list {
+	}
+
+	// .categories-filter__item
+	&__item {
+	}
+}
+
+.brands-filter {
+	@extend %border-bottom;
+
+	// .brands-filter__title
+	&__title {
+	}
+
+	// .brands-filter__list
+	&__list {
+	}
+
+	// .brands-filter__item
+	&__item {
+	}
+}
+
+.price-filter {
+	@extend %border-bottom;
+
+	// .price-filter__wrapper
+	&__wrapper {
+	}
+
+	// .price-filter__title
+	&__title {
+		margin-bottom: 30px;
+	}
+}
+
+.stock-filter {
+	// .stock-filter__wrapper
+	&__wrapper {
+	}
+
+	// .stock-filter__title
+	&__title {
+		margin-bottom: 30px;
+	}
+}

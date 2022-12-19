@@ -1,0 +1,47 @@
+@use "variables" as *;
+
+@mixin font($size, $height: $size, $weight: bold, $style: normal){
+	font-size: $size;
+	font-style: $style;
+	font-weight: $weight;
+	line-height: $height;
+}
+
+@mixin columns($width) {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	>* {
+		flex-basis: $width;
+	}
+}
+
+@mixin icon-size($width, $height: 18px) {
+	background-repeat: no-repeat;
+	width: $width;
+	height: $height;
+}
+
+@mixin media-laptop {
+	@media screen and (max-width: $width-container) {
+		@content;
+	}
+}
+
+@mixin media-tablet {
+	@media screen and (max-width: $tablet-width) {
+		@content;
+	}
+}
+
+@mixin media-mobile-big {
+	@media screen and (max-width: $mobile-big-width) {
+		@content;
+	}
+}
+
+@mixin media-mobile-small {
+	@media screen and (max-width: $mobile-small-width) {
+		@content;
+	}
+}
