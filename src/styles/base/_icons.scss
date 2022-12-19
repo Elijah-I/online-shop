@@ -1,0 +1,35 @@
+@use "../abstract" as *;
+
+.icon {
+	cursor: pointer;
+	display: inline-flex;
+}
+
+.icon-circle {
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	&--sec-color {
+		background-color: $color-secondary;
+	}
+}
+
+.icon--cart {
+	background-image: url("./../assets/svg/cart.svg");
+	@include icon-size(11px, 11px);
+}
+
+.icon--rows {
+	background-image: url("./../assets/svg/rows.svg");
+	@include icon-size(25px, 25px);
+	background-size: 100%;
+}
+
+.icon--columns {
+	background-image: url("./../assets/svg/columns.svg");
+	@include icon-size(25px, 25px);
+	background-size: 100%;
+}

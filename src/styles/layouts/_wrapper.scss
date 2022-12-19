@@ -1,0 +1,13 @@
+@use "../abstract" as *;
+
+.wrapper {
+	max-width: $width-container;
+	margin: 0 auto;
+	@include media-laptop {
+		 padding: 0 46px;
+	}
+
+	@include media-mobile-big {
+		padding: 0 21px;
+	}
+}

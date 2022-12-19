@@ -1,4 +1,4 @@
-import { ExtendedElement } from "../utils/utils";
+import { ExtendedElement } from "../../utils/utils";
 
 export class CartView {
   render(root: ExtendedElement) {

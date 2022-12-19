@@ -1,0 +1,84 @@
+@use "../abstract" as *;
+
+.head-controls {
+	// .head-controls__wrapper
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 30px;
+		margin-bottom: 40px;
+	}
+
+	// .head-controls__header
+	&__header {
+	}
+
+	// .head-controls__layouts
+	&__layouts {
+	}
+
+	// .head-controls__search
+	&__search {
+	}
+
+	// .head-controls__sort-by
+	&__sort-by {
+	}
+}
+
+.layouts {
+	// .layouts__radio
+	&__radio {
+		position: fixed;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&__radio:hover + .icon {
+		filter: invert(0);
+		transform: scale(1.2);
+	}
+
+	&__radio:checked + .icon {
+		filter: invert(0);
+		transform: scale(1.2);
+	}
+
+	.icon {
+		filter: invert(0.5);
+	}
+}
+
+.search {
+	@extend %border;
+	border-radius: 20px;
+	padding: 10px;
+
+	&__form {
+		display: flex;
+		align-items: center;
+	}
+
+	&__input {
+		outline: none;
+		padding: 0 10px;
+	}
+
+	&__button {
+		background-color: inherit;
+	}
+}
+
+.sort-by {
+	&__select {
+		@extend %border;
+		border-radius: 20px;
+		padding: 12px 10px;
+		outline: none;
+		&:hover {
+			color: $color-primary;
+			cursor: pointer;
+		}
+	}
+}

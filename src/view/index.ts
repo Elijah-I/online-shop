@@ -2,10 +2,11 @@ import { ExtendedElement, Utils } from "../utils/utils";
 import { Controller } from "../controller/index";
 import { Routing } from "types/routing";
 import { Model } from "../model/index";
+import { ProductView } from "./productView/index";
+import { MainView } from "./mainView/index";
+import { CartView } from "./cartView/index";
 
-import { ProductView } from "./product.view";
-import { MainView } from "./main.view";
-import { CartView } from "./cart.view";
+const logo = require("../assets/svg/logo.svg");
 
 export class View {
   root: ExtendedElement;
@@ -46,9 +47,7 @@ export class View {
   }
 
   addHandlers() {
-    for (const link of Utils.id(
-      ".header__link"
-    ) as NodeListOf<ExtendedElement>) {
+    for (const link of Utils.id(".nav__link") as NodeListOf<ExtendedElement>) {
       link.addEventListener("click", (e: Event) => {
         this.controller.route(link.href!, e);
       });
@@ -66,7 +65,7 @@ export class View {
     const [, path, id] = route.path;
     const searchParams = route.searchParams;
 
-    const main = Utils.id(".main") as ExtendedElement;
+    const main = Utils.id(".main__wrapper") as ExtendedElement;
 
     switch (path) {
       case "":
@@ -86,7 +85,36 @@ export class View {
 
   renderHeader() {
     const header = Utils.create<HTMLElement>("header", "header");
-    header.setAttribute("style", "display: flex; gap: 20px; padding: 20px;");
+
+    header.innerHTML = `
+            <div class="wrapper header__wrapper">
+                <a href="#" class="header__logo logo"><img src="${logo}" alt="Hobbies Art Logo"></a>
+                <nav class="header__nav nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
+                        <li class="nav__item cart">
+                            <a href="/cart" class="nav__link">
+                                <div class="cart__wrapper">
+                                    <div class="cart__content">
+                                        <span class="icon icon--cart"></span>
+                                        <p class="cart__text">Cart</p>
+                                        <div class="cart__total">
+                                            <div class="icon-circle icon-circle--sec-color">
+                                                <span class="cart__total-value">1</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+    `;
+    /*
+    const header = Utils.create<HTMLElement>("header", "header");
+    const headerWrapper = Utils.create<HTMLDivElement>("wrapper header__wrapper", "div");
+    //header.setAttribute("style", "display: flex; gap: 20px; padding: 20px;");
 
     const mainLink = Utils.create<HTMLAnchorElement>("header__link", "a");
     mainLink.href = "/";
@@ -115,11 +143,18 @@ export class View {
 
     header.append(mainLink, cartLink, productLink, searchPattern);
 
+     */
+
     this.root.append(header);
   }
 
   renderContent() {
     const main = Utils.create<HTMLElement>("main", "main");
+    const mainWrapper = Utils.create<HTMLElement>(
+        "main__wrapper wrapper",
+        "div"
+    );
+    main.append(mainWrapper);
     this.root.append(main);
   }
 }

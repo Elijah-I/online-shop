@@ -1,0 +1,47 @@
+@use "../abstract" as *;
+
+.button {
+	padding: 11px 25px 13px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-family: $font-family;
+	@include font(1.6rem, 2.2rem, normal);
+	@extend %transition;
+
+	&--bordered{
+		background: $color-light;
+		border: 1px solid $color-primary;
+		color: $color-primary;
+
+		&:hover {
+			background: $color-primary;
+			color: $color-light;
+		}
+	}
+
+	&--colored{
+		background: $color-primary;
+		border: 1px solid $color-primary;
+		color: $color-light;
+
+		&:hover {
+			background: $color-secondary;
+			border-color: $color-secondary;
+		}
+	}
+
+	&--icon {
+		background: inherit;
+		padding: 5px;
+		filter: invert(0.5);
+		&:hover {
+			filter: invert(0);
+			transform: scale(1.2);
+		}
+	}
+
+	&--icon-active {
+		filter: invert(0);
+		transform: scale(1.2);
+	}
+}
