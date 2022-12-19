@@ -8,6 +8,8 @@
     "watch": true,
     "noEmitOnError": true,
     "noImplicitAny": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "strict": true,
     "lib": ["es2021", "DOM", "DOM.Iterable"],
     "paths": {
