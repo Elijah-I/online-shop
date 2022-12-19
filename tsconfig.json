@@ -10,6 +10,7 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "lib": ["es2021", "DOM", "DOM.Iterable"],
     "paths": {
