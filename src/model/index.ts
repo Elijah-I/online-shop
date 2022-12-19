@@ -15,7 +15,6 @@ export class Model extends Observer {
     this.filterModel = new FilterModel();
 
     this.initState();
-    this.applySearchFilters(true);
   }
 
   setRoute(route: string, noEmmit = false) {
@@ -86,7 +85,7 @@ export class Model extends Observer {
     State.products = [...products];
   }
 
-  applySearchFilters(noEmmit = false) {
+  applySearchFilters() {
     const selectedCategories = this.filterCategories;
 
     State.products.map((product) => {
@@ -102,6 +101,6 @@ export class Model extends Observer {
       return product;
     });
 
-    if (!noEmmit) this.emmit("filter.update");
+    this.emmit("filter.update");
   }
 }

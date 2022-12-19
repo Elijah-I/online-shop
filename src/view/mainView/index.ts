@@ -47,6 +47,6 @@ export class MainView {
 
     this.headControls.render(this.headControlsRoot);
 
-    this.productsList.render(this.model.products, this.productsRoot);
+    this.controller.applySearchFilters();
   }
 }

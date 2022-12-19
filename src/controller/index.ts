@@ -34,6 +34,10 @@ export class Controller {
       JSON.stringify(filterCategories)
     );
 
+    this.applySearchFilters();
+  }
+
+  applySearchFilters() {
     this.model.applySearchFilters();
   }
 }
