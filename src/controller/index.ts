@@ -41,8 +41,8 @@ export class Controller {
       filterBrands.push(id.toString()); // добавляем новый чекед
     } else {
       filterBrands = filterBrands.filter(
-          (brandId) => brandId !== id.toString() // удаляем чекед
-      )
+        (brandId) => brandId !== id.toString() // удаляем чекед
+      );
     }
 
     this.routerController.addSearchParam([
@@ -54,5 +54,41 @@ export class Controller {
 
   applySearchFilters() {
     this.model.applySearchFilters();
+  }
+
+  changeFilterPrice(from: number, to: number) {
+    this.model.changeFilterPrice(from, to);
+
+    let [filterPriceFrom, filterPriceTo] = this.model.filterPrice;
+
+    filterPriceFrom = from.toString();
+    filterPriceTo = to.toString();
+
+    this.routerController.addSearchParam([
+      ["price", `${filterPriceFrom}↕${filterPriceTo}`]
+    ]);
+
+    this.applySearchFilters();
+  }
+
+  changeFilterStock(from: number, to: number) {
+    this.model.changeFilterStock(from, to);
+
+    let [filterStockFrom, filterStockTo] = this.model.filterStock;
+
+    filterStockFrom = from.toString();
+    filterStockTo = to.toString();
+
+    this.routerController.addSearchParam([
+      ["stock", `${filterStockFrom}↕${filterStockTo}`]
+    ]);
+
+    this.applySearchFilters();
+  }
+
+  resetFilter() {
+    this.routerController.addSearchParam([]);
+    this.model.initState();
+    this.applySearchFilters();
   }
 }

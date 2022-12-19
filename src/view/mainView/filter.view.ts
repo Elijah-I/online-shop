@@ -2,38 +2,38 @@ import { ExtendedElement, Utils } from "../../utils/utils";
 import { RangeSlider } from "../../utils/rangeSlider";
 import { Controller } from "controller";
 import { Model } from "model";
-import { Brand, Category } from "store";
 
 export class FilterView {
-  brands: Brand[];
-  categories: Category[];
-
-  constructor(private controller: Controller, private model: Model) {
-    this.brands = this.model.brands;
-    this.categories = this.model.categories;
-  }
+  constructor(private controller: Controller, private model: Model) {}
 
   render(root: ExtendedElement) {
     const filter = Utils.create<HTMLElement>("filter", "section");
-    let template = ``;
+    root.append(filter);
 
-    if (this.categories.length) {
+    this.fill();
+  }
+
+  fill() {
+    this.fillFilters();
+    this.insertSliders();
+    this.addhandlers();
+  }
+
+  fillFilters() {
+    let template = ``;
+    if (this.model.categories.length) {
       template += this.addCategories();
     }
 
-    if (this.brands.length) {
+    if (this.model.brands.length) {
       template += this.addBrands();
     }
 
     template += this.addFilters();
 
-    filter.innerHTML = `<div class="filter__wrapper">${template}</div>`;
-
-    root.append(filter);
-
-    this.insertSliders();
-
-    this.addhandlers();
+    (Utils.id(".filter") as ExtendedElement).html(
+      `<div class="filter__wrapper">${template}</div>`
+    );
   }
 
   private addFilters() {
@@ -51,8 +51,8 @@ export class FilterView {
       </div>
 
       <div class="filter__buttons">
-        <button class="button button--rounded button--bordered">Reset</button>
-        <button class="button button--rounded button--bordered">Copy link</button>
+        <button class="button button--rounded button--bordered button-reset">Reset</button>
+        <button class="button button--rounded button--bordered button-copy">Copy link</button>
       </div>
     `;
   }
@@ -64,7 +64,7 @@ export class FilterView {
         <ul class="categories-filter__list filter-list">
     `;
 
-    this.categories.forEach(({ id, checked, name }) => {
+    this.model.categories.forEach(({ id, checked, name }) => {
       template += `
           <li class="categories-filter__item filter-list__item">
             <input 
@@ -97,7 +97,7 @@ export class FilterView {
         <ul class="brands-filter__list filter-list">
     `;
 
-    this.brands.forEach(({ id, checked, name }) => {
+    this.model.brands.forEach(({ id, checked, name }) => {
       template += `
           <li class="brands-filter__item filter-list__item">
             <input 
@@ -125,21 +125,21 @@ export class FilterView {
 
   insertSliders() {
     const priceRange = Utils.id(".price-filter__wrapper") as ExtendedElement;
-    const priceRangeSlider = new RangeSlider([
-      "price-range-from",
-      "price-range-to",
-      "price-input-from",
-      "price-input-to"
-    ]);
+    priceRange.html('<h3 class="price-filter__title title">Price</h3>');
+    const priceRangeSlider = new RangeSlider(
+      this.model,
+      this.controller,
+      "price"
+    );
     priceRange.append(priceRangeSlider.buildRangeSlider());
 
     const stockRange = Utils.id(".stock-filter__wrapper") as ExtendedElement;
-    const stockRangeSlider = new RangeSlider([
-      "stock-range-from",
-      "stock-range-to",
-      "stock-input-from",
-      "stock-input-to"
-    ]);
+    stockRange.html('<h3 class="price-filter__title title">Stock</h3>');
+    const stockRangeSlider = new RangeSlider(
+      this.model,
+      this.controller,
+      "stock"
+    );
     stockRange.append(stockRangeSlider.buildRangeSlider());
   }
 
@@ -156,14 +156,20 @@ export class FilterView {
     }
 
     for (const brand of Utils.id(
-        ".filter__brand-item"
+      ".filter__brand-item"
     ) as NodeListOf<ExtendedElement>) {
       Utils.addEvent(brand, "click", () =>
-          this.controller.changeFilterBrand(
-              brand.checked!,
-              +brand.dataset!.id
-          )
+        this.controller.changeFilterBrand(brand.checked!, +brand.dataset!.id)
       );
     }
+
+    Utils.addEvent(".button-reset", "click", () => {
+      this.controller.resetFilter();
+      this.fill();
+    });
+
+    Utils.addEvent(".button-copy", "click", () => {
+      navigator.clipboard.writeText(window.location.href);
+    });
   }
 }

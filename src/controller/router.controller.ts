@@ -26,7 +26,10 @@ export class RouterController {
       else params[action](param, value);
     }
 
-    const newRoute = `${route.origin}/?${params}`;
+    let newRoute = `${route.origin}`;
+    if (addParams.length && params.toString()) {
+      newRoute += `/?${params}`;
+    }
 
     window.history.replaceState({}, "", this.makeRoute(newRoute));
 

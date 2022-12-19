@@ -26,4 +26,22 @@ export class FilterModel {
   getBrands(searchBrands: string | null) {
     return searchBrands ? searchBrands.split("↕") : [];
   }
+
+  changePrice(from: number, to: number) {
+    State.price.from = from;
+    State.price.to = to;
+  }
+
+  getPrices(searchPrices: string | null) {
+    return searchPrices ? searchPrices.split("↕") : [null, null];
+  }
+
+  changeStock(from: number, to: number) {
+    State.stock.from = from;
+    State.stock.to = to;
+  }
+
+  getStocks(searchStocks: string | null) {
+    return searchStocks ? searchStocks.split("↕") : [null, null];
+  }
 }

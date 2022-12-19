@@ -27,18 +27,43 @@ export type Product = {
   show?: boolean;
 };
 
+export type Price = {
+  from: number;
+  max: number;
+  to: number;
+};
+
+export type Stock = Price;
+
 interface IState {
   route: string;
   deployPath: string;
   categories: Category[];
   brands: Brand[];
   products: Product[];
+  price: Price;
+  stock: Stock;
 }
 
 export const State: IState = {
   route: window.location.href,
   deployPath: "/online-shop-release",
+
+  products: [],
+
   categories: [],
+
   brands: [],
-  products: []
+
+  price: {
+    from: 0,
+    to: 0,
+    max: 0
+  },
+
+  stock: {
+    from: 0,
+    to: 0,
+    max: 0
+  }
 };

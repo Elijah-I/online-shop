@@ -1,3 +1,6 @@
+import { Controller } from "controller";
+import { Model } from "model";
+
 export class RangeSlider {
   arrOfId: string[];
   wrapper: HTMLElement;
@@ -8,8 +11,18 @@ export class RangeSlider {
   rangeValueFrom: HTMLElement;
   rangeValueTo: HTMLElement;
 
-  constructor(arrOfId: string[]) {
-    this.arrOfId = arrOfId;
+  constructor(
+    private model: Model,
+    private controller: Controller,
+    private type: string
+  ) {
+    this.arrOfId = [
+      `${this.type}-range-from`,
+      `${this.type}-range-to`,
+      `${this.type}-input-from`,
+      `${this.type}-input-to`
+    ];
+
     this.wrapper = this.createDomNode("div", "range-filter");
     this.controls = this.createDomNode("div", "range-filter__controls");
     this.rangeControlFrom = this.createDomNode("input", "range-filter__range");
@@ -46,20 +59,32 @@ export class RangeSlider {
   }
 
   initInputs() {
+    let range = { max: 100, from: 50, to: 80 };
+    if (this.type === "price") range = this.model.priceRange;
+    if (this.type === "stock") range = this.model.stockRange;
+
+    const { max, from, to } = range;
+
     this.rangeControlFrom.type = "range";
     this.rangeControlFrom.min = "0";
-    this.rangeControlFrom.max = "100";
-    this.rangeControlFrom.value = "50";
+    this.rangeControlFrom.max = max.toString();
+    this.rangeControlFrom.value = from.toString();
 
     this.rangeControlTo.type = "range";
     this.rangeControlTo.min = "0";
-    this.rangeControlTo.max = "100";
-    this.rangeControlTo.value = "80";
+    this.rangeControlTo.max = max.toString();
+    this.rangeControlTo.value = to.toString();
   }
 
   initDefaultValues() {
-    this.rangeValueFrom.innerText = "50";
-    this.rangeValueTo.innerText = "80";
+    let range = { max: 100, from: 50, to: 80 };
+    if (this.type === "price") range = this.model.priceRange;
+    if (this.type === "stock") range = this.model.stockRange;
+
+    const { from, to } = range;
+
+    this.rangeValueFrom.innerText = from.toString();
+    this.rangeValueTo.innerText = to.toString();
   }
 
   appendElements() {
@@ -75,12 +100,32 @@ export class RangeSlider {
         parseInt(this.rangeControlTo.value, 10)
       )
     );
+
     this.rangeControlTo.addEventListener("input", () =>
       this.controlRangeTo(
         parseInt(this.rangeControlFrom.value, 10),
         parseInt(this.rangeControlTo.value, 10)
       )
     );
+
+    this.rangeControlFrom.addEventListener("mouseup", () => {
+      this.applyRange(
+        parseInt(this.rangeControlFrom.value, 10),
+        parseInt(this.rangeControlTo.value, 10)
+      );
+    });
+
+    this.rangeControlTo.addEventListener("mouseup", () => {
+      this.applyRange(
+        parseInt(this.rangeControlFrom.value, 10),
+        parseInt(this.rangeControlTo.value, 10)
+      );
+    });
+  }
+
+  applyRange(from: number, to: number) {
+    if (this.type === "price") this.controller.changeFilterPrice(from, to);
+    if (this.type === "stock") this.controller.changeFilterStock(from, to);
   }
 
   controlRangeFrom(from: number, to: number) {
