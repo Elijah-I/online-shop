@@ -13,4 +13,17 @@ export class FilterModel {
   getCategories(searchCategories: string | null) {
     return searchCategories ? searchCategories.split("↕") : [];
   }
+
+  changeBrand(checked: boolean, id: number) {
+    State.brands.map((brand) => {
+      if (brand.id === id) {
+        brand.checked = checked;
+      }
+      return brand;
+    });
+  }
+
+  getBrands(searchBrands: string | null) {
+    return searchBrands ? searchBrands.split("↕") : [];
+  }
 }

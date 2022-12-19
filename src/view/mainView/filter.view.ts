@@ -102,8 +102,8 @@ export class FilterView {
           <li class="brands-filter__item filter-list__item">
             <input 
               type="checkbox" 
-              class="filter-list__item-check" 
-              data-label-for="brands" 
+              class="filter-list__item-check filter__brand-item" 
+              data-id="${id}"
               id="brands-${id}" 
               ${checked ? "checked" : ""}
             >
@@ -152,6 +152,17 @@ export class FilterView {
           category.checked!,
           +category.dataset!.id
         )
+      );
+    }
+
+    for (const brand of Utils.id(
+        ".filter__brand-item"
+    ) as NodeListOf<ExtendedElement>) {
+      Utils.addEvent(brand, "click", () =>
+          this.controller.changeFilterBrand(
+              brand.checked!,
+              +brand.dataset!.id
+          )
       );
     }
   }

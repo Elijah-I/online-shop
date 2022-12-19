@@ -29,10 +29,25 @@ export class Controller {
       ["category", filterCategories.join("↕")]
     ]);
 
-    localStorage.setItem(
-      "checkedCategoriesId",
-      JSON.stringify(filterCategories)
-    );
+    this.applySearchFilters();
+  }
+
+  changeFilterBrand(checked: boolean, id: number) {
+    this.model.changeFilterBrand(checked, id); // меняем в модели на чекед/анчекд
+
+    let filterBrands = this.model.filterBrands;
+
+    if (checked) {
+      filterBrands.push(id.toString()); // добавляем новый чекед
+    } else {
+      filterBrands = filterBrands.filter(
+          (brandId) => brandId !== id.toString() // удаляем чекед
+      )
+    }
+
+    this.routerController.addSearchParam([
+      ["brand", filterBrands.join("↕")] // записываем в URL обновленную строку
+    ]);
 
     this.applySearchFilters();
   }

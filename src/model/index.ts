@@ -42,8 +42,16 @@ export class Model extends Observer {
     this.filterModel.changeCategory(checked, id);
   }
 
+  changeFilterBrand(checked: boolean, id: number) {
+    this.filterModel.changeBrand(checked, id);
+  }
+
   get filterCategories() {
     return this.filterModel.getCategories(this.route.searchParams.category);
+  }
+
+  get filterBrands() {
+    return this.filterModel.getBrands(this.route.searchParams.brand); // получаем массив значений по ключу из адресной строки после &brand=...
   }
 
   private initState() {
@@ -51,13 +59,8 @@ export class Model extends Observer {
     const brands: Record<string, Brand> = {};
     const categories: Record<string, Category> = {};
 
-    const checkedCategoriesId = JSON.parse(
-      localStorage.getItem("checkedCategoriesId") || "[]"
-    );
-
-    const checkedBrandsId = JSON.parse(
-      localStorage.getItem("checkedBrandsId") || "[]"
-    );
+    const checkedCategoriesId = this.filterCategories;
+    const checkedBrandsId = this.filterBrands;
 
     products.forEach((product) => {
       const withBrand = checkedBrandsId.includes(product.brand.id.toString());
@@ -83,6 +86,7 @@ export class Model extends Observer {
 
   applySearchFilters() {
     const selectedCategories = this.filterCategories;
+    const selectedBrands = this.filterBrands;
 
     State.products.map((product) => {
       product.show = true;
@@ -90,6 +94,13 @@ export class Model extends Observer {
       if (
         selectedCategories.length &&
         selectedCategories.includes(product.category.id.toString()) === false
+      ) {
+        product.show = false;
+      }
+
+      if (
+          selectedBrands.length &&
+          selectedBrands.includes(product.brand.id.toString()) === false
       ) {
         product.show = false;
       }
