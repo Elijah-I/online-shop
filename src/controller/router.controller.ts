@@ -12,6 +12,10 @@ export class RouterController {
 
     window.history.pushState({}, "", this.makeRoute(route));
 
+    this.updateRoute(route);
+  }
+
+  updateRoute(route: string) {
     this.model.setRoute(route);
   }
 

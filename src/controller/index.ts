@@ -12,6 +12,10 @@ export class Controller {
     this.routerController.route(route, event);
   }
 
+  updateRoute(route: string) {
+    this.routerController.updateRoute(route);
+  }
+
   changeFilterCategory(checked: boolean, id: number) {
     this.model.changeFilterCategory(checked, id);
 

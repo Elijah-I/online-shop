@@ -55,6 +55,10 @@ export class View {
   }
 
   addListeners() {
+    window.addEventListener("popstate", () => {
+      this.controller.updateRoute(window.location.href);
+    });
+
     this.model.on("route", () => {
       this.renderRoute();
     });
