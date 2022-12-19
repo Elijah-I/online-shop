@@ -1,4 +1,5 @@
 import { ExtendedElement, Utils } from "../../utils/utils";
+import { Model } from "model/index";
 import { SearchParamsObject } from "types/searchParams";
 import { FilterView } from "./filter.view";
 import { ProductsView } from "./products.view";
@@ -9,8 +10,8 @@ export class MainView {
   headControls: HeadControlsView;
   productsList: ProductsView;
 
-  constructor() {
-    this.filters = new FilterView();
+  constructor(private model: Model) {
+    this.filters = new FilterView(this.model.brands, this.model.categories);
     this.headControls = new HeadControlsView();
     this.productsList = new ProductsView();
   }
@@ -29,8 +30,8 @@ export class MainView {
 
   renderHeadAndContent(root: ExtendedElement) {
     const rightSideWrapper = Utils.create<HTMLDivElement>(
-        "main__right-side",
-        "div"
+      "main__right-side",
+      "div"
     );
 
     this.renderHeadControls(rightSideWrapper);

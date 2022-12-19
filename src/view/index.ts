@@ -18,7 +18,7 @@ export class View {
     this.root = Utils.id("#root") as ExtendedElement;
 
     this.productView = new ProductView();
-    this.mainView = new MainView();
+    this.mainView = new MainView(this.model);
     this.cartView = new CartView();
   }
 
@@ -151,8 +151,8 @@ export class View {
   renderContent() {
     const main = Utils.create<HTMLElement>("main", "main");
     const mainWrapper = Utils.create<HTMLElement>(
-        "main__wrapper wrapper",
-        "div"
+      "main__wrapper wrapper",
+      "div"
     );
     main.append(mainWrapper);
     this.root.append(main);
