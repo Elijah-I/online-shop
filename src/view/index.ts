@@ -18,7 +18,7 @@ export class View {
     this.root = Utils.id("#root") as ExtendedElement;
 
     this.productView = new ProductView();
-    this.mainView = new MainView(this.model);
+    this.mainView = new MainView(this.controller, this.model);
     this.cartView = new CartView();
   }
 
@@ -63,14 +63,13 @@ export class View {
   renderRoute() {
     const route = this.model.route;
     const [, path, id] = route.path;
-    const searchParams = route.searchParams;
 
     const main = Utils.id(".main__wrapper") as ExtendedElement;
 
     switch (path) {
       case "":
       case Routing.MAIN:
-        this.mainView.render(main, searchParams);
+        this.mainView.render(main);
         break;
 
       case Routing.CART:
@@ -111,39 +110,6 @@ export class View {
                 </nav>
             </div>
     `;
-    /*
-    const header = Utils.create<HTMLElement>("header", "header");
-    const headerWrapper = Utils.create<HTMLDivElement>("wrapper header__wrapper", "div");
-    //header.setAttribute("style", "display: flex; gap: 20px; padding: 20px;");
-
-    const mainLink = Utils.create<HTMLAnchorElement>("header__link", "a");
-    mainLink.href = "/";
-    mainLink.innerText = "Main";
-
-    const cartLink = Utils.create<HTMLAnchorElement>("header__link", "a");
-    cartLink.href = "/cart";
-    cartLink.innerText = "Cart";
-
-    const productLink = Utils.create<HTMLAnchorElement>("header__link", "a");
-    productLink.href = "/product/0";
-    productLink.innerText = "Product";
-
-    const searchPattern = Utils.create<HTMLButtonElement>("", "button");
-    searchPattern.innerText = "Search Pattern";
-    Utils.addEvent(searchPattern, "click", () => {
-      this.controller.addSearchParam([
-        ["category", "smartphones"],
-        ["brand", "apple"],
-        ["price", "58↕899"],
-        ["stock", "25↕94"],
-        ["sort", "price-ASC"],
-        ["view", "small"]
-      ]);
-    });
-
-    header.append(mainLink, cartLink, productLink, searchPattern);
-
-     */
 
     this.root.append(header);
   }

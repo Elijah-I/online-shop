@@ -1,9 +1,17 @@
 import { ExtendedElement, Utils } from "../../utils/utils";
 import { RangeSlider } from "../../utils/rangeSlider";
-import { Brand, Category } from "store/index";
+import { Controller } from "controller";
+import { Model } from "model";
+import { Brand, Category } from "store";
 
 export class FilterView {
-  constructor(private brands: Brand[], private categories: Category[]) {}
+  brands: Brand[];
+  categories: Category[];
+
+  constructor(private controller: Controller, private model: Model) {
+    this.brands = this.model.brands;
+    this.categories = this.model.categories;
+  }
 
   render(root: ExtendedElement) {
     const filter = Utils.create<HTMLElement>("filter", "section");
@@ -24,6 +32,8 @@ export class FilterView {
     root.append(filter);
 
     this.insertSliders();
+
+    this.addhandlers();
   }
 
   private addFilters() {
@@ -59,8 +69,9 @@ export class FilterView {
           <li class="categories-filter__item filter-list__item">
             <input 
               type="checkbox" 
-              class="filter-list__item-check" 
-              id="categories-${id}" 
+              class="filter-list__item-check filter__categorie-item" 
+              data-id="${id}"
+              id="categories-${id}"
               ${checked ? "checked" : ""}
             >
             <label 
@@ -130,5 +141,18 @@ export class FilterView {
       "stock-input-to"
     ]);
     stockRange.append(stockRangeSlider.buildRangeSlider());
+  }
+
+  addhandlers() {
+    for (const category of Utils.id(
+      ".filter__categorie-item"
+    ) as NodeListOf<ExtendedElement>) {
+      Utils.addEvent(category, "click", () =>
+        this.controller.changeFilterCategory(
+          category.checked!,
+          +category.dataset!.id
+        )
+      );
+    }
   }
 }

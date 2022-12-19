@@ -30,7 +30,7 @@ export class RouterController {
 
     window.history.replaceState({}, "", this.makeRoute(newRoute));
 
-    this.model.setRoute(newRoute);
+    this.model.setRoute(newRoute, true);
   }
 
   private makeRoute(route: string) {

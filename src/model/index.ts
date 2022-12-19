@@ -1,21 +1,26 @@
-import { Brand, Category, State } from "store/index";
+import { Brand, Category, Product, State } from "store/index";
 import Products from "../store/products.json";
 import { Observer } from "../utils/observer";
+import { FilterModel } from "./filter.model";
 import { RouterModel } from "./router.model";
 
 export class Model extends Observer {
   routerModel: RouterModel;
+  filterModel: FilterModel;
 
   constructor() {
     super();
 
     this.routerModel = new RouterModel();
+    this.filterModel = new FilterModel();
+
     this.initState();
+    this.applySearchFilters(true);
   }
 
-  setRoute(route: string) {
+  setRoute(route: string, noEmmit = false) {
     this.routerModel.setRoute(route);
-    this.emmit("route");
+    if (!noEmmit) this.emmit("route");
   }
 
   get route() {
@@ -30,7 +35,20 @@ export class Model extends Observer {
     return State.categories;
   }
 
+  get products() {
+    return State.products;
+  }
+
+  changeFilterCategory(checked: boolean, id: number) {
+    this.filterModel.changeCategory(checked, id);
+  }
+
+  get filterCategories() {
+    return this.filterModel.getCategories(this.route.searchParams.category);
+  }
+
   private initState() {
+    const products: Product[] = [...Products];
     const brands: Record<string, Brand> = {};
     const categories: Record<string, Category> = {};
 
@@ -42,21 +60,48 @@ export class Model extends Observer {
       localStorage.getItem("checkedBrandsId") || "[]"
     );
 
-    Products.forEach((product) => {
+    products.map((product) => {
+      const withBrand = checkedBrandsId.includes(product.brand.id.toString());
+      const withCategory = checkedCategoriesId.includes(
+        product.category.id.toString()
+      );
+
       categories[product.category.id] = {
         ...product.category,
-        checked: checkedCategoriesId.includes(product.category.id)
+        checked: withCategory
       };
 
       brands[product.brand.id] = {
         ...product.brand,
-        checked: checkedBrandsId.includes(product.brand.id)
+        checked: withBrand
       };
+
+      product.show = true;
+
+      return product;
     });
 
     State.categories = [...Object.values(categories)];
     State.brands = [...Object.values(brands)];
+    State.products = [...products];
+  }
 
-    console.log(State);
+  applySearchFilters(noEmmit = false) {
+    const selectedCategories = this.filterCategories;
+
+    State.products.map((product) => {
+      product.show = true;
+
+      if (
+        selectedCategories.length &&
+        selectedCategories.includes(product.category.id.toString()) === false
+      ) {
+        product.show = false;
+      }
+
+      return product;
+    });
+
+    if (!noEmmit) this.emmit("filter.update");
   }
 }
