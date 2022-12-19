@@ -59,7 +59,7 @@ export class Model extends Observer {
       localStorage.getItem("checkedBrandsId") || "[]"
     );
 
-    products.map((product) => {
+    products.forEach((product) => {
       const withBrand = checkedBrandsId.includes(product.brand.id.toString());
       const withCategory = checkedCategoriesId.includes(
         product.category.id.toString()
@@ -74,10 +74,6 @@ export class Model extends Observer {
         ...product.brand,
         checked: withBrand
       };
-
-      product.show = true;
-
-      return product;
     });
 
     State.categories = [...Object.values(categories)];

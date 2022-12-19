@@ -9,7 +9,7 @@ export class MainView {
   filters: FilterView;
   headControls: HeadControlsView;
   productsList: ProductsView;
-  productsRoot: HTMLDivElement;
+  productsRoot: HTMLElement;
   headControlsRoot: HTMLElement;
   rightSideWrapper: HTMLDivElement;
 
@@ -18,7 +18,7 @@ export class MainView {
     this.headControls = new HeadControlsView();
     this.productsList = new ProductsView();
 
-    this.productsRoot = Utils.create<HTMLDivElement>("products", "section");
+    this.productsRoot = Utils.create<HTMLElement>("products", "section");
     this.headControlsRoot = Utils.create<HTMLElement>(
       "head-controls",
       "section"
