@@ -106,7 +106,7 @@ export class Controller {
     this.model.changeLayout(layout);
 
     this.routerController.addSearchParam([
-      ["layout", layout]
+      [SearchParams.LAYOUT, layout]
     ]);
   }
 
@@ -114,7 +114,7 @@ export class Controller {
     this.model.changeSort(sort);
 
     this.routerController.addSearchParam([
-      ["sort", sort]
+      [SearchParams.SORT, sort]
     ]);
 
     this.applyControls();
