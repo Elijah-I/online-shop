@@ -68,6 +68,10 @@ export class Model extends Observer {
     return State.price;
   }
 
+  get amount() {
+    return State.amount;
+  }
+
   changeFilterCategory(checked: boolean, id: number) {
     this.filterModel.changeCategory(checked, id);
   }
