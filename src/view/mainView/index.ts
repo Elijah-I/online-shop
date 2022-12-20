@@ -12,8 +12,13 @@ export class MainView {
   productsRoot: HTMLElement;
   headControlsRoot: HTMLElement;
   rightSideWrapper: HTMLDivElement;
+  leftSideWrapper: HTMLDivElement;
 
-  constructor(private controller: Controller, private model: Model) {
+  constructor(
+    private controller: Controller,
+    private model: Model,
+    private root: ExtendedElement
+  ) {
     this.filters = new FilterView(this.controller, this.model);
     this.headControls = new HeadControlsView(this.controller, this.model);
     this.productsList = new ProductsView();
@@ -27,30 +32,36 @@ export class MainView {
       "main__right-side",
       "div"
     );
+    this.leftSideWrapper = Utils.create<HTMLDivElement>(
+      "main__left-side",
+      "div"
+    );
 
     this.addListeners();
   }
 
   addListeners() {
-    const renderProductsCallback = () =>
+    const renderProductsCallback = () => {
       this.productsList.render(
         this.model.products,
         this.model.layout,
         this.productsRoot
       );
+
+      this.filters.render(this.leftSideWrapper);
+    };
     this.model.on("filter.update", renderProductsCallback);
     this.model.on("controls.update", renderProductsCallback);
     this.model.on("search.update", renderProductsCallback);
   }
 
-  render(root: ExtendedElement) {
-    root.html("");
+  render() {
+    this.root.html("");
 
-    this.filters.render(root);
     this.headControls.render(this.headControlsRoot);
     this.rightSideWrapper.append(this.headControlsRoot, this.productsRoot);
 
-    root.append(this.rightSideWrapper);
+    this.root.append(this.leftSideWrapper, this.rightSideWrapper);
 
     this.controller.applyFilters();
     this.controller.applyControls();

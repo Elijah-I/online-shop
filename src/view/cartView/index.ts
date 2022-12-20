@@ -1,7 +1,9 @@
 import { ExtendedElement } from "../../utils/utils";
 
 export class CartView {
-  render(root: ExtendedElement) {
-    root.html("cart");
+  constructor(private root: ExtendedElement) {}
+
+  render() {
+    this.root.html("cart");
   }
 }

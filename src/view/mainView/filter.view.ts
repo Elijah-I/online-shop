@@ -6,8 +6,9 @@ import { Model } from "model";
 export class FilterView {
   constructor(private controller: Controller, private model: Model) {}
 
-  render(root: ExtendedElement) {
+  render(root: HTMLDivElement) {
     const filter = Utils.create<HTMLElement>("filter", "section");
+    root.innerHTML = "";
     root.append(filter);
 
     this.fill();

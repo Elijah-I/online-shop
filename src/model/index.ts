@@ -1,4 +1,11 @@
-import { Brand, Category, Product, State } from "store/index";
+import {
+  Brand,
+  BrandsAmount,
+  CategoriesAmount,
+  Category,
+  Product,
+  State
+} from "store/index";
 import Products from "../store/products.json";
 import { Observer } from "../utils/observer";
 import { FilterModel } from "./filter.model";
@@ -248,7 +255,62 @@ export class Model extends Observer {
       return product;
     });
 
+    this.calculateAmounts();
+
     this.emmit("filter.update");
+  }
+
+  private calculateAmounts() {
+    const categories: CategoriesAmount = {};
+    const brands: BrandsAmount = {};
+    const price = { min: 10000000, max: 0 };
+    const stock = { min: 10000000, max: 0 };
+
+    State.products.forEach((product) => {
+      if (product.show) {
+        const categoryID = product.category.id;
+        const brandID = product.brand.id;
+
+        categories[categoryID] = categories[categoryID]
+          ? categories[categoryID] + 1
+          : 1;
+
+        brands[brandID] = brands[brandID] ? brands[brandID] + 1 : 1;
+
+        if (price.min > product.price) {
+          price.min = product.price;
+        }
+
+        if (price.max < product.price) {
+          price.max = product.price;
+        }
+
+        if (stock.min > product.stock) {
+          stock.min = product.stock;
+        }
+
+        if (stock.max < product.stock) {
+          stock.max = product.stock;
+        }
+      }
+    });
+
+    State.stock = {
+      from: stock.min,
+      to: stock.max,
+      max: State.stock.max
+    };
+
+    State.price = {
+      from: price.min,
+      to: price.max,
+      max: State.price.max
+    };
+
+    State.amount = {
+      categories,
+      brands
+    };
   }
 
   applyControls() {
