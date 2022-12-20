@@ -84,7 +84,6 @@ export class FilterView {
           </li>`;
     });
 
-    console.log()
     template += `
         </ul>
       </div>
