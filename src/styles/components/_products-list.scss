@@ -28,18 +28,21 @@
 				justify-content: end;
 			}
 
+			&__rating-buy {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+			}
+
 			// .product-item__price
 			&__price {
-				order: 0;
-				text-align: left;
+				text-align: right;
 			}
 
 			// .product-item__button
 			&__button {
-				order: 0;
-
 				& .button {
-
+					width: 100%;
 				}
 			}
 		}
@@ -57,31 +60,46 @@
 			}
 
 			&__title {
-				padding: 30px;
+				justify-content: center;
 				text-align: center;
+				font-size: 2.5rem;
 			}
 
 			// .product-item__info
 			&__info {
-				flex-direction: row;
-				gap: 12px;
-				justify-content: end;
+				flex-direction: row-reverse;
+				justify-content: space-between;
+				font-size: 1.9rem;
+			}
 
+			&__desc {
+				gap: 10px;
+				text-align: right;
 			}
 
 			// .product-item__price
 			&__price {
-				order: 1;
-				text-align: end;
+				font-size: 2rem;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+
 				&-default {
+					padding-top: 20px;
 				}
 
 				&-discount {
-					@include font(2.1rem, 1.8rem);
+					@include font(3rem, 1.8rem);
 					color: $color-primary;
 				}
 			}
 
+			&__rating-buy {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			/*
 			// .product-item__category
 			&__category,
 			&__brand,
@@ -103,14 +121,22 @@
 				top: 0;
 				right: -8px;
 			}
+			 */
 
 			// .product-item__brand
 			&__brand {
 			}
 
+			&__rating {
+				align-self: center;
+				font-size: 1.9rem;
+			}
+
 			// .product-item__button
 			&__button {
-				order: 1;
+				& .button {
+					width: 19vw;
+				}
 			}
 		}
 	}
@@ -146,18 +172,25 @@
 		margin: 0 0 15px;
 		text-align: left;
 		flex-grow: 1;
+		display: flex;
+		align-items: center;
 	}
 
 	// .product-item__info
 	&__info {
 		display: flex;
+		gap: 10px;
 		padding-bottom: 10px;
+	}
+
+	&__desc {
+		display: flex;
+		flex-direction: column;
 	}
 
 	// .product-item__price
 	&__price {
 		@include font(1.8rem, 1.8rem);
-		padding-bottom: 15px;
 		&-default {
 			text-decoration: line-through;
 		}
@@ -176,11 +209,12 @@
 	&__brand {
 	}
 
+	&__rating-buy {
+
+	}
+
 	// .product-item__button
 	&__button {
 		text-align: center;
-		& .button {
-			width: 100%;
-		}
 	}
 }

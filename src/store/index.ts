@@ -52,6 +52,7 @@ interface IState {
   amount: {
     categories: CategoriesAmount;
     brands: BrandsAmount;
+    totalAmount: number;
   };
 }
 
@@ -81,7 +82,8 @@ export const State: IState = {
 
   amount: {
     categories: {},
-    brands: {}
+    brands: {},
+    totalAmount: 0,
   },
 
   layout: "",
