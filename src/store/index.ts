@@ -45,6 +45,7 @@ interface IState {
   stock: Stock;
   layout: string;
   sort: string;
+  search: string;
 }
 
 export const State: IState = {
@@ -56,6 +57,8 @@ export const State: IState = {
   categories: [],
 
   brands: [],
+
+  search: "",
 
   price: {
     from: 0,
@@ -69,6 +72,6 @@ export const State: IState = {
     max: 0
   },
 
-  layout: '',
-  sort: ''
+  layout: "",
+  sort: ""
 };

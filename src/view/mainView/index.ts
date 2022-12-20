@@ -20,21 +20,27 @@ export class MainView {
 
     this.productsRoot = Utils.create<HTMLElement>("products", "section");
     this.headControlsRoot = Utils.create<HTMLElement>(
-        "head-controls",
-        "section"
+      "head-controls",
+      "section"
     );
     this.rightSideWrapper = Utils.create<HTMLDivElement>(
-        "main__right-side",
-        "div"
+      "main__right-side",
+      "div"
     );
 
     this.addListeners();
   }
 
   addListeners() {
-    const renderProductsCallback = () => this.productsList.render(this.model.products, this.model.layout, this.productsRoot);
+    const renderProductsCallback = () =>
+      this.productsList.render(
+        this.model.products,
+        this.model.layout,
+        this.productsRoot
+      );
     this.model.on("filter.update", renderProductsCallback);
     this.model.on("controls.update", renderProductsCallback);
+    this.model.on("search.update", renderProductsCallback);
   }
 
   render(root: ExtendedElement) {
@@ -46,7 +52,7 @@ export class MainView {
 
     root.append(this.rightSideWrapper);
 
-    this.controller.applySearchFilters();
+    this.controller.applyFilters();
     this.controller.applyControls();
   }
 }

@@ -3,13 +3,15 @@ import Products from "../store/products.json";
 import { Observer } from "../utils/observer";
 import { FilterModel } from "./filter.model";
 import { RouterModel } from "./router.model";
-import {ControlsModel} from "./controls.model";
-import {SortSettings} from "types/sortSettings";
+import { ControlsModel } from "./controls.model";
+import { SortSettings } from "types/sortSettings";
+import { SearchModel } from "./search.model";
 
 export class Model extends Observer {
   routerModel: RouterModel;
   filterModel: FilterModel;
   controlsModel: ControlsModel;
+  searchModel: SearchModel;
 
   constructor() {
     super();
@@ -17,6 +19,7 @@ export class Model extends Observer {
     this.routerModel = new RouterModel();
     this.filterModel = new FilterModel();
     this.controlsModel = new ControlsModel();
+    this.searchModel = new SearchModel();
 
     this.initState();
   }
@@ -106,12 +109,21 @@ export class Model extends Observer {
     return this.controlsModel.getSort(this.route.searchParams.sort);
   }
 
+  get searchPattern() {
+    return this.searchModel.getPattern(this.route.searchParams.search);
+  }
+
+  get search() {
+    return State.search;
+  }
+
   initState() {
     const products: Product[] = [...Products];
     const brands: Record<string, Brand> = {};
     const categories: Record<string, Category> = {};
     const stock = { ...State.stock };
     const price = { ...State.price };
+    const searchPattern = this.searchPattern;
 
     const checkedCategoriesId = this.filterCategories;
     const checkedBrandsId = this.filterBrands;
@@ -124,7 +136,7 @@ export class Model extends Observer {
     products.forEach((product) => {
       const withBrand = checkedBrandsId.includes(product.brand.id.toString());
       const withCategory = checkedCategoriesId.includes(
-          product.category.id.toString()
+        product.category.id.toString()
       );
 
       categories[product.category.id] = {
@@ -166,6 +178,7 @@ export class Model extends Observer {
 
     State.layout = layout;
     State.sort = sort;
+    State.search = searchPattern;
   }
 
   private getRangeFrom(range: { max: number }) {
@@ -176,9 +189,10 @@ export class Model extends Observer {
     return Math.round(range.max - range.max * 0.1);
   }
 
-  applySearchFilters() {
-    const selectedCategories = this.filterCategories;
+  applyFilters() {
+    const find = this.searchPattern;
     const selectedBrands = this.filterBrands;
+    const selectedCategories = this.filterCategories;
     const [selectedStockFrom, selectedStockTo] = this.filterStock;
     const [selectedPriceFrom, selectedPriceTo] = this.filterPrice;
 
@@ -186,23 +200,23 @@ export class Model extends Observer {
       product.show = true;
 
       if (
-          selectedCategories.length &&
-          selectedCategories.includes(product.category.id.toString()) === false
+        selectedCategories.length &&
+        selectedCategories.includes(product.category.id.toString()) === false
       ) {
         product.show = false;
       }
 
       if (
-          selectedBrands.length &&
-          selectedBrands.includes(product.brand.id.toString()) === false
+        selectedBrands.length &&
+        selectedBrands.includes(product.brand.id.toString()) === false
       ) {
         product.show = false;
       }
 
       if (selectedStockFrom && selectedStockTo) {
         if (
-            product.stock < +selectedStockFrom ||
-            product.stock > +selectedStockTo
+          product.stock < +selectedStockFrom ||
+          product.stock > +selectedStockTo
         ) {
           product.show = false;
         }
@@ -210,11 +224,25 @@ export class Model extends Observer {
 
       if (selectedPriceFrom && selectedPriceTo) {
         if (
-            product.price < +selectedPriceFrom ||
-            product.price > +selectedPriceTo
+          product.price < +selectedPriceFrom ||
+          product.price > +selectedPriceTo
         ) {
           product.show = false;
         }
+      }
+
+      let show = false;
+
+      if (!find) show = true;
+
+      if (!show) show = this.searchContains(find, product.brand.name);
+      if (!show) show = this.searchContains(find, product.category.name);
+      if (!show) show = this.searchContains(find, product.title);
+      if (!show) show = this.searchContains(find, product.price.toString());
+      if (!show) show = this.searchContains(find, product.description);
+
+      if (!show) {
+        product.show = false;
       }
 
       return product;
@@ -228,25 +256,56 @@ export class Model extends Observer {
 
     switch (sort) {
       case SortSettings.DEFAULT:
-        State.products.sort((productFirst,productSecond ) => productFirst.id - productSecond.id)
+        State.products.sort(
+          (productFirst, productSecond) => productFirst.id - productSecond.id
+        );
         break;
       case SortSettings.PRICE_LOW_TO_HIGH:
-        State.products.sort((productFirst,productSecond ) => productFirst.price - productSecond.price)
+        State.products.sort(
+          (productFirst, productSecond) =>
+            productFirst.price - productSecond.price
+        );
         break;
 
       case SortSettings.PRICE_HIGH_TO_LOW:
-        State.products.sort((productFirst,productSecond ) => productSecond.price - productFirst.price)
+        State.products.sort(
+          (productFirst, productSecond) =>
+            productSecond.price - productFirst.price
+        );
         break;
 
       case SortSettings.RATING_HIGH_TO_LOW:
-        State.products.sort((productFirst,productSecond ) => productSecond.rating - productFirst.rating)
+        State.products.sort(
+          (productFirst, productSecond) =>
+            productSecond.rating - productFirst.rating
+        );
         break;
 
       case SortSettings.RATING_LOW_TO_HIGH:
-        State.products.sort((productFirst,productSecond ) => productFirst.rating - productSecond.rating)
+        State.products.sort(
+          (productFirst, productSecond) =>
+            productFirst.rating - productSecond.rating
+        );
         break;
     }
 
     this.emmit("controls.update");
+  }
+
+  changeSearchPattern(searchPattern: string) {
+    this.searchModel.changePattern(searchPattern);
+  }
+
+  private searchContains(searchPattern: string, searchString: string) {
+    let contains = false;
+
+    const searchPatterns = searchPattern.split(" ");
+    for (const find of searchPatterns) {
+      if (searchString.toLocaleLowerCase().includes(find.toLocaleLowerCase())) {
+        contains = true;
+      }
+    }
+
+    return contains;
   }
 }

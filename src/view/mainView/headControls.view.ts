@@ -1,9 +1,9 @@
 import { Utils } from "../../utils/utils";
+import { Model } from "model";
+import { Controller } from "controller";
 import { GridLayoutView } from "./gridLayout.view";
 import { SearchView } from "./search.view";
 import { SortByView } from "./sortBy.view";
-import { Controller } from "../../controller";
-import { Model } from "../../model";
 
 export class HeadControlsView {
   gridLayout: GridLayoutView;
@@ -12,8 +12,8 @@ export class HeadControlsView {
 
   constructor(private controller: Controller, private model: Model) {
     this.gridLayout = new GridLayoutView(this.controller, this.model);
-    this.search = new SearchView();
     this.sortBy = new SortByView(this.controller, this.model);
+    this.search = new SearchView(this.controller, this.model);
   }
 
   render(root: HTMLElement) {
