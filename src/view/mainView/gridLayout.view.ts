@@ -1,59 +1,55 @@
 import { Utils } from "../../utils/utils";
+import { Controller } from "../../controller";
+import { Model } from "../../model";
 
 export class GridLayoutView {
+  constructor(private controller: Controller, private model: Model) {}
+
   render(root: HTMLElement) {
     const layouts = Utils.create<HTMLDivElement>(
-      "head-controls__layouts layouts",
-      "div"
+        "head-controls__layouts layouts",
+        "div"
     );
-
-    const labelForRowsRadioInput = Utils.create<HTMLLabelElement>("", "label");
-    labelForRowsRadioInput.setAttribute("for", "rows");
-
-    const rowsRadioInput = Utils.create<HTMLInputElement>(
-      "layouts__radio",
-      "input"
-    );
-    rowsRadioInput.type = "radio";
-    rowsRadioInput.name = "layout";
-    rowsRadioInput.id = "rows";
-
-    const iconForRowsRadioInput = Utils.create<HTMLSpanElement>(
-      "icon icon--rows",
-      "span"
-    );
-
-    labelForRowsRadioInput.append(rowsRadioInput, iconForRowsRadioInput);
-
-    const labelForColumnsRadioInput = Utils.create<HTMLLabelElement>(
-      "",
-      "label"
-    );
-    labelForColumnsRadioInput.setAttribute("for", "columns");
-
-    const columnsRadioInput = Utils.create<HTMLInputElement>(
-      "layouts__radio",
-      "input"
-    );
-    columnsRadioInput.type = "radio";
-    columnsRadioInput.name = "layout";
-    columnsRadioInput.id = "columns";
-
-    const iconForColumnsRadioInput = Utils.create<HTMLSpanElement>(
-      "icon icon--columns",
-      "span"
-    );
-
-    labelForColumnsRadioInput.append(
-      columnsRadioInput,
-      iconForColumnsRadioInput
-    );
-
-    layouts.append(labelForRowsRadioInput, labelForColumnsRadioInput);
-
     root.append(layouts);
 
-    this.addHandlers(layouts);
+    this.fill(layouts);
+  }
+
+  fill(root: HTMLElement) {
+    this.fillRadioInputs(root);
+    this.addHandlers(root);
+  }
+
+  fillRadioInputs(root: HTMLElement) {
+    const rows = this.generateRadioInput('rows');
+    const columns = this.generateRadioInput('columns');
+    root.append(rows, columns);
+  }
+
+  generateRadioInput(id: string) {
+    const label = Utils.create<HTMLLabelElement>("", "label");
+    label.setAttribute("for", `${id}`);
+
+    const radioInput = Utils.create<HTMLInputElement>(
+        "layouts__radio",
+        "input"
+    );
+    radioInput.type = "radio";
+    radioInput.name = "layout";
+    radioInput.id = `${id}`;
+
+    if (this.model.layout === id) {
+      radioInput.checked = true;
+    }
+
+    const iconForRadioInput = Utils.create<HTMLSpanElement>(
+        `icon icon--${id}`,
+        "span"
+    );
+
+    label.append(radioInput, iconForRadioInput);
+
+    return label;
   }
 
   addHandlers(wrapper: HTMLElement) {
@@ -62,7 +58,10 @@ export class GridLayoutView {
       if (target.tagName !== "INPUT") {
         return;
       }
-      console.log("switch to", target.id);
+      const productList = document.querySelector('.products__wrapper');
+      productList?.classList.replace(`layout-${this.model.layout}`, `layout-${target.id}`);
+
+      this.controller.changeLayout(target.id);
     });
   }
 }

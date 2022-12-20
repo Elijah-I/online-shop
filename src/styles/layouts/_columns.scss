@@ -4,7 +4,7 @@
 	@include columns(21%);
 }
 
-.layout-3-columns {
+.layout-columns {
 	@include columns(30%);
 	&:after {
 		content: '';
@@ -15,4 +15,8 @@
 
 .layout-2-columns {
 	@include columns(49%);
+}
+
+.layout-rows {
+	@include rows(49%);
 }

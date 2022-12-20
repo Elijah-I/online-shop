@@ -15,38 +15,38 @@ export class MainView {
 
   constructor(private controller: Controller, private model: Model) {
     this.filters = new FilterView(this.controller, this.model);
-    this.headControls = new HeadControlsView();
+    this.headControls = new HeadControlsView(this.controller, this.model);
     this.productsList = new ProductsView();
 
     this.productsRoot = Utils.create<HTMLElement>("products", "section");
     this.headControlsRoot = Utils.create<HTMLElement>(
-      "head-controls",
-      "section"
+        "head-controls",
+        "section"
     );
     this.rightSideWrapper = Utils.create<HTMLDivElement>(
-      "main__right-side",
-      "div"
+        "main__right-side",
+        "div"
     );
 
     this.addListeners();
   }
 
   addListeners() {
-    this.model.on("filter.update", () => {
-      this.productsList.render(this.model.products, this.productsRoot);
-    });
+    const renderProductsCallback = () => this.productsList.render(this.model.products, this.model.layout, this.productsRoot);
+    this.model.on("filter.update", renderProductsCallback);
+    this.model.on("controls.update", renderProductsCallback);
   }
 
   render(root: ExtendedElement) {
     root.html("");
 
     this.filters.render(root);
-
+    this.headControls.render(this.headControlsRoot);
     this.rightSideWrapper.append(this.headControlsRoot, this.productsRoot);
+
     root.append(this.rightSideWrapper);
 
-    this.headControls.render(this.headControlsRoot);
-
     this.controller.applySearchFilters();
+    this.controller.applyControls();
   }
 }
