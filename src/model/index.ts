@@ -3,16 +3,20 @@ import Products from "../store/products.json";
 import { Observer } from "../utils/observer";
 import { FilterModel } from "./filter.model";
 import { RouterModel } from "./router.model";
+import {ControlsModel} from "./controls.model";
+import {SortSettings} from "types/sortSettings";
 
 export class Model extends Observer {
   routerModel: RouterModel;
   filterModel: FilterModel;
+  controlsModel: ControlsModel;
 
   constructor() {
     super();
 
     this.routerModel = new RouterModel();
     this.filterModel = new FilterModel();
+    this.controlsModel = new ControlsModel();
 
     this.initState();
   }
@@ -36,6 +40,14 @@ export class Model extends Observer {
 
   get products() {
     return State.products;
+  }
+
+  get layout() {
+    return State.layout;
+  }
+
+  get sort() {
+    return State.sort;
   }
 
   get stockRange() {
@@ -62,12 +74,20 @@ export class Model extends Observer {
     this.filterModel.changeStock(from, to);
   }
 
+  changeLayout(layout: string) {
+    this.controlsModel.changeLayout(layout);
+  }
+
+  changeSort(sort: string) {
+    this.controlsModel.changeSort(sort);
+  }
+
   get filterCategories() {
     return this.filterModel.getCategories(this.route.searchParams.category);
   }
 
   get filterBrands() {
-    return this.filterModel.getBrands(this.route.searchParams.brand); // получаем массив значений по ключу из адресной строки после &brand=...
+    return this.filterModel.getBrands(this.route.searchParams.brand);
   }
 
   get filterPrice() {
@@ -76,6 +96,14 @@ export class Model extends Observer {
 
   get filterStock() {
     return this.filterModel.getStocks(this.route.searchParams.stock);
+  }
+
+  get controlLayout() {
+    return this.controlsModel.getLayout(this.route.searchParams.layout);
+  }
+
+  get controlSort() {
+    return this.controlsModel.getSort(this.route.searchParams.sort);
   }
 
   initState() {
@@ -90,10 +118,13 @@ export class Model extends Observer {
     const [filterStockFrom, filterStockTo] = this.filterStock;
     const [filterPriceFrom, filterPriceTo] = this.filterPrice;
 
+    const layout = this.controlLayout;
+    const sort = this.controlSort;
+
     products.forEach((product) => {
       const withBrand = checkedBrandsId.includes(product.brand.id.toString());
       const withCategory = checkedCategoriesId.includes(
-        product.category.id.toString()
+          product.category.id.toString()
       );
 
       categories[product.category.id] = {
@@ -132,6 +163,9 @@ export class Model extends Observer {
       to: filterPriceTo ? +filterPriceTo : this.getRangeTo(price),
       max: price.max
     };
+
+    State.layout = layout;
+    State.sort = sort;
   }
 
   private getRangeFrom(range: { max: number }) {
@@ -152,23 +186,23 @@ export class Model extends Observer {
       product.show = true;
 
       if (
-        selectedCategories.length &&
-        selectedCategories.includes(product.category.id.toString()) === false
+          selectedCategories.length &&
+          selectedCategories.includes(product.category.id.toString()) === false
       ) {
         product.show = false;
       }
 
       if (
-        selectedBrands.length &&
-        selectedBrands.includes(product.brand.id.toString()) === false
+          selectedBrands.length &&
+          selectedBrands.includes(product.brand.id.toString()) === false
       ) {
         product.show = false;
       }
 
       if (selectedStockFrom && selectedStockTo) {
         if (
-          product.stock < +selectedStockFrom ||
-          product.stock > +selectedStockTo
+            product.stock < +selectedStockFrom ||
+            product.stock > +selectedStockTo
         ) {
           product.show = false;
         }
@@ -176,8 +210,8 @@ export class Model extends Observer {
 
       if (selectedPriceFrom && selectedPriceTo) {
         if (
-          product.price < +selectedPriceFrom ||
-          product.price > +selectedPriceTo
+            product.price < +selectedPriceFrom ||
+            product.price > +selectedPriceTo
         ) {
           product.show = false;
         }
@@ -187,5 +221,32 @@ export class Model extends Observer {
     });
 
     this.emmit("filter.update");
+  }
+
+  applyControls() {
+    const sort = this.controlSort;
+
+    switch (sort) {
+      case SortSettings.DEFAULT:
+        State.products.sort((productFirst,productSecond ) => productFirst.id - productSecond.id)
+        break;
+      case SortSettings.PRICE_LOW_TO_HIGH:
+        State.products.sort((productFirst,productSecond ) => productFirst.price - productSecond.price)
+        break;
+
+      case SortSettings.PRICE_HIGH_TO_LOW:
+        State.products.sort((productFirst,productSecond ) => productSecond.price - productFirst.price)
+        break;
+
+      case SortSettings.RATING_HIGH_TO_LOW:
+        State.products.sort((productFirst,productSecond ) => productSecond.rating - productFirst.rating)
+        break;
+
+      case SortSettings.RATING_LOW_TO_HIGH:
+        State.products.sort((productFirst,productSecond ) => productFirst.rating - productSecond.rating)
+        break;
+    }
+
+    this.emmit("controls.update");
   }
 }

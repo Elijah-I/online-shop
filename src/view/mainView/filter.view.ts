@@ -16,7 +16,7 @@ export class FilterView {
   fill() {
     this.fillFilters();
     this.insertSliders();
-    this.addhandlers();
+    this.addHandlers();
   }
 
   fillFilters() {
@@ -143,7 +143,7 @@ export class FilterView {
     stockRange.append(stockRangeSlider.buildRangeSlider());
   }
 
-  addhandlers() {
+  addHandlers() {
     for (const category of Utils.id(
       ".filter__categorie-item"
     ) as NodeListOf<ExtendedElement>) {

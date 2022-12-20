@@ -5,7 +5,7 @@ export enum SearchParams {
   STOCK = "stock",
   SORT = "sort",
   SEARCH = "search",
-  VIEW = "view"
+  LAYOUT = "layout"
 }
 
 export type SearchParamsObject = Record<string, string | null>;

@@ -1,5 +1,6 @@
 import { Model } from "../model/index";
 import { RouterController } from "./router.controller";
+import {SearchParams} from "types/searchParams";
 
 export class Controller {
   routerController: RouterController;
@@ -25,7 +26,7 @@ export class Controller {
       filterCategories.push(id.toString());
     } else {
       filterCategories = filterCategories.filter(
-        (categoryId) => categoryId !== id.toString()
+          (categoryId) => categoryId !== id.toString()
       );
     }
 
@@ -37,20 +38,20 @@ export class Controller {
   }
 
   changeFilterBrand(checked: boolean, id: number) {
-    this.model.changeFilterBrand(checked, id); // меняем в модели на чекед/анчекд
+    this.model.changeFilterBrand(checked, id);
 
     let filterBrands = this.model.filterBrands;
 
     if (checked) {
-      filterBrands.push(id.toString()); // добавляем новый чекед
+      filterBrands.push(id.toString());
     } else {
       filterBrands = filterBrands.filter(
-        (brandId) => brandId !== id.toString() // удаляем чекед
+          (brandId) => brandId !== id.toString()
       );
     }
 
     this.routerController.addSearchParam([
-      ["brand", filterBrands.join("↕")] // записываем в URL обновленную строку
+      ["brand", filterBrands.join("↕")]
     ]);
 
     this.applySearchFilters();
@@ -58,6 +59,10 @@ export class Controller {
 
   applySearchFilters() {
     this.model.applySearchFilters();
+  }
+
+  applyControls() {
+    this.model.applyControls();
   }
 
   changeFilterPrice(from: number, to: number) {
@@ -91,8 +96,27 @@ export class Controller {
   }
 
   resetFilter() {
-    this.routerController.addSearchParam([]);
+    this.routerController.addSearchParam([[SearchParams.CATEGORY, ''], [SearchParams.BRAND, ''], [SearchParams.STOCK, ''], [SearchParams.PRICE, '']]);
     this.model.initState();
     this.applySearchFilters();
+    this.applyControls();
+  }
+
+  changeLayout(layout: string) {
+    this.model.changeLayout(layout);
+
+    this.routerController.addSearchParam([
+      [SearchParams.LAYOUT, layout]
+    ]);
+  }
+
+  changeSort(sort: string) {
+    this.model.changeSort(sort);
+
+    this.routerController.addSearchParam([
+      [SearchParams.SORT, sort]
+    ]);
+
+    this.applyControls();
   }
 }
