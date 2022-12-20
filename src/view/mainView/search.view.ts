@@ -1,6 +1,9 @@
 import { Utils } from "../../utils/utils";
+import { Model } from "model";
+import { Controller } from "controller";
 
 export class SearchView {
+  constructor(private controller: Controller, private model: Model) {}
   render(root: HTMLElement) {
     const search = Utils.create<HTMLDivElement>(
       "head-controls__search search",
@@ -13,6 +16,7 @@ export class SearchView {
     );
     searchInput.placeholder = "Search products";
     searchInput.name = "search";
+    searchInput.value = this.model.search;
 
     search.append(searchInput);
     root.append(search);
@@ -22,8 +26,8 @@ export class SearchView {
 
   addHandler(input: HTMLInputElement) {
     input.addEventListener("input", (e: Event) => {
-      const inputEl = e.target as HTMLInputElement;
-      console.log("input data", inputEl.value);
+      const input = e.target as HTMLInputElement;
+      this.controller.addSearchPattern(input.value);
     });
   }
 }

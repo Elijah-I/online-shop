@@ -16,6 +16,14 @@
 	}
 }
 
+@mixin rows($width) {
+	display: flex;
+	flex-direction: column;
+	>* {
+		flex-basis: $width;
+	}
+}
+
 @mixin icon-size($width, $height: 18px) {
 	background-repeat: no-repeat;
 	width: $width;

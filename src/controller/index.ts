@@ -1,11 +1,19 @@
 import { Model } from "../model/index";
+import { FilterController } from "./filter.controller";
 import { RouterController } from "./router.controller";
+import { SearchController } from "./search.controller";
 
 export class Controller {
+  searchDelay: null | ReturnType<typeof setTimeout>;
   routerController: RouterController;
+  filterController: FilterController;
+  searchController: SearchController;
 
   constructor(private model: Model) {
+    this.searchDelay = null;
     this.routerController = new RouterController(model);
+    this.searchController = new SearchController(model, this.routerController);
+    this.filterController = new FilterController(model, this.routerController);
   }
 
   route(route: string, event: Event | false = false) {
@@ -16,83 +24,41 @@ export class Controller {
     this.routerController.updateRoute(route);
   }
 
-  changeFilterCategory(checked: boolean, id: number) {
-    this.model.changeFilterCategory(checked, id);
-
-    let filterCategories = this.model.filterCategories;
-
-    if (checked) {
-      filterCategories.push(id.toString());
-    } else {
-      filterCategories = filterCategories.filter(
-        (categoryId) => categoryId !== id.toString()
-      );
+  addSearchPattern(searchPattern: string) {
+    if (this.searchDelay) {
+      clearTimeout(this.searchDelay);
     }
 
-    this.routerController.addSearchParam([
-      ["category", filterCategories.join("↕")]
-    ]);
+    this.searchDelay = setTimeout(() => {
+      this.searchController.addPattern(searchPattern);
+    }, 1000);
+  }
 
-    this.applySearchFilters();
+  changeFilterCategory(checked: boolean, id: number) {
+    this.filterController.changeCategory(checked, id);
   }
 
   changeFilterBrand(checked: boolean, id: number) {
-    this.model.changeFilterBrand(checked, id); // меняем в модели на чекед/анчекд
-
-    let filterBrands = this.model.filterBrands;
-
-    if (checked) {
-      filterBrands.push(id.toString()); // добавляем новый чекед
-    } else {
-      filterBrands = filterBrands.filter(
-        (brandId) => brandId !== id.toString() // удаляем чекед
-      );
-    }
-
-    this.routerController.addSearchParam([
-      ["brand", filterBrands.join("↕")] // записываем в URL обновленную строку
-    ]);
-
-    this.applySearchFilters();
+    this.filterController.changeBrand(checked, id);
   }
 
-  applySearchFilters() {
-    this.model.applySearchFilters();
+  applyFilters() {
+    this.model.applyFilters();
+  }
+
+  applyControls() {
+    this.model.applyControls();
   }
 
   changeFilterPrice(from: number, to: number) {
-    this.model.changeFilterPrice(from, to);
-
-    let [filterPriceFrom, filterPriceTo] = this.model.filterPrice;
-
-    filterPriceFrom = from.toString();
-    filterPriceTo = to.toString();
-
-    this.routerController.addSearchParam([
-      ["price", `${filterPriceFrom}↕${filterPriceTo}`]
-    ]);
-
-    this.applySearchFilters();
+    this.filterController.changePrice(from, to);
   }
 
   changeFilterStock(from: number, to: number) {
-    this.model.changeFilterStock(from, to);
-
-    let [filterStockFrom, filterStockTo] = this.model.filterStock;
-
-    filterStockFrom = from.toString();
-    filterStockTo = to.toString();
-
-    this.routerController.addSearchParam([
-      ["stock", `${filterStockFrom}↕${filterStockTo}`]
-    ]);
-
-    this.applySearchFilters();
+    this.filterController.changeStock(from, to);
   }
 
   resetFilter() {
-    this.routerController.addSearchParam([]);
-    this.model.initState();
-    this.applySearchFilters();
+    this.filterController.reset();
   }
 }
