@@ -35,6 +35,9 @@ export type Price = {
 
 export type Stock = Price;
 
+export type CategoriesAmount = Record<string, number>;
+export type BrandsAmount = CategoriesAmount;
+
 interface IState {
   route: string;
   deployPath: string;
@@ -46,6 +49,10 @@ interface IState {
   layout: string;
   sort: string;
   search: string;
+  amount: {
+    categories: CategoriesAmount;
+    brands: BrandsAmount;
+  };
 }
 
 export const State: IState = {
@@ -70,6 +77,11 @@ export const State: IState = {
     from: 0,
     to: 0,
     max: 0
+  },
+
+  amount: {
+    categories: {},
+    brands: {}
   },
 
   layout: "",

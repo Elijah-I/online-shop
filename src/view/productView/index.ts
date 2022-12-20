@@ -1,7 +1,9 @@
 import { ExtendedElement } from "../../utils/utils";
 
 export class ProductView {
-  render(root: ExtendedElement, id: string) {
-    root.html(`product ${id}`);
+  constructor(private root: ExtendedElement) {}
+
+  render(id: string) {
+    this.root.html(`product ${id}`);
   }
 }

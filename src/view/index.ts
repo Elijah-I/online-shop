@@ -17,21 +17,18 @@ export class View {
   constructor(private controller: Controller, private model: Model) {
     this.root = Utils.id("#root") as ExtendedElement;
 
-    this.productView = new ProductView();
-    this.mainView = new MainView(this.controller, this.model);
-    this.cartView = new CartView();
-  }
-
-  init() {
     this.addListeners();
-    this.render();
-    this.addHandlers();
-  }
-
-  render() {
     this.renderHeader();
     this.renderContent();
+
+    const main = Utils.id(".main__wrapper") as ExtendedElement;
+
+    this.productView = new ProductView(main);
+    this.mainView = new MainView(this.controller, this.model, main);
+    this.cartView = new CartView(main);
+
     this.checkRestoreRoute();
+    this.addHandlers();
   }
 
   checkRestoreRoute() {
@@ -68,20 +65,18 @@ export class View {
     const route = this.model.route;
     const [, path, id] = route.path;
 
-    const main = Utils.id(".main__wrapper") as ExtendedElement;
-
     switch (path) {
       case "":
       case Routing.MAIN:
-        this.mainView.render(main);
+        this.mainView.render();
         break;
 
       case Routing.CART:
-        this.cartView.render(main);
+        this.cartView.render();
         break;
 
       case Routing.PRODUCTS:
-        this.productView.render(main, id);
+        this.productView.render(id);
         break;
     }
   }

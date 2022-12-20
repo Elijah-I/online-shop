@@ -6,8 +6,9 @@ import { Model } from "model";
 export class FilterView {
   constructor(private controller: Controller, private model: Model) {}
 
-  render(root: ExtendedElement) {
+  render(root: HTMLDivElement) {
     const filter = Utils.create<HTMLElement>("filter", "section");
+    root.innerHTML = "";
     root.append(filter);
 
     this.fill();
@@ -77,7 +78,8 @@ export class FilterView {
             <label 
               class="filter-list__item-label" 
               for="categories-${id}">
-              ${name}
+              <span>${name}</span>
+              <span>(${this.model.amount.categories[id] || '0'})</span>
             </label>
           </li>`;
     });
@@ -110,7 +112,8 @@ export class FilterView {
             <label 
               class="filter-list__item-label" 
               for="brands-${id}">
-              ${name}
+              <span>${name}</span>
+              <span>(${this.model.amount.brands[id] || '0'})</span>
             </label>
           </li>`;
     });
