@@ -12,6 +12,10 @@ export class RouterController {
 
     window.history.pushState({}, "", this.makeRoute(route));
 
+    this.updateRoute(route);
+  }
+
+  updateRoute(route: string) {
     this.model.setRoute(route);
   }
 
@@ -26,11 +30,14 @@ export class RouterController {
       else params[action](param, value);
     }
 
-    const newRoute = `${route.origin}/?${params}`;
+    let newRoute = `${route.origin}`;
+    if (addParams.length && params.toString()) {
+      newRoute += `/?${params}`;
+    }
 
     window.history.replaceState({}, "", this.makeRoute(newRoute));
 
-    this.model.setRoute(newRoute);
+    this.model.setRoute(newRoute, true);
   }
 
   private makeRoute(route: string) {

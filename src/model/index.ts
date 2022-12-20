@@ -1,20 +1,191 @@
+import { Brand, Category, Product, State } from "store/index";
+import Products from "../store/products.json";
 import { Observer } from "../utils/observer";
+import { FilterModel } from "./filter.model";
 import { RouterModel } from "./router.model";
 
 export class Model extends Observer {
   routerModel: RouterModel;
+  filterModel: FilterModel;
 
   constructor() {
     super();
+
     this.routerModel = new RouterModel();
+    this.filterModel = new FilterModel();
+
+    this.initState();
   }
 
-  setRoute(route: string) {
+  setRoute(route: string, noEmmit = false) {
     this.routerModel.setRoute(route);
-    this.emmit("route");
+    if (!noEmmit) this.emmit("route");
   }
 
   get route() {
     return this.routerModel.route;
+  }
+
+  get brands() {
+    return State.brands;
+  }
+
+  get categories() {
+    return State.categories;
+  }
+
+  get products() {
+    return State.products;
+  }
+
+  get stockRange() {
+    return State.stock;
+  }
+
+  get priceRange() {
+    return State.price;
+  }
+
+  changeFilterCategory(checked: boolean, id: number) {
+    this.filterModel.changeCategory(checked, id);
+  }
+
+  changeFilterBrand(checked: boolean, id: number) {
+    this.filterModel.changeBrand(checked, id);
+  }
+
+  changeFilterPrice(from: number, to: number) {
+    this.filterModel.changePrice(from, to);
+  }
+
+  changeFilterStock(from: number, to: number) {
+    this.filterModel.changeStock(from, to);
+  }
+
+  get filterCategories() {
+    return this.filterModel.getCategories(this.route.searchParams.category);
+  }
+
+  get filterBrands() {
+    return this.filterModel.getBrands(this.route.searchParams.brand); // получаем массив значений по ключу из адресной строки после &brand=...
+  }
+
+  get filterPrice() {
+    return this.filterModel.getPrices(this.route.searchParams.price);
+  }
+
+  get filterStock() {
+    return this.filterModel.getStocks(this.route.searchParams.stock);
+  }
+
+  initState() {
+    const products: Product[] = [...Products];
+    const brands: Record<string, Brand> = {};
+    const categories: Record<string, Category> = {};
+    const stock = { ...State.stock };
+    const price = { ...State.price };
+
+    const checkedCategoriesId = this.filterCategories;
+    const checkedBrandsId = this.filterBrands;
+    const [filterStockFrom, filterStockTo] = this.filterStock;
+    const [filterPriceFrom, filterPriceTo] = this.filterPrice;
+
+    products.forEach((product) => {
+      const withBrand = checkedBrandsId.includes(product.brand.id.toString());
+      const withCategory = checkedCategoriesId.includes(
+        product.category.id.toString()
+      );
+
+      categories[product.category.id] = {
+        ...product.category,
+        checked: withCategory
+      };
+
+      brands[product.brand.id] = {
+        ...product.brand,
+        checked: withBrand
+      };
+
+      if (product.stock > stock.max) {
+        stock.max = product.stock;
+      }
+
+      if (product.price > price.max) {
+        price.max = product.price;
+      }
+    });
+
+    State.products = [...products];
+
+    State.categories = [...Object.values(categories)];
+
+    State.brands = [...Object.values(brands)];
+
+    State.stock = {
+      from: filterStockFrom ? +filterStockFrom : this.getRangeFrom(stock),
+      to: filterStockTo ? +filterStockTo : this.getRangeTo(stock),
+      max: stock.max
+    };
+
+    State.price = {
+      from: filterPriceFrom ? +filterPriceFrom : this.getRangeFrom(price),
+      to: filterPriceTo ? +filterPriceTo : this.getRangeTo(price),
+      max: price.max
+    };
+  }
+
+  private getRangeFrom(range: { max: number }) {
+    return Math.round(range.max - range.max * 0.9);
+  }
+
+  private getRangeTo(range: { max: number }) {
+    return Math.round(range.max - range.max * 0.1);
+  }
+
+  applySearchFilters() {
+    const selectedCategories = this.filterCategories;
+    const selectedBrands = this.filterBrands;
+    const [selectedStockFrom, selectedStockTo] = this.filterStock;
+    const [selectedPriceFrom, selectedPriceTo] = this.filterPrice;
+
+    State.products.map((product) => {
+      product.show = true;
+
+      if (
+        selectedCategories.length &&
+        selectedCategories.includes(product.category.id.toString()) === false
+      ) {
+        product.show = false;
+      }
+
+      if (
+        selectedBrands.length &&
+        selectedBrands.includes(product.brand.id.toString()) === false
+      ) {
+        product.show = false;
+      }
+
+      if (selectedStockFrom && selectedStockTo) {
+        if (
+          product.stock < +selectedStockFrom ||
+          product.stock > +selectedStockTo
+        ) {
+          product.show = false;
+        }
+      }
+
+      if (selectedPriceFrom && selectedPriceTo) {
+        if (
+          product.price < +selectedPriceFrom ||
+          product.price > +selectedPriceTo
+        ) {
+          product.show = false;
+        }
+      }
+
+      return product;
+    });
+
+    this.emmit("filter.update");
   }
 }

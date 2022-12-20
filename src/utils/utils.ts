@@ -7,6 +7,8 @@ export interface ExtendedElement extends Element {
   class(cls: string, rm?: boolean): ExtendedElement;
   value?: string;
   href?: string;
+  checked?: boolean;
+  dataset?: { [key: string]: string };
 }
 
 interface IUtils {

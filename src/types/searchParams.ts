@@ -4,6 +4,7 @@ export enum SearchParams {
   PRICE = "price",
   STOCK = "stock",
   SORT = "sort",
+  SEARCH = "search",
   VIEW = "view"
 }
 

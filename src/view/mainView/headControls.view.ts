@@ -15,8 +15,6 @@ export class HeadControlsView {
   }
 
   render(root: HTMLElement) {
-    const headControls = Utils.create<HTMLElement>("head-controls", "section");
-
     const headControlsWrapper = Utils.create<HTMLElement>(
       "head-controls__wrapper",
       "div"
@@ -26,8 +24,6 @@ export class HeadControlsView {
     this.search.render(headControlsWrapper);
     this.sortBy.render(headControlsWrapper);
 
-    headControls.append(headControlsWrapper);
-
-    root.append(headControls);
+    root.append(headControlsWrapper);
   }
 }

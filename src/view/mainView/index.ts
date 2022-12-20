@@ -1,49 +1,52 @@
 import { ExtendedElement, Utils } from "../../utils/utils";
-import { SearchParamsObject } from "types/searchParams";
+import { Model } from "model/index";
 import { FilterView } from "./filter.view";
 import { ProductsView } from "./products.view";
 import { HeadControlsView } from "./headControls.view";
+import { Controller } from "controller";
 
 export class MainView {
   filters: FilterView;
   headControls: HeadControlsView;
   productsList: ProductsView;
+  productsRoot: HTMLElement;
+  headControlsRoot: HTMLElement;
+  rightSideWrapper: HTMLDivElement;
 
-  constructor() {
-    this.filters = new FilterView();
+  constructor(private controller: Controller, private model: Model) {
+    this.filters = new FilterView(this.controller, this.model);
     this.headControls = new HeadControlsView();
     this.productsList = new ProductsView();
-  }
 
-  render(root: ExtendedElement, searchParams: SearchParamsObject) {
-    root.html("");
-    console.log("Search Params", searchParams);
-
-    this.renderFilters(root);
-    this.renderHeadAndContent(root);
-  }
-
-  renderFilters(root: ExtendedElement) {
-    this.filters.render(root);
-  }
-
-  renderHeadAndContent(root: ExtendedElement) {
-    const rightSideWrapper = Utils.create<HTMLDivElement>(
-        "main__right-side",
-        "div"
+    this.productsRoot = Utils.create<HTMLElement>("products", "section");
+    this.headControlsRoot = Utils.create<HTMLElement>(
+      "head-controls",
+      "section"
+    );
+    this.rightSideWrapper = Utils.create<HTMLDivElement>(
+      "main__right-side",
+      "div"
     );
 
-    this.renderHeadControls(rightSideWrapper);
-    this.renderProductsList(rightSideWrapper);
-
-    root.append(rightSideWrapper);
+    this.addListeners();
   }
 
-  renderHeadControls(root: HTMLElement) {
-    this.headControls.render(root);
+  addListeners() {
+    this.model.on("filter.update", () => {
+      this.productsList.render(this.model.products, this.productsRoot);
+    });
   }
 
-  renderProductsList(root: HTMLElement) {
-    this.productsList.render(root);
+  render(root: ExtendedElement) {
+    root.html("");
+
+    this.filters.render(root);
+
+    this.rightSideWrapper.append(this.headControlsRoot, this.productsRoot);
+    root.append(this.rightSideWrapper);
+
+    this.headControls.render(this.headControlsRoot);
+
+    this.controller.applySearchFilters();
   }
 }
