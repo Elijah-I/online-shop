@@ -83,7 +83,12 @@ export class FilterController {
   }
 
   reset() {
-    this.routerController.addSearchParam([]);
+    this.routerController.addSearchParam([
+      [SearchParams.CATEGORY, ""],
+      [SearchParams.BRAND, ""],
+      [SearchParams.STOCK, ""],
+      [SearchParams.PRICE, ""]
+    ]);
     this.model.initState();
     this.applyFilters();
   }

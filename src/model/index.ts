@@ -301,7 +301,7 @@ export class Model extends Observer {
 
     const searchPatterns = searchPattern.split(" ");
     for (const find of searchPatterns) {
-      if (searchString.includes(find)) {
+      if (searchString.toLocaleLowerCase().includes(find.toLocaleLowerCase())) {
         contains = true;
       }
     }

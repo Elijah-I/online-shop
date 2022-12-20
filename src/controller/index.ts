@@ -1,3 +1,4 @@
+import { SearchParams } from "types/searchParams";
 import { Model } from "../model/index";
 import { FilterController } from "./filter.controller";
 import { RouterController } from "./router.controller";
@@ -60,5 +61,19 @@ export class Controller {
 
   resetFilter() {
     this.filterController.reset();
+  }
+
+  changeLayout(layout: string) {
+    this.model.changeLayout(layout);
+
+    this.routerController.addSearchParam([[SearchParams.LAYOUT, layout]]);
+  }
+
+  changeSort(sort: string) {
+    this.model.changeSort(sort);
+
+    this.routerController.addSearchParam([[SearchParams.SORT, sort]]);
+
+    this.applyControls();
   }
 }
