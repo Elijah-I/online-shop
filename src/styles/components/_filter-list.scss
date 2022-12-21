@@ -45,13 +45,18 @@
 
 	// .filter-list__item-label
 	&__item-label {
+		display: flex;
+		justify-content: space-between;
 		width: 100%;
 		cursor: pointer;
-		padding: 0 6px 0;
-		user-select: none;
+		padding: 0 6px 0 10px;
 		text-decoration: none;
-		opacity: 1;
-		transition-duration: 1s;
+
+		&:hover {
+			>* {
+				color: $color-primary;
+			}
+		}
 	}
 }
 

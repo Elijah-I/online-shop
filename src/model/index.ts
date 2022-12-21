@@ -267,6 +267,7 @@ export class Model extends Observer {
   private calculateAmounts() {
     const categories: CategoriesAmount = {};
     const brands: BrandsAmount = {};
+    let totalAmount = 0;
     const price = { min: 10000000, max: 0 };
     const stock = { min: 10000000, max: 0 };
 
@@ -311,10 +312,15 @@ export class Model extends Observer {
       max: State.price.max
     };
 
+    totalAmount = Object.values(categories).reduce((acc, category) => (acc += category), 0)
+
     State.amount = {
       categories,
-      brands
+      brands,
+      totalAmount
     };
+
+    console.log('State', State)
   }
 
   applyControls() {

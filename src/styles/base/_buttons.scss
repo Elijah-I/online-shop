@@ -6,7 +6,8 @@
 	cursor: pointer;
 	font-family: $font-family;
 	@include font(1.6rem, 2.2rem, normal);
-	@extend %transition;
+	//@extend %transition;
+	transition: all ease .3s;
 
 	&--bordered{
 		background: $color-light;
@@ -16,6 +17,7 @@
 		&:hover {
 			background: $color-primary;
 			color: $color-light;
+			transition: all ease .3s;
 		}
 	}
 
@@ -27,6 +29,16 @@
 		&:hover {
 			background: $color-secondary;
 			border-color: $color-secondary;
+		}
+	}
+
+	&--copy-clicked {
+		background: $color-primary;
+		transition: all ease .3s;
+
+		&:hover {
+			background: $color-primary;
+			color: $color-light;
 		}
 	}
 

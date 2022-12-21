@@ -5,6 +5,16 @@ export class ProductsView {
     render(products: Product[], layout: string, root: HTMLElement) {
         root.innerHTML = "";
 
+        const headStyle = document.getElementsByTagName('style');
+
+        if(headStyle) {
+            for (const headStyleElement of headStyle) {
+                headStyleElement.parentNode?.removeChild(headStyleElement);
+            }
+        }
+
+        const headStyleInner = document.head.appendChild(document.createElement("style"));
+
         const productsWrapper = Utils.create<HTMLDivElement>(
             `products__wrapper layout-${layout}`,
             "div"
@@ -22,31 +32,42 @@ export class ProductsView {
             </div>
             <div class="product-item__content">
                 <h4 class="product-item__title title">${title}</h4>
-                <div class="product-item__price">
-                    <span class="product-item__price-default">${price}₽</span>
-                    <span class="product-item__price-discount">${(price - ((price / 100) * discountPercentage)).toFixed(2)}₽</span>
-                </div>
+                
                 <div class="product-item__info">
-                    <span class="product-item__category">
-                        Category: ${category.name}
-                    </span>
-                    <span class="product-item__brand">
-                        Brand: ${brand.name}
-                    </span>
-                    <span class="product-item__stock">
-                        Stock: ${stock}
-                    </span>
-                    <span class="product-item__rating">
-                        Rating: ${rating}
-                    </span>
+                    <div class="product-item__desc">
+                        <span class="product-item__category">
+                            ${category.name}
+                        </span>
+                        <span class="product-item__brand">
+                            Brand: ${brand.name}
+                        </span>
+                        <span class="product-item__stock">
+                            Stock: ${stock}
+                        </span>
+                    </div>
+                    <div class="product-item__price">
+                        <span class="product-item__price-default">${price}₽</span>
+                        <span class="product-item__price-discount">${(price - ((price / 100) * discountPercentage)).toFixed(2)}₽</span>
+                    </div>
                 </div>
-                <div class="product-item__button">
-                    <button class="button button--rounded button--bordered">Add to cart</button>
-                </div>
+                <div class="product-item__rating-buy">
+                    <span class="product-item__rating" id="rating-${id}">
+                        ${rating}
+                    </span>
+                    <div class="product-item__button">
+                        <button class="button button--rounded button--bordered">Add to cart</button>
+                    </div>
+                </div>  
             </div>
           </div>
         `;
                 productsWrapper.innerHTML += template;
+                headStyleInner.innerHTML += `#rating-${id}:before {
+                content: '★★★★★';
+                letter-spacing: 3px;
+                background: linear-gradient(90deg, #fc0 ${rating / 5 * 100}%, #fff ${rating / 5 * 100}%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;}\n`
             }
         );
 

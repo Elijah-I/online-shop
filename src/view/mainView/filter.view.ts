@@ -51,9 +51,14 @@ export class FilterView {
         </div>
       </div>
 
+      <div class="filter__total-products total-products">
+        <span class="total-products__text">Products found:</span>
+        <span class="total-products__value" id="total-products">${this.model.amount.totalAmount}</span>
+      </div>
+      
       <div class="filter__buttons">
-        <button class="button button--rounded button--bordered button-reset">Reset</button>
-        <button class="button button--rounded button--bordered button-copy">Copy link</button>
+        <button class="button button--rounded button--bordered" id="button-reset">Reset</button>
+        <button class="button button--rounded button--bordered" id="button-copy">Copy link</button>
       </div>
     `;
   }
@@ -166,12 +171,22 @@ export class FilterView {
       );
     }
 
-    Utils.addEvent(".button-reset", "click", () => {
+    Utils.addEvent("#button-reset", "click", () => {
       this.controller.resetFilter();
       this.fill();
     });
 
-    Utils.addEvent(".button-copy", "click", () => {
+    Utils.addEvent("#button-copy", "click", (e: Event) => {
+      const target = e.target as HTMLElement;
+      target.classList.add('button--copy-clicked');
+      const targetText = target.innerText;
+      target.innerText = 'Link copied!';
+
+      target.addEventListener('transitionend', function () {
+        this.innerText = targetText;
+        this.classList.remove('button--copy-clicked');
+      })
+
       navigator.clipboard.writeText(window.location.href);
     });
   }

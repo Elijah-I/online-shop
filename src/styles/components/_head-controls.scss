@@ -28,6 +28,11 @@
 }
 
 .layouts {
+
+	>* {
+		padding: 5px;
+	}
+
 	// .layouts__radio
 	&__radio {
 		position: fixed;
@@ -37,12 +42,12 @@
 
 	&__radio:hover + .icon {
 		filter: invert(0);
-		transform: scale(1.2);
+		transform: scale(1.29);
 	}
 
 	&__radio:checked + .icon {
 		filter: invert(0);
-		transform: scale(1.2);
+		transform: scale(1.29);
 	}
 
 	.icon {
@@ -71,6 +76,10 @@
 }
 
 .sort-by {
+	&__label {
+		padding-right: 10px;
+	}
+
 	&__select {
 		@extend %border;
 		border-radius: 20px;
