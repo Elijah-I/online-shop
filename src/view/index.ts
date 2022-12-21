@@ -28,7 +28,7 @@ export class View {
       this.controller,
       this.model,
       main,
-      (a: number) => this.updateCart(a)
+      (a: number, s: number) => this.updateCart(a, s)
     );
     this.cartView = new CartView(main);
 
@@ -86,15 +86,18 @@ export class View {
     }
   }
 
-  private updateCart(amount: number) {
-    const total = Utils.id(".cart__total-value") as ExtendedElement;
+  private updateCart(amount: number, sum: number) {
+    const value = Utils.id(".cart__total-value") as ExtendedElement;
+    const price = Utils.id(".cart__total-price") as ExtendedElement;
 
-    total
+    value
       .html(amount ? amount.toString() : "")
       .parentElement!.parentElement!.setAttribute(
         "style",
         amount ? "" : "display: none;"
       );
+
+    price.html(sum ? `${sum.toString()}₽` : "");
   }
 
   renderHeader() {
@@ -107,7 +110,8 @@ export class View {
                     <ul class="nav__list">
                         <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
                         <li class="nav__item cart">
-                            <a href="/cart" class="nav__link">
+                            <a href="/cart" class="nav__link cart__link">
+                                <div class="cart__total-price"></div>
                                 <div class="cart__wrapper">
                                     <div class="cart__content">
                                         <span class="icon icon--cart"></span>

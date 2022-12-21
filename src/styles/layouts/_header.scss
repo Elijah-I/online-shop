@@ -32,6 +32,13 @@
     padding: 5px 15px;
   }
 
+  // .cart__link
+  &__link {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+  }
+
   // .cart__content
   &__content {
     position: relative;
@@ -54,6 +61,11 @@
   // .cart__total-value
   &__total-value {
     font-size: 11px;
+  }
+
+  // .cart__total-price
+  &__total-price {
+    color: $color-primary;
   }
 }
 

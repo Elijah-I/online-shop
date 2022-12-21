@@ -53,7 +53,7 @@ export class FilterView {
 
       <div class="filter__total-products total-products">
         <span class="total-products__text">Products found:</span>
-        <span class="total-products__value" id="total-products">${this.model.amount.totalAmount}</span>
+        <span class="total-products__value" id="total-products">${this.model.amount.total}</span>
       </div>
       
       <div class="filter__buttons">
@@ -84,7 +84,7 @@ export class FilterView {
               class="filter-list__item-label" 
               for="categories-${id}">
               <span>${name}</span>
-              <span>(${this.model.amount.categories[id] || '0'})</span>
+              <span>(${this.model.amount.categories[id] || "0"})</span>
             </label>
           </li>`;
     });
@@ -118,7 +118,7 @@ export class FilterView {
               class="filter-list__item-label" 
               for="brands-${id}">
               <span>${name}</span>
-              <span>(${this.model.amount.brands[id] || '0'})</span>
+              <span>(${this.model.amount.brands[id] || "0"})</span>
             </label>
           </li>`;
     });
@@ -178,14 +178,14 @@ export class FilterView {
 
     Utils.addEvent("#button-copy", "click", (e: Event) => {
       const target = e.target as HTMLElement;
-      target.classList.add('button--copy-clicked');
+      target.classList.add("button--copy-clicked");
       const targetText = target.innerText;
-      target.innerText = 'Link copied!';
+      target.innerText = "Link copied!";
 
-      target.addEventListener('transitionend', function () {
+      target.addEventListener("transitionend", function () {
         this.innerText = targetText;
-        this.classList.remove('button--copy-clicked');
-      })
+        this.classList.remove("button--copy-clicked");
+      });
 
       navigator.clipboard.writeText(window.location.href);
     });

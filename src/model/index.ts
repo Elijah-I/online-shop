@@ -139,6 +139,15 @@ export class Model extends Observer {
     return State.cart;
   }
 
+  get totalPrice() {
+    return State.products.reduce((sum, product) => {
+      if (this.cartIds.includes(product.id)) {
+        sum += product.price;
+      }
+      return sum;
+    }, 0);
+  }
+
   initState() {
     const products: Product[] = [...Products];
     const brands: Record<string, Brand> = {};
@@ -281,7 +290,7 @@ export class Model extends Observer {
   private calculateAmounts() {
     const categories: CategoriesAmount = {};
     const brands: BrandsAmount = {};
-    let totalAmount = 0;
+    let total = this.cartIds.length;
     const price = { min: 10000000, max: 0 };
     const stock = { min: 10000000, max: 0 };
 
@@ -326,7 +335,7 @@ export class Model extends Observer {
       max: State.price.max
     };
 
-    totalAmount = Object.values(categories).reduce(
+    total = Object.values(categories).reduce(
       (acc, category) => (acc += category),
       0
     );
@@ -334,7 +343,7 @@ export class Model extends Observer {
     State.amount = {
       categories,
       brands,
-      totalAmount
+      total
     };
   }
 

@@ -18,7 +18,7 @@ export class MainView {
     private controller: Controller,
     private model: Model,
     private root: ExtendedElement,
-    private onCartUpdate: (a: number) => void
+    private onCartUpdate: (a: number, s: number) => void
   ) {
     this.filters = new FilterView(this.controller, this.model);
     this.headControls = new HeadControlsView(this.controller, this.model);
@@ -56,7 +56,7 @@ export class MainView {
       const cartIds = this.model.cartIds;
 
       this.productsList.applyCart(cartIds);
-      this.onCartUpdate(cartIds.length);
+      this.onCartUpdate(cartIds.length, this.model.totalPrice);
     };
 
     this.model.on("filter.update", renderProductsCallback);
