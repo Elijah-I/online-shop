@@ -6,6 +6,7 @@ export class ProductsView {
   constructor(private controller: Controller) {}
 
   render(products: Product[], layout: string, root: HTMLElement) {
+    let found = 0;
     root.innerHTML = "";
 
     const headStyle = document.getElementsByTagName("style");
@@ -45,7 +46,7 @@ export class ProductsView {
         }`;
         const buttonText = cart ? "Remove from cart" : "Add to cart";
 
-        if (show)
+        if (show) {
           template += `
           <a href="/product/${id}" class="${classNM}" data-id=${id} id="product-${id}">
             <div class="product-item__img">
@@ -84,7 +85,11 @@ export class ProductsView {
                 </div>  
             </div>
           </a>
-        `;
+          `;
+
+          found++;
+        }
+
         productsWrapper.innerHTML += template;
         headStyleInner.innerHTML += `#rating-${id}:before {
                 content: '★★★★★';
@@ -97,22 +102,27 @@ export class ProductsView {
       }
     );
 
+    if (found === 0) {
+      productsWrapper.innerHTML = `<div class="products__empty">Nothing found on your filters</div>`;
+    }
+
     root.append(productsWrapper);
 
     this.addHandlers();
   }
 
   applyCart(cartIds: number[]) {
-    for (const product of Utils.id(
-      ".product-item"
-    ) as NodeListOf<ExtendedElement>) {
-      product.class("product-item--carted", true);
-      (
-        Utils.id(
-          `#product-${product.dataset!.id} .button__add`
-        ) as ExtendedElement
-      ).html("add to cart");
-    }
+    const products = Utils.ids(".product-item");
+
+    if (products)
+      for (const product of products as NodeListOf<ExtendedElement>) {
+        product.classList.remove("product-item--carted");
+        (
+          Utils.id(
+            `#product-${product.dataset!.id} .button__add`
+          ) as ExtendedElement
+        ).html("add to cart");
+      }
 
     for (const cartId of cartIds) {
       const product = Utils.id(`#product-${cartId}`);
@@ -128,9 +138,10 @@ export class ProductsView {
   }
 
   private addHandlers() {
-    for (const button of Utils.ids(
-      ".products__item"
-    ) as NodeListOf<ExtendedElement>) {
+    const buttons = Utils.ids(".products__item");
+    if (!buttons) return;
+
+    for (const button of buttons as NodeListOf<ExtendedElement>) {
       button.addEventListener("click", (e: Event) => {
         if (
           e.target instanceof HTMLElement &&

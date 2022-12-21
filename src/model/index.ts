@@ -14,6 +14,7 @@ import { ControlsModel } from "./controls.model";
 import { SortSettings } from "types/sortSettings";
 import { SearchModel } from "./search.model";
 import { CartModel } from "./cart.model";
+import { SearchParams } from "types/searchParams";
 
 export class Model extends Observer {
   routerModel: RouterModel;
@@ -295,6 +296,8 @@ export class Model extends Observer {
     let total = this.cartIds.length;
     const price = { min: 10000000, max: 0 };
     const stock = { min: 10000000, max: 0 };
+    const [selectedStockFrom, selectedStockTo] = this.filterStock;
+    const [selectedPriceFrom, selectedPriceTo] = this.filterPrice;
 
     State.products.forEach((product) => {
       if (product.show) {
@@ -325,15 +328,43 @@ export class Model extends Observer {
       }
     });
 
+    let calcStock = false;
+    let calcPrice = false;
+
+    for (const param in this.route.searchParams) {
+      if (this.route.searchParams[param]) {
+        if (param !== SearchParams.STOCK && param !== SearchParams.PRICE) {
+          if (stock.min < 1000000) calcStock = true;
+          if (price.min < 1000000) calcPrice = true;
+        }
+      }
+    }
+
     State.stock = {
-      from: stock.min,
-      to: stock.max,
+      from: selectedStockFrom
+        ? +selectedStockFrom
+        : calcStock
+        ? stock.min
+        : this.getRangeFrom(State.stock),
+      to: selectedStockTo
+        ? +selectedStockTo
+        : calcStock
+        ? stock.max
+        : this.getRangeTo(State.stock),
       max: State.stock.max
     };
 
     State.price = {
-      from: price.min,
-      to: price.max,
+      from: selectedPriceFrom
+        ? +selectedPriceFrom
+        : calcPrice
+        ? price.min
+        : this.getRangeFrom(State.price),
+      to: selectedPriceTo
+        ? +selectedPriceTo
+        : calcPrice
+        ? price.max
+        : this.getRangeTo(State.price),
       max: State.price.max
     };
 
