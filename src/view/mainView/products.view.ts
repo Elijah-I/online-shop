@@ -115,13 +115,15 @@ export class ProductsView {
     }
 
     for (const cartId of cartIds) {
-      const product = Utils.id(`#product-${cartId}`) as ExtendedElement;
+      const product = Utils.id(`#product-${cartId}`);
 
-      product.class("product-item--carted");
+      if (product !== null) {
+        (product as ExtendedElement).class("product-item--carted");
 
-      (Utils.id(`#product-${cartId} .button__add`) as ExtendedElement).html(
-        "remove from cart"
-      );
+        (Utils.id(`#product-${cartId} .button__add`) as ExtendedElement).html(
+          "remove from cart"
+        );
+      }
     }
   }
 
