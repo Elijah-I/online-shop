@@ -8,6 +8,8 @@
 
   // .products__item
   &__item {
+    text-decoration: none;
+    color: $color-text;
   }
 
   &__empty {
@@ -40,7 +42,8 @@
 
       // .product-item__price
       &__price {
-        text-align: right;
+        display: flex;
+        justify-content: space-between;
       }
 
       // .product-item__button

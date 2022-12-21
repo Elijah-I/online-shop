@@ -47,7 +47,7 @@ export class ProductsView {
 
         if (show)
           template += `
-          <div class="${classNM}" data-id=${id} id="product-${id}">
+          <a href="/product/${id}" class="${classNM}" data-id=${id} id="product-${id}">
             <div class="product-item__img">
                 <img src="${thumbnail}" alt="Product Item" width="240" height="248">
             </div>
@@ -83,7 +83,7 @@ export class ProductsView {
                     </div>
                 </div>  
             </div>
-          </div>
+          </a>
         `;
         productsWrapper.innerHTML += template;
         headStyleInner.innerHTML += `#rating-${id}:before {
@@ -128,11 +128,27 @@ export class ProductsView {
   }
 
   private addHandlers() {
-    for (const button of Utils.id(
-      ".button__add"
+    for (const button of Utils.ids(
+      ".products__item"
     ) as NodeListOf<ExtendedElement>) {
-      Utils.addEvent(button, "click", () => {
-        this.controller.toggleCart(+button.dataset!.id);
+      button.addEventListener("click", (e: Event) => {
+        if (
+          e.target instanceof HTMLElement &&
+          e.target.closest(".button__add")
+        ) {
+          e.preventDefault();
+          this.controller.toggleCart(+button.dataset!.id);
+          return false;
+        }
+
+        if (
+          e.target instanceof HTMLElement &&
+          e.target.closest(".products__item")
+        ) {
+          const link = e.target.closest(".products__item") as HTMLAnchorElement;
+          this.controller.route(link.href, e);
+          return false;
+        }
       });
     }
   }

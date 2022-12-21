@@ -21,6 +21,7 @@ interface IUtils {
   ): void;
 
   id(selector: string): NodeListOf<ExtendedElement> | ExtendedElement | null;
+  ids(selector: string): NodeListOf<ExtendedElement> | null;
 
   create<T extends HTMLElement>(cls: string, type?: string): T;
 }
@@ -77,6 +78,14 @@ export const Utils: IUtils = {
     }
 
     if (elems.length === 1) return elems[0];
+    if (elems.length) return elems;
+    return null;
+  },
+
+  ids(selector) {
+    const elems: NodeListOf<ExtendedElement> =
+      document.querySelectorAll(selector);
+
     if (elems.length) return elems;
     return null;
   },
