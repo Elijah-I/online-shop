@@ -2,6 +2,7 @@ import { Product } from "store";
 import { Controller } from "controller";
 import { Utils, ExtendedElement } from "../../utils/utils";
 import {headStyle} from "../../utils/headStyle";
+import {Routing} from "types/routing";
 
 export class ProductsView {
   constructor(private controller: Controller) {}
@@ -126,5 +127,16 @@ export class ProductsView {
         this.controller.toggleCart(+button.dataset!.id);
       });
     }
+
+    Utils.addEvent(".products__wrapper", "click", (e: Event) => {
+        const target = e.target as HTMLElement;
+
+        const productCart = target.closest('.products__item') as HTMLElement;
+
+        if (productCart) {
+            const link = `${window.location.href}${Routing.PRODUCTS}/${productCart.dataset.id}`
+            this.controller.route(link, e);
+        }
+      });
   }
 }
