@@ -64,7 +64,11 @@ export class MainView {
     this.model.on("search.update", renderProductsCallback);
 
     this.model.on("cart.update", cartCallback);
-    window.addEventListener("storage", cartCallback);
+    window.addEventListener("storage", () => {
+      this.model.initState();
+      this.controller.applyCart();
+      cartCallback();
+    });
   }
 
   render() {

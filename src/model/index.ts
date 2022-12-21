@@ -188,6 +188,8 @@ export class Model extends Observer {
       if (product.price > price.max) {
         price.max = product.price;
       }
+
+      product.cart = cart.includes(product.id);
     });
 
     State.products = [...products];
