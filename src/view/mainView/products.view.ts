@@ -1,24 +1,15 @@
 import { Product } from "store";
 import { Controller } from "controller";
 import { Utils, ExtendedElement } from "../../utils/utils";
+import {headStyle} from "../../utils/headStyle";
 
 export class ProductsView {
   constructor(private controller: Controller) {}
 
   render(products: Product[], layout: string, root: HTMLElement) {
     root.innerHTML = "";
-
-    const headStyle = document.getElementsByTagName("style");
-
-    if (headStyle) {
-      for (const headStyleElement of headStyle) {
-        headStyleElement.parentNode?.removeChild(headStyleElement);
-      }
-    }
-
-    const headStyleInner = document.head.appendChild(
-      document.createElement("style")
-    );
+    headStyle.clearHeadStyle();
+    const headStyleInner = headStyle.getHeadStyle();
 
     const productsWrapper = Utils.create<HTMLDivElement>(
       `products__wrapper layout-${layout}`,
