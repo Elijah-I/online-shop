@@ -23,7 +23,10 @@ export class View {
 
     const main = Utils.id(".main__wrapper") as ExtendedElement;
 
-    this.productView = new ProductView(main);
+    this.productView = new ProductView(
+        this.controller,
+        this.model,
+        main);
     this.mainView = new MainView(
       this.controller,
       this.model,
@@ -105,7 +108,7 @@ export class View {
 
     header.innerHTML = `
             <div class="wrapper header__wrapper">
-                <a href="#" class="header__logo logo"><img src="${logo}" alt="Hobbies Art Logo"></a>
+                <a href="/" class="header__logo logo nav__link"><img src="${logo}" alt="Hobbies Art Logo"></a>
                 <nav class="header__nav nav">
                     <ul class="nav__list">
                         <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
