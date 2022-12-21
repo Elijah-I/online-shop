@@ -24,11 +24,6 @@
     .product-item {
       flex-direction: column;
 
-      // product-item--carted
-      &--carted {
-        box-shadow: 0 4px 20px transparentize($color-primary, 0.1);
-      }
-
       // .product-item__info
       &__info {
         flex-direction: column;
@@ -155,6 +150,14 @@
   display: flex;
   transition: all 0.3s ease-out 0s;
   cursor: pointer;
+
+  &:hover &__title {
+    color: $color-primary;
+  }
+  // product-item--carted
+  &--carted {
+    box-shadow: 0 4px 20px transparentize($color-primary, 0.1);
+  }
 
   // .product-item__img
   &__img {
