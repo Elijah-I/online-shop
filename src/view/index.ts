@@ -23,7 +23,10 @@ export class View {
 
     const main = Utils.id(".main__wrapper") as ExtendedElement;
 
-    this.productView = new ProductView(main);
+    this.productView = new ProductView(
+        this.controller,
+        this.model,
+        main);
     this.mainView = new MainView(
       this.controller,
       this.model,
