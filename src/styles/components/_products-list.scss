@@ -1,105 +1,109 @@
 @use "../abstract" as *;
 
 .products {
-	// .products__wrapper
-	&__wrapper {
-		gap: 40px;
-	}
+  // .products__wrapper
+  &__wrapper {
+    gap: 40px;
+  }
 
-	// .products__item
-	&__item {
-	}
+  // .products__item
+  &__item {
+  }
 
-	&__empty {
-		flex-basis: 100%;
-		text-align: center;
-	}
-
+  &__empty {
+    flex-basis: 100%;
+    text-align: center;
+  }
 }
 
 .products {
-	.layout-columns {
-		.product-item {
-			flex-direction: column;
+  .layout-columns {
+    .product-item {
+      flex-direction: column;
 
-			// .product-item__info
-			&__info {
-				flex-direction: column;
-				justify-content: end;
-			}
+      // product-item--carted
+      &--carted {
+        box-shadow: 0 4px 20px transparentize($color-primary, 0.1);
+      }
 
-			&__rating-buy {
-				display: flex;
-				flex-direction: column;
-				gap: 10px;
-			}
+      // .product-item__info
+      &__info {
+        flex-direction: column;
+        justify-content: end;
+      }
 
-			// .product-item__price
-			&__price {
-				text-align: right;
-			}
+      &__rating-buy {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
 
-			// .product-item__button
-			&__button {
-				& .button {
-					width: 100%;
-				}
-			}
-		}
-	}
+      // .product-item__price
+      &__price {
+        text-align: right;
+      }
+
+      // .product-item__button
+      &__button {
+        & .button {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 .products {
-	.layout-rows {
-		.product-item {
-			flex-direction: row;
+  .layout-rows {
+    .product-item {
+      flex-direction: row;
 
-			// .product-item__img
-			&__img {
-				max-width: 240px;
-			}
+      // .product-item__img
+      &__img {
+        max-width: 240px;
+      }
 
-			&__title {
-				justify-content: center;
-				text-align: center;
-				font-size: 2.5rem;
-			}
+      &__title {
+        justify-content: center;
+        text-align: center;
+        font-size: 2.5rem;
+      }
 
-			// .product-item__info
-			&__info {
-				flex-direction: row-reverse;
-				justify-content: space-between;
-				font-size: 1.9rem;
-			}
+      // .product-item__info
+      &__info {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        font-size: 1.9rem;
+      }
 
-			&__desc {
-				gap: 10px;
-				text-align: right;
-			}
+      &__desc {
+        gap: 10px;
+        text-align: right;
+      }
 
-			// .product-item__price
-			&__price {
-				font-size: 2rem;
-				display: flex;
-				align-items: center;
-				gap: 10px;
+      // .product-item__price
+      &__price {
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
 
-				&-default {
-					padding-top: 20px;
-				}
+        &-default {
+          padding-top: 20px;
+        }
 
-				&-discount {
-					@include font(3rem, 1.8rem);
-					color: $color-primary;
-				}
-			}
+        &-discount {
+          @include font(3rem, 1.8rem);
+          color: $color-primary;
+        }
+      }
 
-			&__rating-buy {
-				display: flex;
-				justify-content: space-between;
-			}
+      &__rating-buy {
+        display: flex;
+        justify-content: space-between;
+      }
 
-			/*
+      /*
 			// .product-item__category
 			&__category,
 			&__brand,
@@ -123,98 +127,97 @@
 			}
 			 */
 
-			// .product-item__brand
-			&__brand {
-			}
+      // .product-item__brand
+      &__brand {
+      }
 
-			&__rating {
-				align-self: center;
-				font-size: 1.9rem;
-			}
+      &__rating {
+        align-self: center;
+        font-size: 1.9rem;
+      }
 
-			// .product-item__button
-			&__button {
-				& .button {
-					width: 19vw;
-				}
-			}
-		}
-	}
+      // .product-item__button
+      &__button {
+        & .button {
+          width: 19vw;
+        }
+      }
+    }
+  }
 }
 
 .product-item {
-	@extend %block-shadowed;
-	display: flex;
-	transition: all 0.3s ease-out 0s;
-	cursor: pointer;
+  @extend %block-shadowed;
+  display: flex;
+  transition: all 0.3s ease-out 0s;
+  cursor: pointer;
 
-	// .product-item__img
-	&__img {
-		>* {
-			border-top-right-radius: 10px;
-			border-top-left-radius: 10px;
-			width: 100%;
-			height: 100%;
-		}
-	}
+  // .product-item__img
+  &__img {
+    > * {
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-	// .product-item__content
-	&__content {
-		padding: 10px 20px 20px;
-		flex-grow: 1;
-		display: flex;
-		flex-direction: column;
-	}
+  // .product-item__content
+  &__content {
+    padding: 10px 20px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-	// .product-item__title
-	&__title {
-		transition: all 0.3s ease-out 0s;
-		margin: 0 0 15px;
-		text-align: left;
-		flex-grow: 1;
-		display: flex;
-		align-items: center;
-	}
+  // .product-item__title
+  &__title {
+    transition: all 0.3s ease-out 0s;
+    margin: 0 0 15px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
 
-	// .product-item__info
-	&__info {
-		display: flex;
-		gap: 10px;
-		padding-bottom: 10px;
-	}
+  // .product-item__info
+  &__info {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
 
-	&__desc {
-		display: flex;
-		flex-direction: column;
-	}
+  &__desc {
+    display: flex;
+    flex-direction: column;
+  }
 
-	// .product-item__price
-	&__price {
-		@include font(1.8rem, 1.8rem);
-		&-default {
-			text-decoration: line-through;
-		}
+  // .product-item__price
+  &__price {
+    @include font(1.8rem, 1.8rem);
+    &-default {
+      text-decoration: line-through;
+    }
 
-		&-discount {
-			@include font(2.1rem, 1.8rem);
-			color: $color-primary;
-		}
-	}
+    &-discount {
+      @include font(2.1rem, 1.8rem);
+      color: $color-primary;
+    }
+  }
 
-	// .product-item__category
-	&__category {
-	}
+  // .product-item__category
+  &__category {
+  }
 
-	// .product-item__brand
-	&__brand {
-	}
+  // .product-item__brand
+  &__brand {
+  }
 
-	&__rating-buy {
+  &__rating-buy {
+  }
 
-	}
-
-	// .product-item__button
-	&__button {
-		text-align: center;
-	}
+  // .product-item__button
+  &__button {
+    text-align: center;
+  }
 }

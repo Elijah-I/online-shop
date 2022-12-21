@@ -1,85 +1,95 @@
 @use "../abstract" as *;
 
 .header {
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-	padding: 15px 0 17px 0;
-	margin-bottom: 80px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 15px 0 17px 0;
+  margin-bottom: 80px;
 
-	&__wrapper {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-	&__logo {
-		display: flex;
-		flex-basis: 50%;
-	}
+  &__logo {
+    display: flex;
+    flex-basis: 50%;
+  }
 
-	&__nav {
-		flex-grow: 1;
-	}
+  &__nav {
+    flex-grow: 1;
+  }
 
-	// .header__total
-	&__total {
-
-	}
+  // .header__total
+  &__total {
+  }
 }
 
 .cart {
+  &__wrapper {
+    @extend %border;
+    border-radius: 46px;
+    padding: 5px 15px;
+  }
 
-	&__wrapper {
-		@extend %border;
-		border-radius: 46px;
-		padding: 5px 15px;
-	}
+  // .cart__link
+  &__link {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+  }
 
-	// .cart__content
-	&__content {
-		position: relative;
-		display: flex;
-		align-items: center;
-		gap: 5px;
-	}
+  // .cart__content
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 
-	// .cart__text
-	&__text {
-	}
+  // .cart__text
+  &__text {
+  }
 
-	// .cart__total
-	&__total {
-		position: absolute;
-		top: -18px;
-		left: 50px;
-	}
+  // .cart__total
+  &__total {
+    position: absolute;
+    top: -18px;
+    left: 50px;
+  }
 
-	// .cart__total-value
-	&__total-value {
+  // .cart__total-value
+  &__total-value {
+    font-size: 11px;
+  }
 
-	}
+  // .cart__total-price
+  &__total-price {
+    color: $color-primary;
+  }
 }
 
 .total {
-	// .total__wrapper
-	&__wrapper {
-		@extend %border;
-		border-radius: 46px;
-		padding: 5px 15px;
-	}
+  // .total__wrapper
+  &__wrapper {
+    @extend %border;
+    border-radius: 46px;
+    padding: 5px 15px;
+  }
 
-	// .total__content
-	&__content {
-		position: relative;
-		display: flex;
-		align-items: center;
-		gap: 5px;
-	}
+  // .total__content
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 
-	// .total__text
-	&__text {
-	}
+  // .total__text
+  &__text {
+  }
 
-	// .total__value
-	&__value {
-	}
+  // .total__value
+  &__value {
+  }
 }

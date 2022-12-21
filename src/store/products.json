@@ -8,6 +8,7 @@
     "rating": 4.3,
     "stock": 76,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 0,
       "name": "Gamma"
@@ -31,6 +32,7 @@
     "rating": 4.8,
     "stock": 58,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 0,
       "name": "Gamma"
@@ -54,6 +56,7 @@
     "rating": 5,
     "stock": 17,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 0,
       "name": "Gamma"
@@ -77,6 +80,7 @@
     "rating": 5,
     "stock": 4,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 0,
       "name": "Gamma"
@@ -100,6 +104,7 @@
     "rating": 4.8,
     "stock": 8,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 0,
       "name": "Gamma"
@@ -124,6 +129,7 @@
     "rating": 5,
     "stock": 3,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 0,
       "name": "Gamma"
@@ -147,6 +153,7 @@
     "rating": 4.1,
     "stock": 153,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 1,
       "name": "Zlatka"
@@ -170,6 +177,7 @@
     "rating": 5,
     "stock": 99,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 2,
       "name": "Hobbius"
@@ -193,6 +201,7 @@
     "rating": 4.7,
     "stock": 136,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 1,
       "name": "Zlatka"
@@ -216,6 +225,7 @@
     "rating": 5,
     "stock": 315,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 3,
       "name": "Blumentag"
@@ -239,6 +249,7 @@
     "rating": 4.5,
     "stock": 227,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 3,
       "name": "Blumentag"
@@ -262,6 +273,7 @@
     "rating": 4.9,
     "stock": 169,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 3,
       "name": "Blumentag"
@@ -285,6 +297,7 @@
     "rating": 5,
     "stock": 336,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 3,
       "name": "Blumentag"
@@ -309,6 +322,7 @@
     "rating": 5,
     "stock": 478,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 3,
       "name": "Blumentag"
@@ -333,6 +347,7 @@
     "rating": 5,
     "stock": 57,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 4,
       "name": "Lol&Pop"
@@ -357,6 +372,7 @@
     "rating": 5,
     "stock": 78,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 4,
       "name": "Lol&Pop"
@@ -383,6 +399,7 @@
     "rating": 3.9,
     "stock": 331,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 4,
       "name": "Lol&Pop"
@@ -406,6 +423,7 @@
     "rating": 5,
     "stock": 174,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 5,
       "name": "Artberry"
@@ -431,6 +449,7 @@
     "rating": 4.8,
     "stock": 778,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 5,
       "name": "Artberry"
@@ -457,6 +476,7 @@
     "rating": 4.2,
     "stock": 120,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 6,
       "name": "1TOY"
@@ -480,6 +500,7 @@
     "rating": 5,
     "stock": 147,
     "show": true,
+    "cart": false,
     "brand": {
       "id": 6,
       "name": "1TOY"

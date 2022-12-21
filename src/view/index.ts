@@ -24,7 +24,12 @@ export class View {
     const main = Utils.id(".main__wrapper") as ExtendedElement;
 
     this.productView = new ProductView(main);
-    this.mainView = new MainView(this.controller, this.model, main);
+    this.mainView = new MainView(
+      this.controller,
+      this.model,
+      main,
+      (a: number, s: number) => this.updateCart(a, s)
+    );
     this.cartView = new CartView(main);
 
     this.checkRestoreRoute();
@@ -81,6 +86,20 @@ export class View {
     }
   }
 
+  private updateCart(amount: number, sum: number) {
+    const value = Utils.id(".cart__total-value") as ExtendedElement;
+    const price = Utils.id(".cart__total-price") as ExtendedElement;
+
+    value
+      .html(amount ? amount.toString() : "")
+      .parentElement!.parentElement!.setAttribute(
+        "style",
+        amount ? "" : "display: none;"
+      );
+
+    price.html(sum ? `${sum.toString()}₽` : "");
+  }
+
   renderHeader() {
     const header = Utils.create<HTMLElement>("header", "header");
 
@@ -91,14 +110,15 @@ export class View {
                     <ul class="nav__list">
                         <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
                         <li class="nav__item cart">
-                            <a href="/cart" class="nav__link">
+                            <a href="/cart" class="nav__link cart__link">
+                                <div class="cart__total-price"></div>
                                 <div class="cart__wrapper">
                                     <div class="cart__content">
                                         <span class="icon icon--cart"></span>
                                         <p class="cart__text">Cart</p>
                                         <div class="cart__total">
                                             <div class="icon-circle icon-circle--sec-color">
-                                                <span class="cart__total-value">1</span>
+                                                <span class="cart__total-value"></span>
                                             </div>
                                         </div>
                                     </div>

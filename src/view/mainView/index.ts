@@ -17,11 +17,12 @@ export class MainView {
   constructor(
     private controller: Controller,
     private model: Model,
-    private root: ExtendedElement
+    private root: ExtendedElement,
+    private onCartUpdate: (a: number, s: number) => void
   ) {
     this.filters = new FilterView(this.controller, this.model);
     this.headControls = new HeadControlsView(this.controller, this.model);
-    this.productsList = new ProductsView();
+    this.productsList = new ProductsView(this.controller);
 
     this.productsRoot = Utils.create<HTMLElement>("products", "section");
     this.headControlsRoot = Utils.create<HTMLElement>(
@@ -50,9 +51,24 @@ export class MainView {
 
       this.filters.render(this.leftSideWrapper);
     };
+
+    const cartCallback = () => {
+      const cartIds = this.model.cartIds;
+
+      this.productsList.applyCart(cartIds);
+      this.onCartUpdate(cartIds.length, this.model.totalPrice);
+    };
+
     this.model.on("filter.update", renderProductsCallback);
     this.model.on("controls.update", renderProductsCallback);
     this.model.on("search.update", renderProductsCallback);
+
+    this.model.on("cart.update", cartCallback);
+    window.addEventListener("storage", () => {
+      this.model.initState();
+      this.controller.applyCart();
+      cartCallback();
+    });
   }
 
   render() {
@@ -65,5 +81,6 @@ export class MainView {
 
     this.controller.applyFilters();
     this.controller.applyControls();
+    this.controller.applyCart();
   }
 }

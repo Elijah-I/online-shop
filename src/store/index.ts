@@ -24,7 +24,8 @@ export type Product = {
   };
   thumbnail: string;
   images: string[];
-  show?: boolean;
+  show: boolean;
+  cart: boolean;
 };
 
 export type Price = {
@@ -49,10 +50,11 @@ interface IState {
   layout: string;
   sort: string;
   search: string;
+  cart: number[];
   amount: {
     categories: CategoriesAmount;
     brands: BrandsAmount;
-    totalAmount: number;
+    total: number;
   };
 }
 
@@ -65,6 +67,8 @@ export const State: IState = {
   categories: [],
 
   brands: [],
+
+  cart: [],
 
   search: "",
 
@@ -83,7 +87,7 @@ export const State: IState = {
   amount: {
     categories: {},
     brands: {},
-    totalAmount: 0,
+    total: 0
   },
 
   layout: "",

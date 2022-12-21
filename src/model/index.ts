@@ -13,12 +13,14 @@ import { RouterModel } from "./router.model";
 import { ControlsModel } from "./controls.model";
 import { SortSettings } from "types/sortSettings";
 import { SearchModel } from "./search.model";
+import { CartModel } from "./cart.model";
 
 export class Model extends Observer {
   routerModel: RouterModel;
   filterModel: FilterModel;
   controlsModel: ControlsModel;
   searchModel: SearchModel;
+  cartModel: CartModel;
 
   constructor() {
     super();
@@ -27,6 +29,7 @@ export class Model extends Observer {
     this.filterModel = new FilterModel();
     this.controlsModel = new ControlsModel();
     this.searchModel = new SearchModel();
+    this.cartModel = new CartModel();
 
     this.initState();
   }
@@ -128,6 +131,23 @@ export class Model extends Observer {
     return State.search;
   }
 
+  get cartItems() {
+    return State.products.filter((product) => product.cart);
+  }
+
+  get cartIds() {
+    return State.cart;
+  }
+
+  get totalPrice() {
+    return State.products.reduce((sum, product) => {
+      if (this.cartIds.includes(product.id)) {
+        sum += product.price;
+      }
+      return sum;
+    }, 0);
+  }
+
   initState() {
     const products: Product[] = [...Products];
     const brands: Record<string, Brand> = {};
@@ -135,6 +155,7 @@ export class Model extends Observer {
     const stock = { ...State.stock };
     const price = { ...State.price };
     const searchPattern = this.searchPattern;
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     const checkedCategoriesId = this.filterCategories;
     const checkedBrandsId = this.filterBrands;
@@ -167,6 +188,8 @@ export class Model extends Observer {
       if (product.price > price.max) {
         price.max = product.price;
       }
+
+      product.cart = cart.includes(product.id);
     });
 
     State.products = [...products];
@@ -190,6 +213,8 @@ export class Model extends Observer {
     State.layout = layout;
     State.sort = sort;
     State.search = searchPattern;
+
+    State.cart = [...cart];
   }
 
   private getRangeFrom(range: { max: number }) {
@@ -267,7 +292,7 @@ export class Model extends Observer {
   private calculateAmounts() {
     const categories: CategoriesAmount = {};
     const brands: BrandsAmount = {};
-    let totalAmount = 0;
+    let total = this.cartIds.length;
     const price = { min: 10000000, max: 0 };
     const stock = { min: 10000000, max: 0 };
 
@@ -312,15 +337,16 @@ export class Model extends Observer {
       max: State.price.max
     };
 
-    totalAmount = Object.values(categories).reduce((acc, category) => (acc += category), 0)
+    total = Object.values(categories).reduce(
+      (acc, category) => (acc += category),
+      0
+    );
 
     State.amount = {
       categories,
       brands,
-      totalAmount
+      total
     };
-
-    console.log('State', State)
   }
 
   applyControls() {
@@ -364,6 +390,17 @@ export class Model extends Observer {
     this.emmit("controls.update");
   }
 
+  applyCart() {
+    State.products.map((product) => {
+      if (this.cartIds.includes(product.id)) {
+        product.cart = true;
+      }
+      return product;
+    });
+
+    this.emmit("cart.update");
+  }
+
   changeSearchPattern(searchPattern: string) {
     this.searchModel.changePattern(searchPattern);
   }
@@ -379,5 +416,9 @@ export class Model extends Observer {
     }
 
     return contains;
+  }
+
+  toggleCart(id: number) {
+    this.cartModel.toggle(id);
   }
 }
