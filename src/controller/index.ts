@@ -1,5 +1,6 @@
 import { SearchParams } from "types/searchParams";
 import { Model } from "../model/index";
+import { CartController } from "./cart.controller";
 import { FilterController } from "./filter.controller";
 import { RouterController } from "./router.controller";
 import { SearchController } from "./search.controller";
@@ -9,9 +10,12 @@ export class Controller {
   routerController: RouterController;
   filterController: FilterController;
   searchController: SearchController;
+  cartController: CartController;
 
   constructor(private model: Model) {
     this.searchDelay = null;
+
+    this.cartController = new CartController(model);
     this.routerController = new RouterController(model);
     this.searchController = new SearchController(model, this.routerController);
     this.filterController = new FilterController(model, this.routerController);
@@ -51,6 +55,10 @@ export class Controller {
     this.model.applyControls();
   }
 
+  applyCart() {
+    this.model.applyCart();
+  }
+
   changeFilterPrice(from: number, to: number) {
     this.filterController.changePrice(from, to);
   }
@@ -75,5 +83,9 @@ export class Controller {
     this.routerController.addSearchParam([[SearchParams.SORT, sort]]);
 
     this.applyControls();
+  }
+
+  toggleCart(id: number) {
+    this.cartController.toggle(id);
   }
 }

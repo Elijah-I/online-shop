@@ -24,7 +24,12 @@ export class View {
     const main = Utils.id(".main__wrapper") as ExtendedElement;
 
     this.productView = new ProductView(main);
-    this.mainView = new MainView(this.controller, this.model, main);
+    this.mainView = new MainView(
+      this.controller,
+      this.model,
+      main,
+      (a: number) => this.updateCart(a)
+    );
     this.cartView = new CartView(main);
 
     this.checkRestoreRoute();
@@ -81,6 +86,17 @@ export class View {
     }
   }
 
+  private updateCart(amount: number) {
+    const total = Utils.id(".cart__total-value") as ExtendedElement;
+
+    total
+      .html(amount ? amount.toString() : "")
+      .parentElement!.parentElement!.setAttribute(
+        "style",
+        amount ? "" : "display: none;"
+      );
+  }
+
   renderHeader() {
     const header = Utils.create<HTMLElement>("header", "header");
 
@@ -98,7 +114,7 @@ export class View {
                                         <p class="cart__text">Cart</p>
                                         <div class="cart__total">
                                             <div class="icon-circle icon-circle--sec-color">
-                                                <span class="cart__total-value">1</span>
+                                                <span class="cart__total-value"></span>
                                             </div>
                                         </div>
                                     </div>

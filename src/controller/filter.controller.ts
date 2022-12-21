@@ -89,6 +89,7 @@ export class FilterController {
       [SearchParams.STOCK, ""],
       [SearchParams.PRICE, ""]
     ]);
+
     this.model.initState();
     this.applyFilters();
   }
