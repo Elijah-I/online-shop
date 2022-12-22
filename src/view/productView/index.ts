@@ -108,7 +108,7 @@ export class ProductView {
     const inCart = this.model.inCart(product.id);
 
     const buttonText = inCart ? "Remove from cart" : "Add to cart";
-    const buttonClass = `button button--rounded button--bordered button__add${
+    const buttonClass = `button button--rounded button--bordered button__add-product${
       inCart ? " button--carted" : ""
     }`;
 
@@ -184,7 +184,7 @@ export class ProductView {
       });
     }
 
-    const buttonAdd = Utils.id(".button__add") as ExtendedElement;
+    const buttonAdd = Utils.id(".button__add-product") as ExtendedElement;
 
     Utils.addEvent(buttonAdd, "click", () => {
       this.controller.toggleCart(+buttonAdd.dataset!.id);
@@ -203,9 +203,11 @@ export class ProductView {
 
   private applyCart(cartIds: number[]) {
     const added = cartIds.includes(this.productId);
+    const buttonAdd = Utils.id(".button__add-product");
 
-    (Utils.id(".button__add") as ExtendedElement)
-      .class("button--carted", !added)
-      .html(added ? "Remove from cart" : "Add to cart");
+    if (buttonAdd !== null)
+      (buttonAdd as ExtendedElement)
+        .class("button--carted", !added)
+        .html(added ? "Remove from cart" : "Add to cart");
   }
 }
