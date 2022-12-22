@@ -57,6 +57,7 @@
     transform: scale(1.2);
   }
 
+  &--carted,
   .product-item--carted & {
     background: $color-primary;
     color: $color-light;

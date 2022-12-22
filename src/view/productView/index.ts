@@ -6,6 +6,7 @@ import { headStyle } from "../../utils/headStyle";
 import { SearchParams } from "types/searchParams";
 
 export class ProductView {
+  productId: number;
   productRoot: HTMLElement;
   breadcrumbsNav: HTMLElement;
   productWrapper: HTMLElement;
@@ -13,11 +14,14 @@ export class ProductView {
   constructor(
     private controller: Controller,
     private model: Model,
-    private root: ExtendedElement
+    private root: ExtendedElement,
+    private onCartUpdate: (a: number, s: number) => void
   ) {
     this.productRoot = Utils.create<HTMLElement>("product", "section");
     this.breadcrumbsNav = Utils.create<HTMLElement>("breadcrumbs-nav", "div");
     this.productWrapper = Utils.create<HTMLElement>("product__wrapper", "div");
+
+    this.productId = -1;
   }
 
   render(id: string) {
@@ -25,6 +29,7 @@ export class ProductView {
 
     for (let i = 0; i < this.model.products.length; i++) {
       if (this.model.products[i].id === parseInt(id)) {
+        this.productId = +id;
         this.fill(this.model.products[i]);
         break;
       }
@@ -40,6 +45,7 @@ export class ProductView {
     this.root.append(this.productRoot);
 
     this.addHandlers();
+    this.addListeners();
   }
 
   fillBreadcrumbsNav({ category, title }: Product) {
@@ -99,6 +105,13 @@ export class ProductView {
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;}\n`;
 
+    const inCart = this.model.inCart(product.id);
+
+    const buttonText = inCart ? "Remove from cart" : "Add to cart";
+    const buttonClass = `button button--rounded button--bordered button__add${
+      inCart ? " button--carted" : ""
+    }`;
+
     return `
       <div class="product__content">
         <h2 class="product__title title">${product.title}</h2>
@@ -142,7 +155,9 @@ export class ProductView {
         </div>
 
         <div class="product__buttons">
-            <button class="button button--rounded button--bordered">Add to cart</button>
+            <button class="${buttonClass}" data-id="${
+      product.id
+    }">${buttonText}</button>
             <button class="button button--rounded button--bordered">Buy now</button>
         </div>
       </div>`;
@@ -168,5 +183,29 @@ export class ProductView {
         this.controller.route(link.href!, e);
       });
     }
+
+    const buttonAdd = Utils.id(".button__add") as ExtendedElement;
+
+    Utils.addEvent(buttonAdd, "click", () => {
+      this.controller.toggleCart(+buttonAdd.dataset!.id);
+      return false;
+    });
+  }
+
+  private addListeners() {
+    this.model.on("cart.update", () => {
+      const cartIds = this.model.cartIds;
+
+      this.applyCart(cartIds);
+      this.onCartUpdate(cartIds.length, this.model.totalPrice);
+    });
+  }
+
+  private applyCart(cartIds: number[]) {
+    const added = cartIds.includes(this.productId);
+
+    (Utils.id(".button__add") as ExtendedElement)
+      .class("button--carted", !added)
+      .html(added ? "Remove from cart" : "Add to cart");
   }
 }

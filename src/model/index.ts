@@ -149,6 +149,10 @@ export class Model extends Observer {
     }, 0);
   }
 
+  inCart(id: number) {
+    return State.cart.includes(id);
+  }
+
   initState() {
     const products: Product[] = [...Products];
     const brands: Record<string, Brand> = {};
