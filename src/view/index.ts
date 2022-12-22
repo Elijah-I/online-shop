@@ -22,7 +22,8 @@ export class View {
     this.renderContent();
 
     const main = Utils.id(".main__wrapper") as ExtendedElement;
-    const onCartUpdate = (a: number, s: number) => this.updateCart(a, s);
+    const onCartUpdate = (a: number, s: number, d: number) =>
+      this.updateCart(a, s, d);
 
     this.productView = new ProductView(
       this.controller,
@@ -92,7 +93,7 @@ export class View {
     }
   }
 
-  private updateCart(amount: number, sum: number) {
+  private updateCart(amount: number, sum: number, discounted: number) {
     const value = Utils.id(".cart__total-value") as ExtendedElement;
     const price = Utils.id(".cart__total-price") as ExtendedElement;
 
@@ -103,7 +104,11 @@ export class View {
         amount ? "" : "display: none;"
       );
 
-    price.html(sum ? `${sum.toString()}₽` : "");
+    price.html(
+      sum
+        ? `<span>${sum.toString()}₽</span><b>${discounted.toString()}₽</b>`
+        : ""
+    );
   }
 
   renderHeader() {

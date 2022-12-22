@@ -15,7 +15,7 @@ export class ProductView {
     private controller: Controller,
     private model: Model,
     private root: ExtendedElement,
-    private onCartUpdate: (a: number, s: number) => void
+    private onCartUpdate: (a: number, s: number, d: number) => void
   ) {
     this.productRoot = Utils.create<HTMLElement>("product", "section");
     this.breadcrumbsNav = Utils.create<HTMLElement>("breadcrumbs-nav", "div");
@@ -197,7 +197,11 @@ export class ProductView {
       const cartIds = this.model.cartIds;
 
       this.applyCart(cartIds);
-      this.onCartUpdate(cartIds.length, this.model.totalPrice);
+      this.onCartUpdate(
+        cartIds.length,
+        this.model.totalPrice,
+        this.model.totalDiscounted
+      );
     });
   }
 

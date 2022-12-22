@@ -149,6 +149,16 @@ export class Model extends Observer {
     }, 0);
   }
 
+  get totalDiscounted() {
+    return State.products.reduce((sum, product) => {
+      if (this.cartIds.includes(product.id)) {
+        sum +=
+          product.price - (product.price / 100) * product.discountPercentage;
+      }
+      return +sum.toFixed(2);
+    }, 0);
+  }
+
   inCart(id: number) {
     return State.cart.includes(id);
   }
