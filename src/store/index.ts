@@ -14,6 +14,7 @@ export type Product = {
   discountPercentage: number;
   rating: number;
   stock: number;
+  stockUsed: number;
   brand: {
     id: number;
     name: string;
@@ -37,6 +38,7 @@ export type Price = {
 export type Stock = Price;
 
 export type CategoriesAmount = Record<string, number>;
+export type CartStocks = Record<number, number>;
 export type BrandsAmount = CategoriesAmount;
 
 interface IState {
@@ -51,6 +53,7 @@ interface IState {
   sort: string;
   search: string;
   cart: number[];
+  cartStock: CartStocks;
   amount: {
     categories: CategoriesAmount;
     brands: BrandsAmount;
@@ -69,6 +72,7 @@ export const State: IState = {
   brands: [],
 
   cart: [],
+  cartStock: {},
 
   search: "",
 

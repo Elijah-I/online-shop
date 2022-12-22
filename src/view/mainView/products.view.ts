@@ -1,10 +1,11 @@
+import { Utils, ExtendedElement } from "../../utils/utils";
 import { Product } from "store";
 import { Controller } from "controller";
-import { Utils, ExtendedElement } from "../../utils/utils";
-import {headStyle} from "../../utils/headStyle";
+import { Model } from "model";
+import { headStyle } from "../../utils/headStyle";
 
 export class ProductsView {
-  constructor(private controller: Controller) {}
+  constructor(private controller: Controller, private model: Model) {}
 
   render(products: Product[], layout: string, root: HTMLElement) {
     let found = 0;
@@ -23,6 +24,7 @@ export class ProductsView {
         title,
         price,
         discountPercentage,
+        stockUsed,
         brand,
         rating,
         stock,
@@ -55,7 +57,9 @@ export class ProductsView {
                             Brand: ${brand.name}
                         </span>
                         <span class="product-item__stock">
-                            Stock: ${stock}
+                            Stock: <span class="info-list__value">${
+                              stock - stockUsed
+                            }</span>
                         </span>
                     </div>
                     <div class="product-item__price">
@@ -113,6 +117,12 @@ export class ProductsView {
             `#product-${product.dataset!.id} .button__add`
           ) as ExtendedElement
         ).html("add to cart");
+
+        (
+          Utils.id(
+            `#product-${product.dataset!.id} .info-list__value`
+          ) as ExtendedElement
+        ).html(this.model.totalStock(+product.dataset!.id).toString());
       }
 
     for (const cartId of cartIds) {
