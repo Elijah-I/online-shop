@@ -22,16 +22,19 @@ export class View {
     this.renderContent();
 
     const main = Utils.id(".main__wrapper") as ExtendedElement;
+    const onCartUpdate = (a: number, s: number) => this.updateCart(a, s);
 
     this.productView = new ProductView(
-        this.controller,
-        this.model,
-        main);
+      this.controller,
+      this.model,
+      main,
+      onCartUpdate
+    );
     this.mainView = new MainView(
       this.controller,
       this.model,
       main,
-      (a: number, s: number) => this.updateCart(a, s)
+      onCartUpdate
     );
     this.cartView = new CartView(main);
 
