@@ -22,7 +22,13 @@ export class ProductView {
 
   render(id: string) {
     this.root.html("");
-    this.fill(this.model.products[parseInt(id)]);
+
+    for (let i = 0; i < this.model.products.length; i++) {
+      if (this.model.products[i].id === parseInt(id)) {
+        this.fill(this.model.products[i]);
+        break;
+      }
+    }
 
     this.controller.applyCart();
   }
