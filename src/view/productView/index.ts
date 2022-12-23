@@ -135,7 +135,9 @@ export class ProductView {
                 </li>
                 <li class="info-list__item">
                     <span class="info-list__name">В наличии</span>
-                    <span class="info-list__value">${product.stock}</span>
+                    <span class="info-list__value-product">${
+                      product.stock - product.stockUsed
+                    }</span>
                 </li>
             </ul>
         </div>
@@ -193,25 +195,40 @@ export class ProductView {
   }
 
   private addListeners() {
-    this.model.on("cart.update", () => {
+    const cartCallback = () => {
       const cartIds = this.model.cartIds;
 
       this.applyCart(cartIds);
+
       this.onCartUpdate(
         cartIds.length,
         this.model.totalPrice,
         this.model.totalDiscounted
       );
+    };
+
+    this.model.on("cart.update", cartCallback);
+
+    window.addEventListener("storage", () => {
+      this.model.initState();
+      this.controller.applyCart();
+      cartCallback();
     });
   }
 
   private applyCart(cartIds: number[]) {
     const added = cartIds.includes(this.productId);
     const buttonAdd = Utils.id(".button__add-product");
+    const listValue = Utils.id(".info-list__value-product");
 
     if (buttonAdd !== null)
       (buttonAdd as ExtendedElement)
         .class("button--carted", !added)
         .html(added ? "Remove from cart" : "Add to cart");
+
+    if (listValue !== null)
+      (listValue as ExtendedElement).html(
+        this.model.totalStock(this.productId).toString()
+      );
   }
 }

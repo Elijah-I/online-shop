@@ -22,7 +22,7 @@ export class MainView {
   ) {
     this.filters = new FilterView(this.controller, this.model);
     this.headControls = new HeadControlsView(this.controller, this.model);
-    this.productsList = new ProductsView(this.controller);
+    this.productsList = new ProductsView(this.controller, this.model);
 
     this.productsRoot = Utils.create<HTMLElement>("products", "section");
     this.headControlsRoot = Utils.create<HTMLElement>(
@@ -56,6 +56,7 @@ export class MainView {
       const cartIds = this.model.cartIds;
 
       this.productsList.applyCart(cartIds);
+
       this.onCartUpdate(
         cartIds.length,
         this.model.totalPrice,
@@ -68,6 +69,7 @@ export class MainView {
     this.model.on("search.update", renderProductsCallback);
 
     this.model.on("cart.update", cartCallback);
+
     window.addEventListener("storage", () => {
       this.model.initState();
       this.controller.applyCart();

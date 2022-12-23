@@ -140,6 +140,10 @@ export class Model extends Observer {
     return State.cart;
   }
 
+  get cartStocks() {
+    return State.cartStock;
+  }
+
   get totalPrice() {
     return State.products.reduce((sum, product) => {
       if (this.cartIds.includes(product.id)) {
@@ -163,6 +167,10 @@ export class Model extends Observer {
     return State.cart.includes(id);
   }
 
+  totalStock(id: number) {
+    return State.products[id].stock - State.products[id].stockUsed;
+  }
+
   initState() {
     const products: Product[] = [...Products];
     const brands: Record<string, Brand> = {};
@@ -170,7 +178,9 @@ export class Model extends Observer {
     const stock = { ...State.stock };
     const price = { ...State.price };
     const searchPattern = this.searchPattern;
+
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const cartStock = JSON.parse(localStorage.getItem("cartStock") || "[]");
 
     const checkedCategoriesId = this.filterCategories;
     const checkedBrandsId = this.filterBrands;
@@ -205,6 +215,7 @@ export class Model extends Observer {
       }
 
       product.cart = cart.includes(product.id);
+      product.stockUsed = cartStock[product.id] ? +cartStock[product.id] : 0;
     });
 
     State.products = [...products];
@@ -230,6 +241,7 @@ export class Model extends Observer {
     State.search = searchPattern;
 
     State.cart = [...cart];
+    State.cartStock = { ...cartStock };
   }
 
   private getRangeFrom(range: { max: number }) {
@@ -436,10 +448,16 @@ export class Model extends Observer {
   }
 
   applyCart() {
+    const cartIds = this.cartIds;
+    const cartStocks = this.cartStocks;
+
     State.products.map((product) => {
-      if (this.cartIds.includes(product.id)) {
+      if (cartIds.includes(product.id)) {
         product.cart = true;
       }
+
+      product.stockUsed = cartStocks[product.id] ? cartStocks[product.id] : 0;
+
       return product;
     });
 
