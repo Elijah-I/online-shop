@@ -42,6 +42,30 @@
     }
   }
 
+  &--page {
+    background: inherit;
+    padding: 0;
+  }
+
+  &--quantity{
+    padding: 0;
+    background: inherit;
+    color: $color-border;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  &--cart-reset {
+    background: inherit;
+    padding: 0;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
   &--icon {
     background: inherit;
     padding: 5px;

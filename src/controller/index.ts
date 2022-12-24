@@ -88,4 +88,8 @@ export class Controller {
   toggleCart(id: number) {
     this.cartController.toggle(id);
   }
+
+  resetCart() {
+    this.cartController.resetCart();
+  }
 }

@@ -37,7 +37,12 @@ export class View {
       main,
       onCartUpdate
     );
-    this.cartView = new CartView(main);
+    this.cartView = new CartView(
+        this.controller,
+        this.model,
+        main,
+        onCartUpdate
+    );
 
     this.checkRestoreRoute();
     this.addHandlers();

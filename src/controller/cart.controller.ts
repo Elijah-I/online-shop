@@ -7,4 +7,8 @@ export class CartController {
     this.model.toggleCart(id);
     this.model.applyCart();
   }
+
+  resetCart() {
+    this.model.resetCart();
+  }
 }
