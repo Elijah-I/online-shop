@@ -144,6 +144,10 @@ export class Model extends Observer {
     return State.cartStock;
   }
 
+  get cartStockTotal() {
+    return Object.values(State.cartStock).reduce((acc, stockValue) => acc + stockValue, 0);
+  }
+
   get totalPrice() {
     return State.products.reduce((sum, product) => {
       if (this.cartIds.includes(product.id)) {
@@ -462,6 +466,12 @@ export class Model extends Observer {
     });
 
     this.emmit("cart.update");
+  }
+
+  resetCart() {
+    this.cartModel.resetCart();
+    this.emmit("cart.update");
+    this.emmit("cart.reset");
   }
 
   changeSearchPattern(searchPattern: string) {

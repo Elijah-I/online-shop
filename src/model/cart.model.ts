@@ -22,6 +22,10 @@ export class CartModel {
       delete State.cartStock[id];
     }
 
+    this.cartLocalStorage();
+  }
+
+  private cartLocalStorage() {
     if (!State.cart.length) {
       localStorage.removeItem("cart");
     } else {
@@ -33,5 +37,19 @@ export class CartModel {
     } else {
       localStorage.setItem("cartStock", JSON.stringify(State.cartStock));
     }
+  }
+
+  resetCart() {
+    State.cart = [];
+    State.cartStock = {};
+
+    State.products.forEach((product) => {
+      if (product.cart) {
+        product.cart = false;
+      }
+      product.stockUsed = 0;
+    });
+
+    this.cartLocalStorage();
   }
 }

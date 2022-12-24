@@ -1,0 +1,317 @@
+@use "../abstract" as *;
+
+.cart-wrapper {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.cart-section {
+	display: flex;
+	justify-content: space-between;
+	flex-grow: 1;
+	margin-bottom: 40px;
+
+	// .cart__shopping
+	&__shopping {
+		flex-basis: 68%;
+	}
+
+	// .cart__total
+	&__total-bill {
+		flex-basis: 20%;
+	}
+}
+
+.shopping {
+	// .shopping__title
+	&__title {
+		margin-bottom: 30px;
+	}
+}
+
+.shopping-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+
+	// .shopping-table__head
+	&__head {
+	}
+
+	&__head-row,
+	&__body-row {
+		>* {
+			padding: 0.75rem;
+		}
+	}
+
+	// .shopping-table__head-row
+	&__head-row {
+		>* {
+			text-align: center;
+			@extend %border-bottom;
+		}
+	}
+
+	// .shopping-table__body
+	&__body {
+
+	}
+
+	// .shopping-table__body-row
+	&__body-row {
+		>* {
+			//padding: 10px 0;
+			@extend %border-bottom;
+		}
+
+
+		& td{
+			vertical-align: middle;
+			text-align: center;
+		}
+	}
+
+	// .shopping-table__footer
+	&__footer {
+	}
+
+	// .shopping-table__footer-row
+	&__footer-row {
+	}
+}
+
+.table-item {
+	// .table-item__product
+	&__product {
+		display: flex;
+		align-items: center;
+	}
+
+	// .table-item__img
+	&__img {
+		width: 100px;
+		>* {
+			width: 90px;
+			object-fit: cover;
+		}
+	}
+
+	// .table-item__title
+	&__title {
+	}
+
+	// .table-item__category
+	&__category {
+	}
+
+	// .table-item__brand
+	&__brand {
+	}
+
+	// .table-item__price
+	&__price {
+		// .table-item__price--default
+		&--default {
+		}
+	}
+
+	// .table-item__stock
+	&__stock {
+	}
+
+	// .table-item__quantity
+	&__quantity {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		border: 1px solid #BDBDBD;
+		border-radius: 46px;
+	}
+
+	// .table-item__input
+	&__input {
+		padding: 5px 0;
+		color: $color-text;
+	}
+
+	// .table-item__amount
+	&__amount {
+	}
+
+	&__button-reset {
+		padding-top: 30px;
+	}
+
+	&__items-on-page {
+		display: flex;
+		padding-top: 30px;
+	}
+
+	// .table-item__pages
+	&__pages {
+		display: flex;
+		padding-top: 30px;
+	}
+
+	// .table-item__page
+	&__page {
+		flex-grow: 1;
+		text-align: center;
+	}
+}
+
+.items-on-page {
+	// .items-on-page__label
+	&__label {
+		padding-right: 10px;
+	}
+
+	// .items-on-page__input
+	&__input {
+		border: 1px solid $color-border;
+		border-radius: 5px;
+		color: $color-text;
+		text-align: center;
+	}
+}
+
+
+.cart-total {
+	align-self: center;
+
+	// .cart-total__wrapper
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: 40px;
+		background-color: $color-light-bg;
+		border-radius: 20px;
+		width: 360px;
+	}
+
+	// .cart-total__title
+	&__title {
+		margin-bottom: 20px;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	&__line {
+		display: flex;
+		align-items: center;
+
+	}
+
+	&__line-text {
+	}
+
+	&__line-dashes {
+		flex-grow: 1;
+		padding-top: 10px;
+		border-bottom: 1px dashed $color-border;
+		margin: 0 8px;
+	}
+
+	// .cart-total__products-value
+	&__line-value {
+		.icon {
+			transform: rotate(90deg);
+		}
+	}
+
+	&__default-sum {
+		margin-bottom: 20px;
+	}
+
+	// .cart-total__sum-text
+	&__default-sum-text {
+		@include font(1.8rem, 1.2rem);
+	}
+
+	// .cart-total__sum-value
+	&__default-sum-value {
+		@include font(1.8rem, 1.2rem);
+		color: $color-text;
+		text-decoration: line-through;
+	}
+
+	&__discount-sum-text {
+		@include font(2rem, 1.2rem);
+	}
+
+	&__discount-sum-value {
+		@include font(2rem, 1.2rem);
+		color: $color-primary;
+	}
+
+	// .cart-total__sum
+	&__sum {
+		padding-top: 30px;
+	}
+
+	&__button {
+		padding-top: 30px;
+		text-align: center;
+
+		& .button {
+			width: 100%;
+		}
+	}
+}
+
+.promo-code {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+
+	// .promo-code__title
+	&__title {
+		display: flex;
+		justify-content: space-between;
+		cursor: pointer;
+		align-items: center;
+	}
+
+	// .promo-code__input
+	&__input {
+		display: flex;
+	}
+
+	// .promo-code__text
+	&__text {
+		outline: none;
+		background-color: inherit;
+		@extend %border-bottom;
+	}
+
+	// .promo-code__button
+	&__button {
+		outline: none;
+		background-color: inherit;
+		cursor: pointer;
+
+		&:hover {
+			color: $color-primary;
+		}
+	}
+
+	// .promo-code__applied
+	&__applied {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		flex-grow: 1;
+		margin-bottom: 20px;
+	}
+
+	// .promo-code__active
+	&__active {
+		padding: 5px;
+	}
+}

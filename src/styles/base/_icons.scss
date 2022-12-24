@@ -33,3 +33,29 @@
 	@include icon-size(25px, 25px);
 	background-size: 100%;
 }
+
+.icon--arrow-left {
+	background-image: url("./../assets/svg/left-arrow.svg");
+	@include icon-size(20px, 15px);
+	background-size: 100%;
+
+	&:hover {
+		transform: scale(1.2);
+	}
+}
+
+.icon--arrow-right {
+	background-image: url("./../assets/svg/right-arrow.svg");
+	@include icon-size(20px, 15px);
+	background-size: 100%;
+
+	&:hover {
+		transform: scale(1.2);
+	}
+}
+
+.icon--close {
+	background-image: url("./../assets/svg/close-icon.svg");
+	@include icon-size(20px, 20px);
+	background-size: 100%;
+}
