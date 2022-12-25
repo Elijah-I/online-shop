@@ -92,4 +92,8 @@ export class Controller {
   resetCart() {
     this.cartController.resetCart();
   }
+
+  changeQantity(id: number, qantity: number) {
+    this.cartController.changeQantity(id, qantity);
+  }
 }

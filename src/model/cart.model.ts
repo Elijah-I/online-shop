@@ -1,4 +1,4 @@
-import { State } from "store/index";
+import { CartStocks, State } from "store/index";
 
 export class CartModel {
   toggle(id: number) {
@@ -51,5 +51,31 @@ export class CartModel {
     });
 
     this.cartLocalStorage();
+  }
+
+  changeQantity(cartStock: CartStocks, id: number, qantity: number) {
+    let added = true;
+
+    State.products.map((product) => {
+      if (product.id === id) {
+        product.stockUsed += qantity;
+
+        if (product.stockUsed < 0) {
+          product.stockUsed = 0;
+          added = false;
+        }
+
+        if (product.stockUsed > product.stock) {
+          product.stockUsed = product.stock;
+          added = false;
+        }
+
+        State.cartStock[id] = product.stockUsed;
+      }
+    });
+
+    this.cartLocalStorage();
+
+    return added;
   }
 }
