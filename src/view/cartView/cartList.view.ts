@@ -10,7 +10,7 @@ export class CartListView {
 
     const cartList = Utils.create<HTMLElement>(
       "cart-section__shopping shopping",
-      "table"
+      "div"
     );
 
     this.fill(cartList);
