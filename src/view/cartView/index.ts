@@ -1,6 +1,6 @@
 import { ExtendedElement, Utils } from "../../utils/utils";
-import {Controller} from "../../controller";
-import {Model} from "../../model";
+import { Controller } from "../../controller";
+import { Model } from "../../model";
 import { CartListView } from "./cartList.view";
 import { CartTotalView } from "./cartTotal.view";
 
@@ -12,10 +12,10 @@ export class CartView {
   cartTotal: CartTotalView;
 
   constructor(
-      private controller: Controller,
-      private model: Model,
-      private root: ExtendedElement,
-      private onCartUpdate: (a: number, s: number, d: number) => void
+    private controller: Controller,
+    private model: Model,
+    private root: ExtendedElement,
+    private onCartUpdate: (a: number, s: number, d: number) => void
   ) {
     this.breadcrumbsNav = Utils.create<HTMLElement>("breadcrumbs-nav", "div");
     this.cartWrapper = Utils.create<HTMLElement>("cart-wrapper", "div");
@@ -27,7 +27,26 @@ export class CartView {
   }
 
   addListeners() {
+    const cartCallback = () => {
+      const cartIds = this.model.cartIds;
+
+      this.cartList.fillTable(this.cartRoot);
+
+      this.onCartUpdate(
+        cartIds.length,
+        this.model.totalPrice,
+        this.model.totalDiscounted
+      );
+    };
+
     this.model.on("cart.reset", () => this.render());
+    this.model.on("cart.update", cartCallback);
+
+    window.addEventListener("storage", () => {
+      this.model.initState();
+      this.controller.applyCart();
+      cartCallback();
+    });
   }
 
   render() {
@@ -35,15 +54,16 @@ export class CartView {
 
     if (this.model.cartIds.length) {
       this.fillBreadcrumbsNav();
-      this.cartWrapper.append(this.breadcrumbsNav, this.cartRoot)
+      this.cartWrapper.append(this.breadcrumbsNav, this.cartRoot);
       this.root.append(this.cartWrapper);
 
       this.cartList.render(this.cartRoot);
       this.cartTotal.render(this.cartRoot);
-
     } else {
       this.root.html("You have no product in your cart.");
     }
+
+    this.controller.applyCart();
   }
 
   fillBreadcrumbsNav() {
