@@ -144,6 +144,10 @@ export class Model extends Observer {
     return State.cartStock;
   }
 
+  get pagination() {
+    return State.pagination;
+  }
+
   get cartStockTotal() {
     return Object.values(State.cartStock).reduce(
       (acc, stockValue) => acc + stockValue,
@@ -188,6 +192,10 @@ export class Model extends Observer {
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const cartStock = JSON.parse(localStorage.getItem("cartStock") || "[]");
+
+    const { perPage, currentPage } = JSON.parse(
+      localStorage.getItem("pagination") || '{"perPage":5,"currentPage":1}'
+    );
 
     const checkedCategoriesId = this.filterCategories;
     const checkedBrandsId = this.filterBrands;
@@ -249,6 +257,11 @@ export class Model extends Observer {
 
     State.cart = [...cart];
     State.cartStock = { ...cartStock };
+
+    State.pagination = {
+      perPage,
+      currentPage
+    };
   }
 
   private getRangeFrom(range: { max: number }) {
@@ -478,8 +491,22 @@ export class Model extends Observer {
   }
 
   changeQantity(id: number, qantity: number) {
-    const added = this.cartModel.changeQantity(this.cartStocks, id, qantity);
+    const added = this.cartModel.changeQantity(id, qantity);
     if (added) this.emmit("cart.update");
+  }
+
+  switchPage(direction: number) {
+    const switched = this.cartModel.switchPage(
+      this.cartItems.length,
+      direction,
+      State.pagination
+    );
+    if (switched) this.emmit("cart.update");
+  }
+
+  applyPerPage(perPage: number) {
+    const applied = this.cartModel.applyPerPage(perPage);
+    if (applied) this.emmit("cart.update");
   }
 
   changeSearchPattern(searchPattern: string) {

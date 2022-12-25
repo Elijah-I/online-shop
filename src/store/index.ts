@@ -54,6 +54,7 @@ interface IState {
   search: string;
   cart: number[];
   cartStock: CartStocks;
+  pagination: Pagination;
   amount: {
     categories: CategoriesAmount;
     brands: BrandsAmount;
@@ -61,9 +62,19 @@ interface IState {
   };
 }
 
+export type Pagination = {
+  perPage: number;
+  currentPage: number;
+};
+
 export const State: IState = {
   route: window.location.href,
   deployPath: "/online-shop-release",
+
+  pagination: {
+    perPage: 5,
+    currentPage: 1
+  },
 
   products: [],
 
