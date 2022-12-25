@@ -31,6 +31,7 @@ export class CartView {
       const cartIds = this.model.cartIds;
 
       this.cartList.fillTable(this.cartRoot);
+      this.cartTotal.render(this.cartRoot);
 
       this.onCartUpdate(
         cartIds.length,

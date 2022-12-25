@@ -145,7 +145,10 @@ export class Model extends Observer {
   }
 
   get cartStockTotal() {
-    return Object.values(State.cartStock).reduce((acc, stockValue) => acc + stockValue, 0);
+    return Object.values(State.cartStock).reduce(
+      (acc, stockValue) => acc + stockValue,
+      0
+    );
   }
 
   get totalPrice() {
@@ -472,6 +475,11 @@ export class Model extends Observer {
     this.cartModel.resetCart();
     this.emmit("cart.update");
     this.emmit("cart.reset");
+  }
+
+  changeQantity(id: number, qantity: number) {
+    const added = this.cartModel.changeQantity(this.cartStocks, id, qantity);
+    if (added) this.emmit("cart.update");
   }
 
   changeSearchPattern(searchPattern: string) {

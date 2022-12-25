@@ -10,7 +10,7 @@ export class CartListView {
 
     const cartList = Utils.create<HTMLElement>(
       "cart-section__shopping shopping",
-      "table"
+      "div"
     );
 
     this.fill(cartList);
@@ -50,6 +50,8 @@ export class CartListView {
     cartTable.innerHTML = template;
 
     root.append(cartTable);
+
+    this.addLocalHandlers();
   }
 
   addTableHead() {
@@ -72,60 +74,57 @@ export class CartListView {
 
     let serialNumber = 1;
     this.model.cartItems.forEach((product) => {
-      template += `<tr class="shopping-table__body-row table-item" id="cart-product-${
-        product.id
-      }">
-                                        <td>
-                                            <span class="table-item__number">${serialNumber}</span>
-                                        </td>
-                                        <td>
-                                            <div class="table-item__product">
-                                                <div class="table-item__img">
-                                                    <img src="${
-                                                      product.thumbnail
-                                                    }" alt="Product photo">
-                                                </div>
-                                                <span class="table-item__title">${
-                                                  product.title
-                                                }</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="table-item__category">${
-                                              product.category.name
-                                            }</span>
-                                        </td>
-                                        <td>
-                                            <span class="table-item__brand">${
-                                              product.brand.name
-                                            }</span>
-                                        </td>
-                                        <td>
-                                            <span class="table-item__price table-item__price--default">${
-                                              product.price
-                                            } ₽</span>
-                                        </td>
-                                        <td>
-                                            <span class="table-item__stock">${
-                                              product.stock - product.stockUsed
-                                            } шт.</span>
-                                        </td>
-                                        <td>
-                                            <div class="table-item__quantity">
-                                                <button class="button button--quantity" id="cart-qty-minus">-</button>
-                                                <span class="table-item__input" id="input">${
-                                                  product.stockUsed
-                                                }</span>
-                                                <button class="button button--quantity" id="cart-qty-plus">+</button>
-                                            </div>
-                                        </td>
+      template += `
+        <tr class="shopping-table__body-row table-item" id="cart-product-${
+          product.id
+        }">
+          <td>
+              <span class="table-item__number">${serialNumber}</span>
+          </td>
+          <td>
+              <div class="table-item__product">
+                  <div class="table-item__img">
+                      <img src="${product.thumbnail}" alt="Product photo">
+                  </div>
+                  <span class="table-item__title">${product.title}</span>
+              </div>
+          </td>
+          <td>
+              <span class="table-item__category">${product.category.name}</span>
+          </td>
+          <td>
+              <span class="table-item__brand">${product.brand.name}</span>
+          </td>
+          <td>
+              <span class="table-item__price table-item__price--default">${
+                product.price
+              } ₽</span>
+          </td>
+          <td>
+              <span class="table-item__stock">${
+                product.stock - product.stockUsed
+              } шт.</span>
+          </td>
+          <td>
+              <div class="table-item__quantity">
+                  <button class="button button--quantity button--quantity-minus" data-id="${
+                    product.id
+                  }">-</button>
+                  <span class="table-item__input" id="input">${
+                    product.stockUsed
+                  }</span>
+                  <button class="button button--quantity button--quantity-plus" data-id="${
+                    product.id
+                  }">+</button>
+              </div>
+          </td>
 
-                                        <td>
-                                            <span class="table-item__amount" id="amount">${
-                                              product.price * product.stockUsed
-                                            } ₽</span>
-                                        </td>
-                                    </tr>`;
+          <td>
+              <span class="table-item__amount" id="amount">${
+                product.price * product.stockUsed
+              } ₽</span>
+          </td>
+      </tr>`;
       serialNumber++;
     });
 
@@ -168,5 +167,24 @@ export class CartListView {
     Utils.addEvent("#cart-reset", "click", () => {
       this.controller.resetCart();
     });
+  }
+
+  addLocalHandlers() {
+    const cartMinus = Utils.ids(".button--quantity-minus");
+    const cartPlus = Utils.ids(".button--quantity-plus");
+
+    if (cartMinus !== null)
+      for (const minus of cartMinus) {
+        Utils.addEvent(minus, "click", () => {
+          this.controller.changeQantity(+minus.dataset!.id, -1);
+        });
+      }
+
+    if (cartPlus !== null)
+      for (const plus of cartPlus) {
+        Utils.addEvent(plus, "click", () => {
+          this.controller.changeQantity(+plus.dataset!.id, 1);
+        });
+      }
   }
 }

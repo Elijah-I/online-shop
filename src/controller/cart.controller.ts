@@ -11,4 +11,8 @@ export class CartController {
   resetCart() {
     this.model.resetCart();
   }
+
+  changeQantity(id: number, qantity: number) {
+    this.model.changeQantity(id, qantity);
+  }
 }
