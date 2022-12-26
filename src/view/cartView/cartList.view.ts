@@ -171,9 +171,12 @@ export class CartListView {
   }
 
   addHandlers() {
-    Utils.addEvent("#cart-reset", "click", () => {
-      this.controller.resetCart();
-    });
+    const reset = Utils.id("#cart-reset");
+
+    if (reset !== null)
+      Utils.addEvent(reset as ExtendedElement, "click", () => {
+        this.controller.resetCart();
+      });
   }
 
   addLocalHandlers() {
@@ -194,18 +197,23 @@ export class CartListView {
         });
       }
 
-    Utils.addEvent("#page-back", "click", () => {
-      this.controller.switchPage(-1);
-    });
+    const back = Utils.id("#page-back");
+    const forward = Utils.id("#page-forward");
+    const perPage = Utils.id(".items-on-page__input");
 
-    Utils.addEvent("#page-forward", "click", () => {
-      this.controller.switchPage(1);
-    });
+    if (back !== null)
+      Utils.addEvent(back as ExtendedElement, "click", () => {
+        this.controller.switchPage(-1);
+      });
 
-    const perPage = Utils.id(".items-on-page__input") as ExtendedElement;
+    if (forward !== null)
+      Utils.addEvent(forward as ExtendedElement, "click", () => {
+        this.controller.switchPage(1);
+      });
 
-    Utils.addEvent(perPage, "blur", () => {
-      this.controller.applyPerPage(+perPage.value!);
-    });
+    if (perPage !== null)
+      Utils.addEvent(perPage as ExtendedElement, "blur", () => {
+        this.controller.applyPerPage(+(perPage as ExtendedElement).value!);
+      });
   }
 }
