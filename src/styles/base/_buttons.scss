@@ -8,6 +8,8 @@
   @include font(1.6rem, 2.2rem, normal);
   //@extend %transition;
   transition: all ease 0.3s;
+  text-align: center;
+  text-decoration: none;
 
   &--bordered {
     background: $color-light;
@@ -47,7 +49,7 @@
     padding: 0;
   }
 
-  &--quantity{
+  &--quantity {
     padding: 0;
     background: inherit;
     color: $color-border;

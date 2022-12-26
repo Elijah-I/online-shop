@@ -23,6 +23,12 @@ export class CartView {
     this.cartTotal = new CartTotalView(this.controller, this.model);
 
     this.cartRoot = Utils.create<HTMLElement>("cart-section", "section");
+
+    if (localStorage.getItem("with.popup")) {
+      console.log("popup.open");
+      localStorage.removeItem("with.popup");
+    }
+
     this.addListeners();
   }
 
