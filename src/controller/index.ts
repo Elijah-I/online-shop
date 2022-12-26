@@ -96,4 +96,12 @@ export class Controller {
   changeQantity(id: number, qantity: number) {
     this.cartController.changeQantity(id, qantity);
   }
+
+  switchPage(direction: number) {
+    this.cartController.switchPage(direction);
+  }
+
+  applyPerPage(perPage: number) {
+    this.cartController.applyPerPage(perPage);
+  }
 }

@@ -1,6 +1,6 @@
 import { Controller } from "../../controller";
 import { Model } from "../../model";
-import { Utils } from "../../utils/utils";
+import { ExtendedElement, Utils } from "../../utils/utils";
 
 export class CartListView {
   constructor(private controller: Controller, private model: Model) {}
@@ -18,6 +18,7 @@ export class CartListView {
     root.append(cartList);
 
     this.addHandlers();
+    this.addLocalHandlers();
   }
 
   fill(root: HTMLElement) {
@@ -50,8 +51,6 @@ export class CartListView {
     cartTable.innerHTML = template;
 
     root.append(cartTable);
-
-    this.addLocalHandlers();
   }
 
   addTableHead() {
@@ -70,11 +69,16 @@ export class CartListView {
   }
 
   addTableBody() {
+    const { perPage, currentPage } = this.model.pagination;
+
     let template = `<tbody class="shopping-table__body">`;
 
     let serialNumber = 1;
-    this.model.cartItems.forEach((product) => {
-      template += `
+    this.model.cartItems.forEach((product, order) => {
+      const page = Math.ceil((order + 1) / perPage);
+
+      if (page === currentPage)
+        template += `
         <tr class="shopping-table__body-row table-item" id="cart-product-${
           product.id
         }">
@@ -134,39 +138,45 @@ export class CartListView {
   }
 
   addTableFooter() {
-    return `<tfoot class="shopping-table__footer">
-                                    <tr class="shopping-table__footer-row">
-                                        <td colspan="2">
-                                            <div class="table-item__items-on-page items-on-page">
-                                                <label class="items-on-page__label" for="items-on-page">Товаров на странице</label>
-                                                <input class="items-on-page__input" type="text" value="1" maxlength="4" size="4" id="items-on-page">
-                                            </div>
-                                        </td>
-                                        <td colspan="2">
-                                            <div class="table-item__pages">
-                                                <button class="button button--page" id="page-back">
-                                                    <span class="icon icon--arrow-left"></span>
-                                                </button>
-                                                <span class="table-item__page" id="page-number">1</span>
-                                                <button class="button button--page" id="page-forward">
-                                                    <span class="icon icon--arrow-right"></span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2" align="right">
-                                            <div class="table-item__button-reset">
-                                                <button class="button button--cart-reset" id="cart-reset">Очистить корзину</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>`;
+    const { perPage, currentPage } = this.model.pagination;
+
+    return `
+      <tfoot class="shopping-table__footer">
+          <tr class="shopping-table__footer-row">
+              <td colspan="2">
+                  <div class="table-item__items-on-page items-on-page">
+                      <label class="items-on-page__label" for="items-on-page">Товаров на странице</label>
+                      <input class="items-on-page__input" type="text" value="${perPage}" maxlength="4" size="4" id="items-on-page">
+                  </div>
+              </td>
+              <td colspan="2">
+                  <div class="table-item__pages">
+                      <button class="button button--page" id="page-back">
+                          <span class="icon icon--arrow-left"></span>
+                      </button>
+                      <span class="table-item__page">${currentPage}</span>
+                      <button class="button button--page" id="page-forward">
+                          <span class="icon icon--arrow-right"></span>
+                      </button>
+                  </div>
+              </td>
+              <td colspan="2"></td>
+              <td colspan="2" align="right">
+                  <div class="table-item__button-reset">
+                      <button class="button button--cart-reset" id="cart-reset">Очистить корзину</button>
+                  </div>
+              </td>
+          </tr>
+      </tfoot>`;
   }
 
   addHandlers() {
-    Utils.addEvent("#cart-reset", "click", () => {
-      this.controller.resetCart();
-    });
+    const reset = Utils.id("#cart-reset");
+
+    if (reset !== null)
+      Utils.addEvent(reset as ExtendedElement, "click", () => {
+        this.controller.resetCart();
+      });
   }
 
   addLocalHandlers() {
@@ -186,5 +196,24 @@ export class CartListView {
           this.controller.changeQantity(+plus.dataset!.id, 1);
         });
       }
+
+    const back = Utils.id("#page-back");
+    const forward = Utils.id("#page-forward");
+    const perPage = Utils.id(".items-on-page__input");
+
+    if (back !== null)
+      Utils.addEvent(back as ExtendedElement, "click", () => {
+        this.controller.switchPage(-1);
+      });
+
+    if (forward !== null)
+      Utils.addEvent(forward as ExtendedElement, "click", () => {
+        this.controller.switchPage(1);
+      });
+
+    if (perPage !== null)
+      Utils.addEvent(perPage as ExtendedElement, "blur", () => {
+        this.controller.applyPerPage(+(perPage as ExtendedElement).value!);
+      });
   }
 }

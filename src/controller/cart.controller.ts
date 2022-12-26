@@ -15,4 +15,12 @@ export class CartController {
   changeQantity(id: number, qantity: number) {
     this.model.changeQantity(id, qantity);
   }
+
+  switchPage(direction: number) {
+    this.model.switchPage(direction);
+  }
+
+  applyPerPage(perPage: number) {
+    this.model.applyPerPage(perPage);
+  }
 }

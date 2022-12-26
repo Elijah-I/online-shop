@@ -1,4 +1,4 @@
-import { CartStocks, State } from "store/index";
+import { Pagination, State } from "store/index";
 
 export class CartModel {
   toggle(id: number) {
@@ -53,7 +53,7 @@ export class CartModel {
     this.cartLocalStorage();
   }
 
-  changeQantity(cartStock: CartStocks, id: number, qantity: number) {
+  changeQantity(id: number, qantity: number) {
     let added = true;
 
     State.products.map((product) => {
@@ -77,5 +77,47 @@ export class CartModel {
     this.cartLocalStorage();
 
     return added;
+  }
+
+  switchPage(total: number, direction: number, pagination: Pagination) {
+    let switched = true;
+
+    let { currentPage } = pagination;
+    const totalPages = Math.ceil(total / pagination.perPage);
+
+    currentPage += direction;
+
+    if (currentPage < 1) {
+      currentPage = 1;
+      switched = false;
+    }
+
+    if (currentPage > totalPages) {
+      currentPage = totalPages;
+      switched = false;
+    }
+
+    State.pagination.currentPage = currentPage;
+
+    localStorage.setItem("pagination", JSON.stringify(State.pagination));
+
+    return switched;
+  }
+
+  applyPerPage(perPage: number) {
+    let applied = false;
+
+    if (perPage !== State.pagination.perPage) {
+      State.pagination = {
+        perPage,
+        currentPage: 1
+      };
+
+      localStorage.setItem("pagination", JSON.stringify(State.pagination));
+
+      applied = true;
+    }
+
+    return applied;
   }
 }

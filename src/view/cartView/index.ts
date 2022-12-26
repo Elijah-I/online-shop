@@ -30,7 +30,7 @@ export class CartView {
     const cartCallback = () => {
       const cartIds = this.model.cartIds;
 
-      this.cartList.fillTable(this.cartRoot);
+      this.cartList.render(this.cartRoot);
       this.cartTotal.render(this.cartRoot);
 
       this.onCartUpdate(
@@ -57,9 +57,6 @@ export class CartView {
       this.fillBreadcrumbsNav();
       this.cartWrapper.append(this.breadcrumbsNav, this.cartRoot);
       this.root.append(this.cartWrapper);
-
-      this.cartList.render(this.cartRoot);
-      this.cartTotal.render(this.cartRoot);
     } else {
       this.root.html("You have no product in your cart.");
     }
