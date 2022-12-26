@@ -160,7 +160,9 @@ export class ProductView {
             <button class="${buttonClass}" data-id="${
       product.id
     }">${buttonText}</button>
-            <button class="button button--rounded button--bordered">Buy now</button>
+            <a href="/cart" class="button button--rounded button--bordered button__buy-product" data-id="${
+              product.id
+            }">Buy now</a>
         </div>
       </div>`;
   }
@@ -186,12 +188,24 @@ export class ProductView {
       });
     }
 
-    const buttonAdd = Utils.id(".button__add-product") as ExtendedElement;
+    const buttonAdd = Utils.id(".button__add-product");
+    const buttonBuy = Utils.id(".button__buy-product");
 
-    Utils.addEvent(buttonAdd, "click", () => {
-      this.controller.toggleCart(+buttonAdd.dataset!.id);
-      return false;
-    });
+    if (buttonAdd !== null)
+      Utils.addEvent(buttonAdd as ExtendedElement, "click", () => {
+        this.controller.toggleCart(+(buttonAdd as ExtendedElement).dataset!.id);
+        return false;
+      });
+
+    if (buttonBuy !== null)
+      (buttonBuy as ExtendedElement).addEventListener("click", (e: Event) => {
+        this.controller.quickBuy(
+          e,
+          +(buttonBuy as ExtendedElement).dataset!.id,
+          (buttonBuy as ExtendedElement).href!
+        );
+        return false;
+      });
   }
 
   private addListeners() {

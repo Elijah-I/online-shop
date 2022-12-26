@@ -15,8 +15,8 @@ export class Controller {
   constructor(private model: Model) {
     this.searchDelay = null;
 
-    this.cartController = new CartController(model);
     this.routerController = new RouterController(model);
+    this.cartController = new CartController(model, this.routerController);
     this.searchController = new SearchController(model, this.routerController);
     this.filterController = new FilterController(model, this.routerController);
   }
@@ -87,6 +87,10 @@ export class Controller {
 
   toggleCart(id: number) {
     this.cartController.toggle(id);
+  }
+
+  quickBuy(e: Event, id: number, href: string) {
+    this.cartController.quickBuy(e, id, href);
   }
 
   resetCart() {
