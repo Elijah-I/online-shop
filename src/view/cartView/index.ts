@@ -34,13 +34,11 @@ export class CartView {
 
   addListeners() {
     const cartCallback = () => {
-      const cartIds = this.model.cartIds;
-
       this.cartList.render(this.cartRoot);
       this.cartTotal.render(this.cartRoot);
 
       this.onCartUpdate(
-        cartIds.length,
+        this.model.cartStockTotal,
         this.model.totalPrice,
         this.model.totalDiscounted
       );

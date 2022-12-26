@@ -156,20 +156,18 @@ export class Model extends Observer {
   }
 
   get totalPrice() {
-    return State.products.reduce((sum, product) => {
-      if (this.cartIds.includes(product.id)) {
-        sum += product.price;
-      }
+    return this.cartItems.reduce((sum, product) => {
+      sum += product.price * product.stockUsed;
       return sum;
     }, 0);
   }
 
   get totalDiscounted() {
-    return State.products.reduce((sum, product) => {
-      if (this.cartIds.includes(product.id)) {
-        sum +=
-          product.price - (product.price / 100) * product.discountPercentage;
-      }
+    return this.cartItems.reduce((sum, product) => {
+      sum +=
+        (product.price - (product.price / 100) * product.discountPercentage) *
+        product.stockUsed;
+
       return +sum.toFixed(2);
     }, 0);
   }

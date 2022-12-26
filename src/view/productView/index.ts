@@ -215,7 +215,7 @@ export class ProductView {
       this.applyCart(cartIds);
 
       this.onCartUpdate(
-        cartIds.length,
+        this.model.cartStockTotal,
         this.model.totalPrice,
         this.model.totalDiscounted
       );
