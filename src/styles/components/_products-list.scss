@@ -52,6 +52,13 @@
   }
 }
 
+.product-item__price-default.product-item__price-only {
+  text-decoration: none;
+}
+.product-item__price-discount.product-item__price-only {
+  display: none;
+}
+
 .products {
   .layout-rows {
     .product-item {

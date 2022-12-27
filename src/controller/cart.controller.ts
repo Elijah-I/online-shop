@@ -34,4 +34,12 @@ export class CartController {
   applyPerPage(perPage: number) {
     this.model.applyPerPage(perPage);
   }
+
+  applyPromo(promo: string) {
+    this.model.applyPromo(promo);
+  }
+
+  removePromo(promo: string) {
+    this.model.removePromo(promo);
+  }
 }

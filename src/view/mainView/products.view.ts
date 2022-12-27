@@ -40,6 +40,8 @@ export class ProductsView {
         const buttonText = cart ? "Remove from cart" : "Add to cart";
 
         if (show) {
+          const priceOnly = !discountPercentage;
+
           template += `
           <a href="/product/${id}" class="${classNM}" data-id=${id} id="product-${id}">
             <div class="product-item__img">
@@ -63,11 +65,15 @@ export class ProductsView {
                         </span>
                     </div>
                     <div class="product-item__price">
-                        <span class="product-item__price-default">${price}₽</span>
-                        <span class="product-item__price-discount">${(
-                          price -
-                          (price / 100) * discountPercentage
-                        ).toFixed(2)}₽</span>
+                        <span class="product-item__price-default${
+                          priceOnly ? " product-item__price-only" : ""
+                        }">${price}₽</span>
+                        <span class="product-item__price-discount${
+                          priceOnly ? " product-item__price-only" : ""
+                        }">${(
+            price -
+            (price / 100) * discountPercentage
+          ).toFixed(2)}₽</span>
                     </div>
                 </div>
                 <div class="product-item__rating-buy">

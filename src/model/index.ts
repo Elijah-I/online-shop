@@ -148,6 +148,10 @@ export class Model extends Observer {
     return State.pagination;
   }
 
+  get promo() {
+    return State.promo;
+  }
+
   get cartStockTotal() {
     return Object.values(State.cartStock).reduce(
       (acc, stockValue) => acc + stockValue,
@@ -190,6 +194,8 @@ export class Model extends Observer {
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const cartStock = JSON.parse(localStorage.getItem("cartStock") || "[]");
+
+    const promo = JSON.parse(localStorage.getItem("promo") || "[]");
 
     const { perPage, currentPage } = JSON.parse(
       localStorage.getItem("pagination") || '{"perPage":5,"currentPage":1}'
@@ -255,6 +261,8 @@ export class Model extends Observer {
 
     State.cart = [...cart];
     State.cartStock = { ...cartStock };
+
+    State.promo = [...promo];
 
     State.pagination = {
       perPage,
@@ -505,6 +513,16 @@ export class Model extends Observer {
   applyPerPage(perPage: number) {
     const applied = this.cartModel.applyPerPage(perPage);
     if (applied) this.emmit("cart.update");
+  }
+
+  applyPromo(promo: string) {
+    const applied = this.cartModel.applyPromo(this.promo, promo);
+    if (applied) this.emmit("cart.update");
+  }
+
+  removePromo(promo: string) {
+    const removed = this.cartModel.removePromo(this.promo, promo);
+    if (removed) this.emmit("cart.update");
   }
 
   changeSearchPattern(searchPattern: string) {

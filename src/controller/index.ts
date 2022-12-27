@@ -108,4 +108,12 @@ export class Controller {
   applyPerPage(perPage: number) {
     this.cartController.applyPerPage(perPage);
   }
+
+  applyPromo(promo: string) {
+    this.cartController.applyPromo(promo);
+  }
+
+  removePromo(promo: string) {
+    this.cartController.removePromo(promo);
+  }
 }
