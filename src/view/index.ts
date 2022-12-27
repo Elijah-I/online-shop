@@ -38,10 +38,10 @@ export class View {
       onCartUpdate
     );
     this.cartView = new CartView(
-        this.controller,
-        this.model,
-        main,
-        onCartUpdate
+      this.controller,
+      this.model,
+      main,
+      onCartUpdate
     );
 
     this.checkRestoreRoute();
@@ -109,11 +109,12 @@ export class View {
         amount ? "" : "display: none;"
       );
 
-    price.html(
-      sum
-        ? `<span>${sum.toString()}₽</span><b>${discounted.toString()}₽</b>`
-        : ""
-    );
+    const total =
+      sum === discounted
+        ? `<b>${sum.toString()}₽</b>`
+        : `<span>${sum.toString()}₽</span><b>${discounted.toString()}₽</b>`;
+
+    price.html(sum ? total : "");
   }
 
   renderHeader() {

@@ -202,6 +202,7 @@
   &__line {
     display: flex;
     align-items: center;
+    gap: 5px;
   }
 
   &__line-text {
@@ -237,6 +238,11 @@
     text-decoration: line-through;
   }
 
+  // .cart-total__sum-alone
+  &__default-sum-alone {
+    text-decoration: none;
+  }
+
   &__discount-sum-text {
     @include font(2rem, 1.2rem);
   }
@@ -259,6 +265,10 @@
       width: 100%;
     }
   }
+}
+
+.opacified {
+  opacity: 0.5;
 }
 
 .promo-code {

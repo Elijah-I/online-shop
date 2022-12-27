@@ -53,6 +53,7 @@ interface IState {
   sort: string;
   search: string;
   cart: number[];
+  promo: string[];
   cartStock: CartStocks;
   pagination: Pagination;
   amount: {
@@ -84,6 +85,8 @@ export const State: IState = {
 
   cart: [],
   cartStock: {},
+
+  promo: [],
 
   search: "",
 

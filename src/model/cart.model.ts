@@ -1,4 +1,5 @@
 import { Pagination, State } from "store/index";
+import { PROMO } from "types/promo";
 
 export class CartModel {
   toggle(id: number) {
@@ -119,5 +120,37 @@ export class CartModel {
     }
 
     return applied;
+  }
+
+  applyPromo(promo: string[], code: string) {
+    let applied = false;
+
+    if (Object.keys(PROMO).includes(code)) {
+      const discount = PROMO[code as keyof typeof PROMO];
+      if (typeof discount === "number" && !promo.includes(code)) {
+        applied = true;
+        State.promo.push(code);
+        localStorage.setItem("promo", JSON.stringify(State.promo));
+      }
+    }
+
+    return applied;
+  }
+
+  removePromo(promo: string[], code: string) {
+    let removed = false;
+
+    if (Object.keys(PROMO).includes(code)) {
+      const discount = PROMO[code as keyof typeof PROMO];
+      if (typeof discount === "number" && promo.includes(code)) {
+        removed = true;
+        State.promo = State.promo.filter((pCode) => pCode !== code);
+
+        if (!State.promo.length) localStorage.removeItem("promo");
+        else localStorage.setItem("promo", JSON.stringify(State.promo));
+      }
+    }
+
+    return removed;
   }
 }
