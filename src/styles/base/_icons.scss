@@ -59,3 +59,33 @@
 	@include icon-size(20px, 20px);
 	background-size: 100%;
 }
+
+.icon--default {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/card.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+.icon--visa {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/visa.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+.icon--mastercard {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/mastercard.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+.icon--american-express {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/american-express.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+

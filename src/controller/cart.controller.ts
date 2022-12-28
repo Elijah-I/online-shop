@@ -19,6 +19,10 @@ export class CartController {
     this.routerController.route(href, e);
   }
 
+  makeOrder() {
+    this.model.makeOrder();
+  }
+
   resetCart() {
     this.model.resetCart();
   }

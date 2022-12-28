@@ -11,6 +11,10 @@
 	@include font(1.6rem, 2.6rem, normal);
 }
 
+.body--scroll__disable {
+	overflow-y: hidden;
+}
+
 .main {
 	&__wrapper {
 		display: flex;

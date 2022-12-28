@@ -1,6 +1,6 @@
 import { Controller } from "../../controller";
 import { Model } from "../../model";
-import { Utils } from "../../utils/utils";
+import { ExtendedElement, Utils } from "../../utils/utils";
 
 export class CartTotalView {
   constructor(private controller: Controller, private model: Model) {
@@ -14,6 +14,8 @@ export class CartTotalView {
 
     cartTotal.append(cartTotalWrapper);
     root.append(cartTotal);
+
+    this.addHandlers();
   }
 
   fill(root: HTMLElement) {
@@ -102,5 +104,14 @@ export class CartTotalView {
     return `<div class="cart-total__button">
                 <button class="button button--colored" id="order">Оформить заказ</button>
             </div>`
+  }
+
+  addHandlers() {
+    const purchase = Utils.id("#order");
+
+    if (purchase !== null)
+      Utils.addEvent(purchase as ExtendedElement, "click", () => {
+        this.controller.makeOrder();
+      });
   }
 }

@@ -3,6 +3,7 @@ import { Controller } from "../../controller";
 import { Model } from "../../model";
 import { CartListView } from "./cartList.view";
 import { CartTotalView } from "./cartTotal.view";
+import { OrderModalView } from "./orderModal.view";
 
 export class CartView {
   cartRoot: HTMLElement;
@@ -10,6 +11,7 @@ export class CartView {
   cartWrapper: HTMLElement;
   cartList: CartListView;
   cartTotal: CartTotalView;
+  purchaseModal: OrderModalView;
 
   constructor(
     private controller: Controller,
@@ -21,13 +23,9 @@ export class CartView {
     this.cartWrapper = Utils.create<HTMLElement>("cart-wrapper", "div");
     this.cartList = new CartListView(this.controller, this.model);
     this.cartTotal = new CartTotalView(this.controller, this.model);
+    this.purchaseModal = new OrderModalView(this.controller, this.model);
 
     this.cartRoot = Utils.create<HTMLElement>("cart-section", "section");
-
-    if (localStorage.getItem("with.popup")) {
-      console.log("popup.open");
-      localStorage.removeItem("with.popup");
-    }
 
     this.addListeners();
   }
@@ -52,6 +50,8 @@ export class CartView {
       this.controller.applyCart();
       cartCallback();
     });
+
+    this.model.on("order.create", () => this.renderPurchaseModal());
   }
 
   render() {
@@ -61,6 +61,7 @@ export class CartView {
       this.fillBreadcrumbsNav();
       this.cartWrapper.append(this.breadcrumbsNav, this.cartRoot);
       this.root.append(this.cartWrapper);
+      this.renderPurchaseModal();
     } else {
       this.root.html("You have no product in your cart.");
     }
@@ -74,5 +75,12 @@ export class CartView {
         <li class="breadcrumbs-nav__item"><a class="bread__link" href="/">Главная</a></li>
         <li class="breadcrumbs-nav__item"><a href="#" onClick="return(false);">Моя корзина</a></li>
       </ul>`;
+  }
+
+  renderPurchaseModal() {
+    if (localStorage.getItem("with.popup")) {
+      this.purchaseModal.render();
+      localStorage.removeItem("with.popup");
+    }
   }
 }
