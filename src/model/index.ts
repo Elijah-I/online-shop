@@ -545,4 +545,9 @@ export class Model extends Observer {
   toggleCart(id: number) {
     this.cartModel.toggle(id);
   }
+
+  makeOrder() {
+    localStorage.setItem("with.popup", "1");
+    this.emmit('order.create');
+  }
 }

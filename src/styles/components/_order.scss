@@ -1,0 +1,93 @@
+@use "../abstract" as *;
+
+.order {
+	padding: 30px 60px;
+	flex-grow: 1;
+	@extend %block-shadowed;
+	border-radius: 20px;
+	background-color: $color-light;
+
+	&__title {
+		padding-bottom: 20px;
+	}
+
+	&__form {
+	}
+}
+
+.order-form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	&__column {
+		display: flex;
+		justify-content: space-between;
+		>* {
+			flex-basis: 45%;
+		}
+	}
+	// .order-form__row
+	&__row {
+	}
+
+	&__label {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	&__text {
+	}
+
+	&__input {
+		flex-basis: 40%;
+		outline: none;
+		background-color: inherit;
+		padding: 5px 10px;
+		border: 1px solid $color-border;
+		border-radius: 10px;
+	}
+
+	&__required {
+		color: $color-primary;
+	}
+
+	// .order-form__name
+	&__name {
+	}
+
+	// .order-form__surname
+	&__surname {
+	}
+
+	// .order-form__phone-number
+	&__phone-number {
+	}
+
+	// .order-form__address
+	&__address {
+	}
+
+	// .order-form__email
+	&__email {
+	}
+
+	// .order-form__button
+	&__button {
+		padding: 11px 25px 13px;
+		border-radius: 4px;
+		cursor: pointer;
+		font-family: $font-family;
+		@include font(1.6rem, 2.2rem, normal);
+		@extend %transition;
+		background: $color-primary;
+		border: 1px solid $color-primary;
+		color: $color-light;
+
+		&:hover {
+			background: $color-secondary;
+			border-color: $color-secondary;
+		}
+	}
+}

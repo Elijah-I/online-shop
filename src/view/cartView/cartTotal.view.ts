@@ -155,4 +155,13 @@ export class CartTotalView {
       }
     }
   }
+
+  addHandlers() {
+    const purchase = Utils.id("#order");
+
+    if (purchase !== null)
+      Utils.addEvent(purchase as ExtendedElement, "click", () => {
+        this.controller.makeOrder();
+      });
+  }
 }
