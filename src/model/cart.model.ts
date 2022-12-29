@@ -141,6 +141,19 @@ export class CartModel {
     return applied;
   }
 
+  verifyPromo(promo: string[], code: string) {
+    let virified = false;
+
+    if (Object.keys(PROMO).includes(code)) {
+      const discount = PROMO[code as keyof typeof PROMO];
+      if (typeof discount === "number" && !promo.includes(code)) {
+        virified = true;
+      }
+    }
+
+    return virified;
+  }
+
   removePromo(promo: string[], code: string) {
     let removed = false;
 

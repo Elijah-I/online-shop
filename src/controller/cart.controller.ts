@@ -61,6 +61,10 @@ export class CartController {
     this.model.applyPromo(promo);
   }
 
+  verifyPromo(promo: string) {
+    return this.model.verifyPromo(promo);
+  }
+
   removePromo(promo: string) {
     this.model.removePromo(promo);
   }

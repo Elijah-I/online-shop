@@ -287,6 +287,7 @@
   // .promo-code__input
   &__input {
     display: flex;
+    gap: 10px;
   }
 
   // .promo-code__text
@@ -304,6 +305,13 @@
 
     &:hover {
       color: $color-primary;
+    }
+
+    // promo-code__button-disabled
+    &-disabled {
+      opacity: 0.25;
+      cursor: default;
+      pointer-events: none;
     }
   }
 

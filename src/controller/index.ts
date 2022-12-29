@@ -117,6 +117,10 @@ export class Controller {
     this.cartController.applyPromo(promo);
   }
 
+  verifyPromo(promo: string) {
+    return this.cartController.verifyPromo(promo);
+  }
+
   removePromo(promo: string) {
     this.cartController.removePromo(promo);
   }

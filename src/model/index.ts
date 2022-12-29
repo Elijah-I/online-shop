@@ -533,6 +533,10 @@ export class Model extends Observer {
     if (applied) this.emmit("cart.update");
   }
 
+  verifyPromo(promo: string) {
+    return this.cartModel.verifyPromo(this.promo, promo);
+  }
+
   removePromo(promo: string) {
     const removed = this.cartModel.removePromo(this.promo, promo);
     if (removed) this.emmit("cart.update");
