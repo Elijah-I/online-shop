@@ -138,6 +138,7 @@ export class CartTotalView {
   addHandlers() {
     const promo = Utils.id(".promo-code__button");
     const applied = Utils.ids(".icon--close");
+    const purchase = Utils.id("#order");
 
     if (promo !== null) {
       Utils.addEvent(promo as ExtendedElement, "click", () => {
@@ -153,6 +154,12 @@ export class CartTotalView {
           this.controller.removePromo(apply.dataset!.id);
         });
       }
+    }
+
+    if (purchase !== null) {
+      Utils.addEvent(purchase as ExtendedElement, "click", () => {
+        this.controller.makeOrder();
+      });
     }
   }
 }

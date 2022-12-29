@@ -93,6 +93,10 @@ export class Controller {
     this.cartController.quickBuy(e, id, href);
   }
 
+  makeOrder() {
+    this.cartController.makeOrder();
+  }
+
   resetCart() {
     this.cartController.resetCart();
   }
