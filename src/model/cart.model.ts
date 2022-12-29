@@ -54,7 +54,7 @@ export class CartModel {
     this.cartLocalStorage();
   }
 
-  changeQantity(id: number, qantity: number) {
+  changeQantity(id: number, qantity: number, onNull: () => void) {
     let added = true;
 
     State.products.map((product) => {
@@ -72,8 +72,16 @@ export class CartModel {
         }
 
         State.cartStock[id] = product.stockUsed;
+
+        if (!product.stockUsed) {
+          this.toggle(id);
+        }
       }
     });
+
+    if (!Object.keys(State.cartStock).length) {
+      onNull();
+    }
 
     this.cartLocalStorage();
 

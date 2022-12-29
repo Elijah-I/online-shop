@@ -52,6 +52,7 @@ export class CartView {
     });
 
     this.model.on("order.create", () => this.renderPurchaseModal());
+    this.model.on("cart.null", () => this.render());
   }
 
   render() {

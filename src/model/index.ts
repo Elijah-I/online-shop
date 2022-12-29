@@ -497,7 +497,9 @@ export class Model extends Observer {
   }
 
   changeQantity(id: number, qantity: number) {
-    const added = this.cartModel.changeQantity(id, qantity);
+    const added = this.cartModel.changeQantity(id, qantity, () =>
+      this.emmit("cart.null")
+    );
     if (added) this.emmit("cart.update");
   }
 
@@ -548,6 +550,6 @@ export class Model extends Observer {
 
   makeOrder() {
     localStorage.setItem("with.popup", "1");
-    this.emmit('order.create');
+    this.emmit("order.create");
   }
 }
