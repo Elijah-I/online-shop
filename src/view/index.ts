@@ -20,6 +20,7 @@ export class View {
     this.addListeners();
     this.renderHeader();
     this.renderContent();
+    this.renderFooter();
 
     const main = Utils.id(".main__wrapper") as ExtendedElement;
     const onCartUpdate = (a: number, s: number, d: number) =>
@@ -158,5 +159,28 @@ export class View {
     );
     main.append(mainWrapper);
     this.root.append(main);
+  }
+
+  renderFooter() {
+    const footer = Utils.create<HTMLElement>("footer", "footer");
+
+    footer.innerHTML = `
+            <footer class="footer">
+            <div class="footer__wrapper wrapper">
+                <div class="footer__gh gh">
+                    <a class="gh__link" href="https://github.com/fogarea"><span class="icon icon--github"></a>
+                </div>
+                <div class="footer__text">
+                  <span>fogarea / elijah</span>
+                  <span>2022</span>
+                </div>
+                <div class="footer__rss rss">
+                    <a class="rss__link" href="https://rs.school/js/"><span class="icon icon--rss"></a>
+                </div>
+            </div>
+        </footer>
+    `;
+
+    this.root.append(footer);
   }
 }
