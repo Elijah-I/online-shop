@@ -12,7 +12,7 @@ const BaseConfig = {
   },
 
   output: {
-    path: Path("../online-shop-release"),
+    path: Path("build"),
     filename: filename("js/", ".js"),
     assetModuleFilename: "[file]"
   },
