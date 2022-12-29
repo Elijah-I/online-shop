@@ -6,7 +6,7 @@ import { ProductView } from "./productView/index";
 import { MainView } from "./mainView/index";
 import { CartView } from "./cartView/index";
 
-const logo = require("../assets/svg/logo.svg");
+const logo = require("../assets/svg/logo.svg") as string;
 
 export class View {
   root: ExtendedElement;
