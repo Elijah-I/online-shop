@@ -146,7 +146,7 @@ export class CartListView {
               <td colspan="2">
                   <div class="table-item__items-on-page items-on-page">
                       <label class="items-on-page__label" for="items-on-page">Товаров на странице</label>
-                      <input class="items-on-page__input" type="text" value="${perPage}" maxlength="4" size="4" id="items-on-page">
+                      <input class="items-on-page__input" type="number" min=1 value="${perPage}" maxlength="4" size="4" id="items-on-page">
                   </div>
               </td>
               <td colspan="2">
@@ -213,7 +213,13 @@ export class CartListView {
 
     if (perPage !== null)
       Utils.addEvent(perPage as ExtendedElement, "blur", () => {
-        this.controller.applyPerPage(+(perPage as ExtendedElement).value!);
+        let per = +(perPage as ExtendedElement).value!;
+        if (!per) {
+          (perPage as ExtendedElement).value = "1";
+          per = 1;
+        }
+
+        this.controller.applyPerPage(per);
       });
   }
 }
