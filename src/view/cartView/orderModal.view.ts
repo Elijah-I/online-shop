@@ -149,7 +149,10 @@ export class OrderModalView{
       (e: Event) => this.handleCardholderNameValidation(e)
     );
     Utils.addEvent('#card-cardholder', "input",
-      (e: Event) => this.handleTextValidation(e)
+      (e: Event) => {
+        this.handleTextValidation(e);
+        this.convertCardholderName(e);
+      }
     );
 
     Utils.addEvent('#card-exp-month', "focusout",
@@ -265,6 +268,15 @@ export class OrderModalView{
       default:
         cardLogo.classList.add(`${Card.DEFAULT}`);
         break;
+    }
+  }
+
+  convertCardholderName(e: Event) {
+    const target = e.target as HTMLInputElement;
+
+    if (target.value.length){
+      target.value = target.value
+        .toUpperCase();
     }
   }
 
