@@ -117,3 +117,10 @@
 		cursor: pointer;
 	}
 }
+
+.icon--zoom {
+	display: inline-flex;
+	background-image: url("./../assets/svg/zoom.svg");
+	@include icon-size(30px, 30px);
+	background-size: 100%;
+}

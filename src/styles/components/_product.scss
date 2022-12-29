@@ -163,21 +163,33 @@
 	// .pictures__list
 	&__list {
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 
 	// .pictures__item
 	&__item {
+		position: relative;
 		width: 30%;
-		cursor: pointer;
-		transition: ease 0.5s;
-
-		&:hover {
-			transform: scale(1.2);
-		}
-		>* {
+		& img {
 			width: 100%;
 			object-fit: cover;
+			transition: ease 0.5s;
+			&:hover {
+				cursor: pointer;
+				transform: scale(1.05);
+			}
+		}
+
+		& .icon {
+			position: absolute;
+			top: 0;
+			right: 0;
+			filter: invert(60%);
+
+			&:hover {
+				filter: invert(0);
+			}
 		}
 	}
 }

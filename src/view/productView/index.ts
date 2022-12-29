@@ -4,12 +4,14 @@ import { Model } from "../../model";
 import { Product } from "../../store";
 import { headStyle } from "../../utils/headStyle";
 import { SearchParams } from "types/searchParams";
+import { ModalWindow } from "../../utils/modal";
 
 export class ProductView {
   productId: number;
   productRoot: HTMLElement;
   breadcrumbsNav: HTMLElement;
   productWrapper: HTMLElement;
+  modal: ModalWindow;
 
   constructor(
     private controller: Controller,
@@ -20,6 +22,7 @@ export class ProductView {
     this.productRoot = Utils.create<HTMLElement>("product", "section");
     this.breadcrumbsNav = Utils.create<HTMLElement>("breadcrumbs-nav", "div");
     this.productWrapper = Utils.create<HTMLElement>("product__wrapper", "div");
+    this.modal = new ModalWindow();
 
     this.productId = -1;
   }
@@ -75,15 +78,16 @@ export class ProductView {
 
   addImages(images: string[]) {
     let template = `<div class="pictures__main-pic">
-                            <img src="${images[0]}" alt="Product image">                                
-                        </div>`;
+                        <img src="${images[0]}" alt="Product image">                    
+                    </div>`;
 
     template += `<ul class="pictures__list">`;
 
     images.forEach((image: string) => {
       template += `<li class="pictures__item">
-                            <img src="${image}" alt="Product image">
-                         </li>`;
+                      <img src="${image}" alt="Product image">
+                      <span class="icon icon--zoom" data-id="zoom"></span>
+                   </li>`;
     });
 
     template += `</ul>`;
@@ -171,13 +175,16 @@ export class ProductView {
     Utils.addEvent(".pictures__list", "click", (e: Event) => {
       const target = e.target as HTMLElement;
 
-      if (target.tagName !== "IMG") {
-        return;
+      if (target.tagName === "IMG") {
+        const rootPicture = Utils.id(".pictures__main-pic") as ExtendedElement;
+        rootPicture.innerHTML = "";
+        rootPicture.append(target.cloneNode(true));
       }
 
-      const rootPicture = Utils.id(".pictures__main-pic") as ExtendedElement;
-      rootPicture.innerHTML = "";
-      rootPicture.append(target.cloneNode(true));
+      if (target.tagName === "SPAN") {
+        const currentImg = target.previousElementSibling as HTMLElement;
+        this.appendImgZoomModal(currentImg);
+      }
     });
 
     for (const link of Utils.id(
@@ -244,5 +251,41 @@ export class ProductView {
       (listValue as ExtendedElement).html(
         this.model.totalStock(this.productId).toString()
       );
+  }
+
+  appendImgZoomModal(currentImg: HTMLElement) {
+    const modalImgWrapper = Utils.create("modal__img", "div");
+    modalImgWrapper.id = "modal__img";
+
+    const modalImg = currentImg.cloneNode(true) as HTMLImageElement;
+    modalImg.className = "modal__img-origin";
+    modalImg.id = "origin-img";
+
+    const modalZoomImg = Utils.create("modal__img-zoom", "span") as HTMLImageElement;
+    modalZoomImg.id = "zoom-img";
+    modalZoomImg.style.backgroundImage = `url('${modalImg.src}')`;
+    modalZoomImg.style.backgroundRepeat = "no-repeat";
+
+    const modalTitle = Utils.create("modal__img-text", "p");
+    modalTitle.innerText = "Для того, чтобы приблизить изображение, наведите на него"
+
+    modalImgWrapper.append(modalTitle, modalImg, modalZoomImg);
+    this.modal.buildModal(modalImgWrapper);
+
+    modalImg.addEventListener('mousemove', (e: MouseEvent) => this.handleZoomImage(e, modalImg, modalZoomImg))
+  }
+
+  handleZoomImage(e: MouseEvent, modalImg: HTMLElement, modalZoomImg: HTMLElement) {
+    const {left, top} = modalImg.getBoundingClientRect();
+    const posX = e.pageX - left - window.pageXOffset;
+    const posY = e.pageY - top - window.pageYOffset;
+
+    modalZoomImg.style.left = `${posX - modalZoomImg.offsetWidth / 2}px`;
+    modalZoomImg.style.top = `${posY - modalZoomImg.offsetHeight / 2}px`;
+
+    const posXZoom = posX * 2 - (modalZoomImg.offsetWidth / 2);
+    const posYZoom = posY * 2 - (modalZoomImg.offsetHeight / 2);
+
+    modalZoomImg.style.backgroundPosition = `-${posXZoom}px -${posYZoom}px`;
   }
 }

@@ -28,13 +28,48 @@
 .modal__close-icon {
 	position: absolute;
 	top: 10px;
-	right: 120px;
-	width: 14px;
-	height: 14px;
+	right: 1%;
+	width: 20px;
+	height: 20px;
 	z-index: 1;
 	cursor: pointer;
 	background-color: transparent;
 	svg {
 		pointer-events: none;
+	}
+}
+
+.modal__img {
+	width: 400px;
+
+	&-text {
+		padding-top: 20px;
+		text-align: center;
+		font-size: 1.2rem;
+	}
+
+	& .modal__img-origin {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	&-zoom {
+		position: absolute;
+		width: 200px;
+		height: 200px;
+		border: 1px solid $color-light;
+		border-radius: 50%;
+		opacity: 0;
+	}
+
+	&:hover,
+	&:active {
+		cursor: cell;
+		display: block;
+
+		.modal__img-zoom {
+			opacity: 1;
+		}
 	}
 }
