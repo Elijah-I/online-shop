@@ -21,7 +21,7 @@ export class FilterController {
       );
     }
 
-    this.routerController.addSearchParam([
+    this.routerController.addUrlParam([
       [SearchParams.CATEGORY, filterCategories.join("↕")]
     ]);
 
@@ -41,7 +41,7 @@ export class FilterController {
       );
     }
 
-    this.routerController.addSearchParam([
+    this.routerController.addUrlParam([
       [SearchParams.BRAND, filterBrands.join("↕")] // записываем в URL обновленную строку
     ]);
 
@@ -60,7 +60,7 @@ export class FilterController {
     filterPriceFrom = from.toString();
     filterPriceTo = to.toString();
 
-    this.routerController.addSearchParam([
+    this.routerController.addUrlParam([
       [SearchParams.PRICE, `${filterPriceFrom}↕${filterPriceTo}`]
     ]);
 
@@ -75,7 +75,7 @@ export class FilterController {
     filterStockFrom = from.toString();
     filterStockTo = to.toString();
 
-    this.routerController.addSearchParam([
+    this.routerController.addUrlParam([
       [SearchParams.STOCK, `${filterStockFrom}↕${filterStockTo}`]
     ]);
 
@@ -83,7 +83,7 @@ export class FilterController {
   }
 
   reset() {
-    this.routerController.addSearchParam([
+    this.routerController.addUrlParam([
       [SearchParams.CATEGORY, ""],
       [SearchParams.BRAND, ""],
       [SearchParams.STOCK, ""],

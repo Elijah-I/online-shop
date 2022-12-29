@@ -108,8 +108,6 @@ export class CartModel {
 
     State.pagination.currentPage = currentPage;
 
-    localStorage.setItem("pagination", JSON.stringify(State.pagination));
-
     return switched;
   }
 
@@ -121,8 +119,6 @@ export class CartModel {
         perPage,
         currentPage: 1
       };
-
-      localStorage.setItem("pagination", JSON.stringify(State.pagination));
 
       applied = true;
     }
@@ -160,5 +156,13 @@ export class CartModel {
     }
 
     return removed;
+  }
+
+  getPerPage(perPage: string | null) {
+    return perPage ? +perPage : 5;
+  }
+
+  getCurrentPage(currentPage: string | null) {
+    return currentPage ? +currentPage : 1;
   }
 }

@@ -1,3 +1,4 @@
+import { PaginationParams } from "types/paginationParams";
 import { Model } from "../model/index";
 import { RouterController } from "./router.controller";
 
@@ -32,11 +33,28 @@ export class CartController {
   }
 
   switchPage(direction: number) {
-    this.model.switchPage(direction);
+    const switched = this.model.switchPage(direction);
+    if (switched) {
+      this.routerController.addUrlParam(
+        [
+          [
+            PaginationParams.CURRENT_PAGE,
+            this.model.pagination.currentPage.toString()
+          ]
+        ],
+        "/cart/"
+      );
+    }
   }
 
   applyPerPage(perPage: number) {
-    this.model.applyPerPage(perPage);
+    const applied = this.model.applyPerPage(perPage);
+    if (applied) {
+      this.routerController.addUrlParam(
+        [[PaginationParams.PER_PAGE, perPage.toString()]],
+        "/cart/"
+      );
+    }
   }
 
   applyPromo(promo: string) {
