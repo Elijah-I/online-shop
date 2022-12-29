@@ -85,7 +85,7 @@ export class CartTotalView {
 
           <div class="promo-code__input">
               <input class="promo-code__text" type="text" id="promo-input" placeholder="Введите промокод">
-              <input class="promo-code__button" type="submit" value="Применить">
+              <input class="promo-code__button promo-code__button-disabled" type="submit" value="Применить">
           </div>
 
           <div class="promo-code__error"></div>
@@ -139,6 +139,20 @@ export class CartTotalView {
     const promo = Utils.id(".promo-code__button");
     const applied = Utils.ids(".icon--close");
     const purchase = Utils.id("#order");
+    const promoText = Utils.id("#promo-input");
+
+    if (promoText !== null) {
+      Utils.addEvent(promoText as ExtendedElement, "keyup", () => {
+        const correct = this.controller.verifyPromo(
+          (Utils.id("#promo-input") as ExtendedElement).value!
+        );
+
+        (promo as ExtendedElement).class(
+          "promo-code__button-disabled",
+          correct
+        );
+      });
+    }
 
     if (promo !== null) {
       Utils.addEvent(promo as ExtendedElement, "click", () => {

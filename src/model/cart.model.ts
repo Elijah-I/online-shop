@@ -54,7 +54,7 @@ export class CartModel {
     this.cartLocalStorage();
   }
 
-  changeQantity(id: number, qantity: number) {
+  changeQantity(id: number, qantity: number, onNull: () => void) {
     let added = true;
 
     State.products.map((product) => {
@@ -72,8 +72,16 @@ export class CartModel {
         }
 
         State.cartStock[id] = product.stockUsed;
+
+        if (!product.stockUsed) {
+          this.toggle(id);
+        }
       }
     });
+
+    if (!Object.keys(State.cartStock).length) {
+      onNull();
+    }
 
     this.cartLocalStorage();
 
@@ -100,8 +108,6 @@ export class CartModel {
 
     State.pagination.currentPage = currentPage;
 
-    localStorage.setItem("pagination", JSON.stringify(State.pagination));
-
     return switched;
   }
 
@@ -113,8 +119,6 @@ export class CartModel {
         perPage,
         currentPage: 1
       };
-
-      localStorage.setItem("pagination", JSON.stringify(State.pagination));
 
       applied = true;
     }
@@ -137,6 +141,19 @@ export class CartModel {
     return applied;
   }
 
+  verifyPromo(promo: string[], code: string) {
+    let virified = false;
+
+    if (Object.keys(PROMO).includes(code)) {
+      const discount = PROMO[code as keyof typeof PROMO];
+      if (typeof discount === "number" && !promo.includes(code)) {
+        virified = true;
+      }
+    }
+
+    return virified;
+  }
+
   removePromo(promo: string[], code: string) {
     let removed = false;
 
@@ -152,5 +169,13 @@ export class CartModel {
     }
 
     return removed;
+  }
+
+  getPerPage(perPage: string | null) {
+    return perPage ? +perPage : 5;
+  }
+
+  getCurrentPage(currentPage: string | null) {
+    return currentPage ? +currentPage : 1;
   }
 }

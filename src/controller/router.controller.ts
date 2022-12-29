@@ -1,6 +1,7 @@
 import { State } from "store/index";
 import { Model } from "../model/index";
 import { SearchParamsArray } from "types/searchParams";
+import { PaginationParamsArray } from "types/paginationParams";
 
 export class RouterController {
   constructor(private model: Model) {}
@@ -19,7 +20,10 @@ export class RouterController {
     this.model.setRoute(route);
   }
 
-  addSearchParam(addParams: SearchParamsArray) {
+  addUrlParam(
+    addParams: SearchParamsArray | PaginationParamsArray,
+    from = "/"
+  ) {
     const route = this.model.route;
     const params = new URLSearchParams(route.searchString);
 
@@ -31,8 +35,9 @@ export class RouterController {
     }
 
     let newRoute = `${route.origin}`;
+
     if (addParams.length && params.toString()) {
-      newRoute += `/?${params}`;
+      newRoute += `${from}?${params}`;
     }
 
     window.history.replaceState({}, "", this.makeRoute(newRoute));

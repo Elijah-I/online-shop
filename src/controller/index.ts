@@ -74,13 +74,13 @@ export class Controller {
   changeLayout(layout: string) {
     this.model.changeLayout(layout);
 
-    this.routerController.addSearchParam([[SearchParams.LAYOUT, layout]]);
+    this.routerController.addUrlParam([[SearchParams.LAYOUT, layout]]);
   }
 
   changeSort(sort: string) {
     this.model.changeSort(sort);
 
-    this.routerController.addSearchParam([[SearchParams.SORT, sort]]);
+    this.routerController.addUrlParam([[SearchParams.SORT, sort]]);
 
     this.applyControls();
   }
@@ -115,6 +115,10 @@ export class Controller {
 
   applyPromo(promo: string) {
     this.cartController.applyPromo(promo);
+  }
+
+  verifyPromo(promo: string) {
+    return this.cartController.verifyPromo(promo);
   }
 
   removePromo(promo: string) {

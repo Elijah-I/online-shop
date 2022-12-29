@@ -11,7 +11,7 @@ export class SearchController {
   addPattern(searchPattern: string) {
     this.model.changeSearchPattern(searchPattern);
 
-    this.routerController.addSearchParam([
+    this.routerController.addUrlParam([
       [SearchParams.SEARCH, encodeURIComponent(searchPattern)]
     ]);
 

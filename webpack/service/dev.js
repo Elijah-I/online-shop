@@ -11,7 +11,7 @@ export const server = isProd
       historyApiFallback: true,
 
       static: {
-        directory: Path("../online-shop-release")
+        directory: Path("build")
       },
 
       client: {

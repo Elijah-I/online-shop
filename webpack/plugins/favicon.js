@@ -12,7 +12,7 @@ const settings = isDev
       mode: "webapp",
       devMode: "webapp",
       prefix: "assets/favicon/",
-      outputPath: Path("../online-shop-release/assets/favicon/"),
+      outputPath: Path("build/assets/favicon/"),
 
       favicons: {
         background: "#ddd",

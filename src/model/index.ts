@@ -100,6 +100,14 @@ export class Model extends Observer {
     this.controlsModel.changeSort(sort);
   }
 
+  get perPage() {
+    return this.cartModel.getPerPage(this.route.searchParams.per);
+  }
+
+  get currentPage() {
+    return this.cartModel.getCurrentPage(this.route.searchParams.page);
+  }
+
   get filterCategories() {
     return this.filterModel.getCategories(this.route.searchParams.category);
   }
@@ -197,9 +205,8 @@ export class Model extends Observer {
 
     const promo = JSON.parse(localStorage.getItem("promo") || "[]");
 
-    const { perPage, currentPage } = JSON.parse(
-      localStorage.getItem("pagination") || '{"perPage":5,"currentPage":1}'
-    );
+    const perPage = this.perPage;
+    const currentPage = this.currentPage;
 
     const checkedCategoriesId = this.filterCategories;
     const checkedBrandsId = this.filterBrands;
@@ -497,7 +504,9 @@ export class Model extends Observer {
   }
 
   changeQantity(id: number, qantity: number) {
-    const added = this.cartModel.changeQantity(id, qantity);
+    const added = this.cartModel.changeQantity(id, qantity, () =>
+      this.emmit("cart.null")
+    );
     if (added) this.emmit("cart.update");
   }
 
@@ -508,16 +517,24 @@ export class Model extends Observer {
       State.pagination
     );
     if (switched) this.emmit("cart.update");
+
+    return switched;
   }
 
   applyPerPage(perPage: number) {
     const applied = this.cartModel.applyPerPage(perPage);
     if (applied) this.emmit("cart.update");
+
+    return applied;
   }
 
   applyPromo(promo: string) {
     const applied = this.cartModel.applyPromo(this.promo, promo);
     if (applied) this.emmit("cart.update");
+  }
+
+  verifyPromo(promo: string) {
+    return this.cartModel.verifyPromo(this.promo, promo);
   }
 
   removePromo(promo: string) {
@@ -548,6 +565,6 @@ export class Model extends Observer {
 
   makeOrder() {
     localStorage.setItem("with.popup", "1");
-    this.emmit('order.create');
+    this.emmit("order.create");
   }
 }
