@@ -1,4 +1,4 @@
-const Model = require("../../src/view/cartView/index.ts");
+const Model = require("../../src/model/index.ts");
 
 describe("model/index", () => {
   it("two plus two is four", () => {
