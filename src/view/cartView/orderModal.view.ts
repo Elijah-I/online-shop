@@ -186,11 +186,13 @@ export class OrderModalView{
       if (errors.length) {
         this.addErrorPopup();
       } else {
-        this.controller.resetCart();
-        this.modal.removeModal();
-        const href = "http://localhost:3000/";
-        this.controller.route(href); // TODO redirect to main page
         this.addOrderPopup();
+
+        setTimeout(() => {
+          this.modal.removeModal();
+          this.controller.resetCart();
+          this.controller.route(this.model.route.origin);
+        }, 2000)
       }
     })
   }
@@ -415,12 +417,12 @@ export class OrderModalView{
   }
 
   addCardErrorMessage(target: HTMLInputElement) {
-    target.parentElement?.classList.add('error');
+    target.classList.add('error');
     target.style.color = 'red';
   }
 
   removeCardErrorMessage(target: HTMLInputElement) {
-    target.parentElement?.classList.remove('error');
+    target.classList.remove('error');
     target.style.color = '';
   }
 }
