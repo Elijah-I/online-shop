@@ -37,7 +37,7 @@ export class ProductsView {
         const classNM = `products__item product-item${
           cart ? " product-item--carted" : ""
         }`;
-        const buttonText = cart ? "Remove from cart" : "Add to cart";
+        const buttonText = cart ? "Удалить из корзины" : "Добавить в корзину";
 
         if (show) {
           const priceOnly = !discountPercentage;
