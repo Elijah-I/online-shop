@@ -9,7 +9,7 @@
     "url": "https://github.com/Elijah-I/webpack-2022.git"
   },
   "scripts": {
-    "test": "jest && mocha",
+    "test": "jest",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack",
     "start": "cross-env NODE_ENV=development webpack serve"

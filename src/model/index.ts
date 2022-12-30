@@ -6,7 +6,7 @@ import {
   Product,
   State
 } from "store/index";
-import Products from "../store/products.json";
+import * as Products from "../store/products.json";
 import { Observer } from "../utils/observer";
 import { FilterModel } from "./filter.model";
 import { RouterModel } from "./router.model";
