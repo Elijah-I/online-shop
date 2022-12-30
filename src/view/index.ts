@@ -55,6 +55,11 @@ export class View {
     if (route) {
       localStorage.removeItem("restore");
       this.controller.route(route);
+
+      if (route.indexOf("/cart") > 0) {
+        this.model.initState();
+        this.cartView.render();
+      }
       return;
     }
 
