@@ -14,7 +14,7 @@ export class SearchView {
       "search__input",
       "input"
     );
-    searchInput.placeholder = "Search products";
+    searchInput.placeholder = "Найти товар";
     searchInput.name = "search";
     searchInput.value = this.model.search;
 

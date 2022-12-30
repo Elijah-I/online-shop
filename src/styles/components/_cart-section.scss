@@ -150,12 +150,13 @@
   // .table-item__pages
   &__pages {
     display: flex;
+    justify-content: end;
     padding-top: 30px;
   }
 
   // .table-item__page
   &__page {
-    flex-grow: 1;
+    padding: 0 10px;
     text-align: center;
   }
 }
@@ -172,6 +173,8 @@
     border-radius: 5px;
     color: $color-text;
     text-align: center;
+    outline: none;
+    width: 50px;
   }
 }
 

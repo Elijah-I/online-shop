@@ -77,7 +77,7 @@ export class CartTotalView {
     return `
       <div class="cart-total__promo-code promo-code">
           <div class="cart-total__line">
-              <span class="cart-total__line-text">Promo for test</span>
+              <span class="cart-total__line-text">Промокоды</span>
               <span class="cart-total__line-dashes"></span>
               <span class="cart-total__line-value">RSS, HOBBIE</span>
           </div>
@@ -87,8 +87,6 @@ export class CartTotalView {
               <input class="promo-code__text" type="text" id="promo-input" placeholder="Введите промокод">
               <input class="promo-code__button promo-code__button-disabled" type="submit" value="Применить">
           </div>
-
-          <div class="promo-code__error"></div>
 
           <div class="promo-code__applied">${applied.join("")}</div>
       </div>`;

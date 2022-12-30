@@ -126,14 +126,14 @@ export class View {
                 <a href="/" class="header__logo logo nav__link"><img src="${logo}" alt="Hobbies Art Logo"></a>
                 <nav class="header__nav nav">
                     <ul class="nav__list">
-                        <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="/" class="nav__link">Главная</a></li>
                         <li class="nav__item cart">
                             <a href="/cart" class="nav__link cart__link">
                                 <div class="cart__total-price"></div>
                                 <div class="cart__wrapper">
                                     <div class="cart__content">
                                         <span class="icon icon--cart"></span>
-                                        <p class="cart__text">Cart</p>
+                                        <p class="cart__text">Корзина</p>
                                         <div class="cart__total">
                                             <div class="icon-circle icon-circle--sec-color">
                                                 <span class="cart__total-value"></span>
@@ -168,7 +168,8 @@ export class View {
             <footer class="footer">
             <div class="footer__wrapper wrapper">
                 <div class="footer__gh gh">
-                    <a class="gh__link" href="https://github.com/fogarea"><span class="icon icon--github"></a>
+                    <a class="gh__link" href="https://github.com/Elijah-I"><span class="icon icon--gh-face"></a>
+                    <a class="gh__link" href="https://github.com/fogarea"><span class="icon icon--gh"></a>
                 </div>
                 <div class="footer__text">
                   <span>fogarea / elijah</span>

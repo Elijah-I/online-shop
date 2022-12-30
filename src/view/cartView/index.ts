@@ -64,7 +64,7 @@ export class CartView {
       this.root.append(this.cartWrapper);
       this.renderPurchaseModal();
     } else {
-      this.root.html("You have no product in your cart.");
+      this.root.html("В корзине нет товаров, перейдите на главную страницу, чтобы добавить их");
     }
 
     this.controller.applyCart();

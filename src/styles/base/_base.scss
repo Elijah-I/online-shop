@@ -4,6 +4,7 @@
 .html {
 	font-size: 10px;
 	scroll-behavior: smooth;
+	height: 100%;
 }
 
 .body {
@@ -11,11 +12,21 @@
 	@include font(1.6rem, 2.6rem, normal);
 }
 
+#root {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
 .body--scroll__disable {
 	overflow-y: hidden;
 }
 
 .main {
+	flex: 1 1 auto;
+	align-items: center;
+	justify-content: center;
+
 	&__wrapper {
 		display: flex;
 		gap: 50px;
