@@ -111,7 +111,7 @@ export class ProductView {
 
     const inCart = this.model.inCart(product.id);
 
-    const buttonText = inCart ? "Remove from cart" : "Add to cart";
+    const buttonText = inCart ? "Удалить из корзины" : "Добавить в корзину";
     const buttonClass = `button button--rounded button--bordered button__add-product${
       inCart ? " button--carted" : ""
     }`;
@@ -134,12 +134,12 @@ export class ProductView {
                     }</span>
                 </li>
                 <li class="info-list__item">
-                    <span class="info-list__name">Производитель</span>
+                    <span class="info-list__name">Бренд</span>
                     <span class="info-list__value">${product.brand.name}</span>
                 </li>
                 <li class="info-list__item">
                     <span class="info-list__name">В наличии</span>
-                    <span class="info-list__value-product">${
+                    <span class="info-list__value" id="info-list-product-value">${
                       product.stock - product.stockUsed
                     }</span>
                 </li>
@@ -166,7 +166,7 @@ export class ProductView {
     }">${buttonText}</button>
             <a href="/cart" class="button button--rounded button--bordered button__buy-product" data-id="${
               product.id
-            }">Buy now</a>
+            }">Быстрая покупка</a>
         </div>
       </div>`;
   }
@@ -240,12 +240,12 @@ export class ProductView {
   private applyCart(cartIds: number[]) {
     const added = cartIds.includes(this.productId);
     const buttonAdd = Utils.id(".button__add-product");
-    const listValue = Utils.id(".info-list__value-product");
+    const listValue = Utils.id("#info-list-product-value");
 
     if (buttonAdd !== null)
       (buttonAdd as ExtendedElement)
         .class("button--carted", !added)
-        .html(added ? "Remove from cart" : "Add to cart");
+        .html(added ? "Удалить из корзины" : "Добавить в корзину");
 
     if (listValue !== null)
       (listValue as ExtendedElement).html(

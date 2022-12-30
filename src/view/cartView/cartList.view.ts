@@ -61,7 +61,7 @@ export class CartListView {
                                         <th>Категория</th>
                                         <th>Бренд</th>
                                         <th>Цена</th>
-                                        <th>В наличии</th>
+                                        <th>Наличие</th>
                                         <th>Количество</th>
                                         <th>Сумма</th>
                                     </tr>
@@ -146,7 +146,7 @@ export class CartListView {
               <td colspan="2">
                   <div class="table-item__items-on-page items-on-page">
                       <label class="items-on-page__label" for="items-on-page">Товаров на странице</label>
-                      <input class="items-on-page__input" type="number" min=1 value="${perPage}" maxlength="4" size="4" id="items-on-page">
+                      <input class="items-on-page__input" type="number" min=1 value="${perPage}" maxlength="4" id="items-on-page">
                   </div>
               </td>
               <td colspan="2">
@@ -214,7 +214,7 @@ export class CartListView {
     if (perPage !== null)
       Utils.addEvent(perPage as ExtendedElement, "blur", () => {
         let per = +(perPage as ExtendedElement).value!;
-        if (!per) {
+        if (per <= 0) {
           (perPage as ExtendedElement).value = "1";
           per = 1;
         }

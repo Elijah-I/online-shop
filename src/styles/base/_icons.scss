@@ -105,6 +105,32 @@
 	}
 }
 
+.icon--gh {
+	display: inline-flex;
+	background-image: url("./../assets/svg/footer/gh.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+
+	transition: all 0.5s ease 0s;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+}
+
+.icon--gh-face {
+	display: inline-flex;
+	background-image: url("./../assets/svg/footer/github-face.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+
+	transition: all 0.5s ease 0s;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+}
+
 .icon--rss {
 	display: inline-flex;
 	background-image: url("./../assets/svg/footer/logo_rs.svg");

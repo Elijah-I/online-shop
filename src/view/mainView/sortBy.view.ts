@@ -13,7 +13,7 @@ export class SortByView {
     );
 
     const labelForSortBySelect = Utils.create<HTMLLabelElement>("sort-by__label", "label");
-    labelForSortBySelect.innerText = "Sort By";
+    labelForSortBySelect.innerText = "Отсортировать";
     labelForSortBySelect.setAttribute("for", "sort-by");
 
     sortBy.append(labelForSortBySelect)

@@ -56,10 +56,10 @@ export class ProductsView {
                             ${category.name}
                         </span>
                         <span class="product-item__brand">
-                            Brand: ${brand.name}
+                            Бренд: ${brand.name}
                         </span>
                         <span class="product-item__stock">
-                            Stock: <span class="info-list__value">${
+                            В наличии: <span class="info-list__value">${
                               stock - stockUsed
                             }</span>
                         </span>
@@ -104,7 +104,7 @@ export class ProductsView {
     );
 
     if (found === 0) {
-      productsWrapper.innerHTML = `<div class="products__empty">Nothing found on your filters</div>`;
+      productsWrapper.innerHTML = `<div class="products__empty">Товары по вашему запросу не найдены. Пожалуйста, попробуйте еще раз</div>`;
     }
 
     root.append(productsWrapper);
@@ -122,7 +122,7 @@ export class ProductsView {
           Utils.id(
             `#product-${product.dataset!.id} .button__add`
           ) as ExtendedElement
-        ).html("add to cart");
+        ).html("Добавить в корзину");
 
         (
           Utils.id(
@@ -138,7 +138,7 @@ export class ProductsView {
         (product as ExtendedElement).class("product-item--carted");
 
         (Utils.id(`#product-${cartId} .button__add`) as ExtendedElement).html(
-          "remove from cart"
+          "Удалить из корзины"
         );
       }
     }
