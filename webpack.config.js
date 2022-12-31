@@ -1,8 +1,8 @@
-import BaseConfig from "./webpack/index.js"
-import * as Dev from "./webpack/service/dev.js"
-import * as Rule from "./webpack/rules/index.js"
-import * as Plugin from "./webpack/plugins/index.js"
-import optimization from "./webpack/service/optimization.js"
+import BaseConfig from "./webpack/index.js";
+import * as Dev from "./webpack/service/dev.js";
+import * as Rule from "./webpack/rules/index.js";
+import * as Plugin from "./webpack/plugins/index.js";
+import optimization from "./webpack/service/optimization.js";
 
 const config = {
   ...BaseConfig,
@@ -29,7 +29,7 @@ const config = {
   },
 
   optimization
-}
+};
 
 // prettier-ignore
 if (Plugin.optimg)
@@ -43,4 +43,4 @@ if (Dev.tool)
 if (Dev.server)
   config.devServer = Dev.server
 
-export default config
+export default config;

@@ -6,7 +6,9 @@ import {
   Product,
   State
 } from "store/index";
-import * as Products from "../store/products.json";
+
+const Products = require("../store/products.json");
+
 import { Observer } from "../utils/observer";
 import { FilterModel } from "./filter.model";
 import { RouterModel } from "./router.model";

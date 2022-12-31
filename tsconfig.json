@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "target": "ES2015",
+    "target": "ES6",
     "outDir": "../build/",
+    "module": "CommonJS",
     "removeComments": true,
     "sourceMap": true,
     "watch": true,
     "noEmitOnError": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
