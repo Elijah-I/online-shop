@@ -20,9 +20,27 @@ describe("toggleCart", () => {
 });
 
 describe("changeSearchPattern", () => {
-  it("set search pattern according to passed agrument", () => {
+  it("set search pattern according to passed argument", () => {
     const pattern = "пряжа";
     model.changeSearchPattern(pattern);
     expect(State.search).toEqual(pattern);
+  });
+});
+
+describe("changeQuantity", () => {
+  it("increase product's stock used quantity", () => {
+    const product = 20;
+    const prevValue = State.products[product].stockUsed;
+    const increaseTo = 10;
+    model.changeQantity(product, increaseTo);
+    expect(State.products[product].stockUsed).toEqual(prevValue + increaseTo);
+  });
+});
+
+describe("resetCart", () => {
+  it("clear State.cart and State.cartStock fields", () => {
+    model.resetCart();
+    expect(State.cart).toEqual([]);
+    expect(State.cartStock).toEqual({});
   });
 });
