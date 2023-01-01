@@ -83,8 +83,8 @@ export class FilterView {
             <label 
               class="filter-list__item-label" 
               for="categories-${id}">
-              <span>${name}</span>
-              <span>(${this.model.amount.categories[id] || "0"})</span>
+              <span class="filter-list__item-name">${name}</span>
+              <span class="filter-list__item-amount">(${this.model.amount.categories[id] || "0"})</span>
             </label>
           </li>`;
     });
@@ -117,8 +117,8 @@ export class FilterView {
             <label 
               class="filter-list__item-label" 
               for="brands-${id}">
-              <span>${name}</span>
-              <span>(${this.model.amount.brands[id] || "0"})</span>
+              <span class="filter-list__item-name">${name}</span>
+              <span class="filter-list__item-amount">(${this.model.amount.brands[id] || "0"})</span>
             </label>
           </li>`;
     });

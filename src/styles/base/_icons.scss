@@ -26,12 +26,18 @@
   background-image: url("./../assets/svg/rows.svg");
   @include icon-size(25px, 25px);
   background-size: 100%;
+	@include media-small-laptop {
+		@include icon-size(20px, 20px);
+	}
 }
 
 .icon--columns {
   background-image: url("./../assets/svg/columns.svg");
   @include icon-size(25px, 25px);
   background-size: 100%;
+		@include media-small-laptop {
+				@include icon-size(20px, 20px);
+		}
 }
 
 .icon--arrow-left {

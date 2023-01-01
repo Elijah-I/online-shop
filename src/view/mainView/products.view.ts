@@ -45,7 +45,7 @@ export class ProductsView {
           template += `
           <a href="/product/${id}" class="${classNM}" data-id=${id} id="product-${id}">
             <div class="product-item__img">
-                <img src="${thumbnail}" alt="Product Item" width="240" height="248">
+                <img src="${thumbnail}" alt="Product Item">
             </div>
             <div class="product-item__content">
                 <h4 class="product-item__title title">${title}</h4>

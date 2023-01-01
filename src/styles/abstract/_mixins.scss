@@ -31,7 +31,13 @@
 }
 
 @mixin media-laptop {
-	@media screen and (max-width: $width-container) {
+	@media screen and (max-width: $laptop-width) {
+		@content;
+	}
+}
+
+@mixin media-small-laptop {
+	@media screen and (max-width: $laptop-small-width) {
 		@content;
 	}
 }

@@ -8,6 +8,12 @@
 		justify-content: space-between;
 		gap: 30px;
 		margin-bottom: 40px;
+
+		@include media-small-laptop {
+			gap: 10px;
+			padding: 6px 5px;
+			margin-bottom: 20px;
+		}
 	}
 
 	// .head-controls__header
@@ -28,6 +34,7 @@
 }
 
 .layouts {
+	display: flex;
 
 	>* {
 		padding: 5px;
@@ -66,28 +73,50 @@
 	}
 
 	&__input {
+		position: relative;
 		outline: none;
+		background: inherit;
+		width: 190px;
 		padding: 0 10px;
 	}
 
 	&__button {
 		background-color: inherit;
 	}
+
+	@include media-laptop {
+		padding: 7px;
+	}
+
+	@include media-small-laptop {
+		padding: 2px;
+	}
 }
 
 .sort-by {
 	&__label {
 		padding-right: 10px;
+		@include media-laptop {
+			display: none;
+		}
 	}
 
 	&__select {
 		@extend %border;
+		background: inherit;
+		text-align: center;
 		border-radius: 20px;
 		padding: 12px 10px;
+		color: $color-border-text;
 		outline: none;
 		&:hover {
 			color: $color-primary;
 			cursor: pointer;
+		}
+
+		@include media-small-laptop {
+			padding: 6px 5px;
+			text-align: left;
 		}
 	}
 }

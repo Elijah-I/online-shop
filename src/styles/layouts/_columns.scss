@@ -11,6 +11,30 @@
 		width: 30%;
 		display: block;
 	}
+
+	@include media-laptop {
+		@include columns(27%);
+		justify-content: flex-start;
+		>* {
+			flex-grow: 1;
+		}
+
+		&:after {
+			width: 46%;
+		}
+	}
+
+	@include media-small-laptop {
+		@include columns(27%);
+		justify-content: flex-start;
+		>* {
+			flex-grow: 0;
+		}
+
+		&:after {
+			width: 46%;
+		}
+	}
 }
 
 .layout-2-columns {

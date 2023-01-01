@@ -131,7 +131,7 @@ export class View {
                 <a href="/" class="header__logo logo nav__link"><img src="${logo}" alt="Hobbies Art Logo"></a>
                 <nav class="header__nav nav">
                     <ul class="nav__list">
-                        <li class="nav__item"><a href="/" class="nav__link">Главная</a></li>
+                        <li class="nav__item main-link"><a href="/" class="nav__link">Главная</a></li>
                         <li class="nav__item cart">
                             <a href="/cart" class="nav__link cart__link">
                                 <div class="cart__total-price"></div>

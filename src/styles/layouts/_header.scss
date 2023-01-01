@@ -30,6 +30,11 @@
     @extend %border;
     border-radius: 46px;
     padding: 5px 15px;
+    cursor: pointer;
+  }
+
+  &:hover &__text {
+    color: $color-primary;
   }
 
   // .cart__link
@@ -49,6 +54,7 @@
 
   // .cart__text
   &__text {
+    color: $color-border-text;
   }
 
   // .cart__total
