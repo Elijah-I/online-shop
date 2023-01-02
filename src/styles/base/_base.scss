@@ -49,28 +49,16 @@
 
 h1 {
 	@include font(4.4rem, 5.4rem);
-	@include media-mobile-big {
-		@include font(3.2rem, 4.2rem);
-	}
 }
 
 h2 {
-	@include font(3.4rem, 4.6rem);
-	@include media-mobile-big {
-		@include font(2.4rem, 3.3rem);
-	}
+	@include font(2.8rem, 3.4rem, 600);
 }
 
 h3 {
 	@include font(1.6rem, 2.0rem, 600);
-	@include media-mobile-big {
-		@include font(2.1rem, 3.1rem);
-	}
 }
 
 h4 {
 	@include font(1.8rem, 2.4rem, 600);
-	@include media-tablet {
-		@include font(2.0rem, 3.0rem, 600);
-	}
 }

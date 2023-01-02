@@ -6,8 +6,9 @@
 	&__wrapper {
 		display: flex;
 		justify-content: space-between;
-		padding: 20px;
+		padding: 20px 20px 0;
 		@extend %block-shadowed;
+		background-color: $color-light;
 		border-radius: 20px;
 		margin-bottom: 40px;
 	}
@@ -23,6 +24,10 @@
 		display: flex;
 		flex-direction: column;
 		padding: 20px 40px 40px 0;
+
+		@include media-small-laptop {
+			padding: 20px 20px 40px 0;
+		}
 	}
 
 	// .product__title
@@ -33,14 +38,28 @@
 	// .product__desc
 	&__desc {
 		padding-bottom: 30px;
-		& span {
-			font-size: 2rem;
-		}
 	}
 
 	// .product__desc-title
 	&__desc-title {
+		font-weight: 500;
 		padding-bottom: 15px;
+	}
+
+	// .product__desc-title
+	&__desc-content {
+		@include font(1.6rem, 2.7rem, 300);
+
+		br {
+			display: none;
+		}
+
+		@include media-laptop {
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 8;
+			-webkit-box-orient: vertical;
+		}
 	}
 
 	// .product__info
@@ -54,6 +73,7 @@
 
 	// .product__info-title
 	&__info-title {
+		font-weight: 500;
 	}
 
 	// .product__info-list
@@ -81,6 +101,11 @@
 		gap: 10px;
 		margin-top: -70px;
 		padding-bottom: 40px;
+
+		@include media-small-laptop {
+			margin-top: 0;
+			padding-bottom: 0;
+		}
 	}
 
 	// .product__price-default
@@ -93,6 +118,10 @@
 	&__price-discount {
 		@include font(4rem, 1.8rem);
 		color: $color-primary;
+
+		@include media-small-laptop {
+			font-size: 2.8rem;
+		}
 	}
 
 	// .product__rating
@@ -100,6 +129,12 @@
 		font-size: 1.9rem;
 		margin-bottom: 20px;
 		text-align: right;
+
+		@include media-small-laptop {
+			font-size: 1.4rem;
+			text-align: left;
+			margin-top: -20px;
+		}
 	}
 
 	&__rating-stars {
@@ -119,7 +154,20 @@
 		>* {
 			width: 50%;
 		}
+
+		@include media-small-laptop {
+			>* {
+				@include font(1.2rem, 1.4rem, 400);
+			}
+		}
 	}
+}
+
+.product__price-default.product__price-only {
+	text-decoration: none;
+}
+.product__price-discount.product__price-only {
+	display: none;
 }
 
 .info-list {
@@ -130,17 +178,20 @@
 	// .info-list__item
 	&__item {
 		@extend %border-bottom;
+		@include font(1.6rem, 2.2rem, 300);
 		display: flex;
-		padding: 20px;
+		padding: 15px;
 		>* {
 			flex-basis: 50%;
 		}
 	}
 
+	@include media-small-laptop {
+		width: 100%;
+	}
+
 	// .info-list__name
 	&__name {
-		font-size: 1.9rem;
-
 	}
 
 	// .info-list__value
