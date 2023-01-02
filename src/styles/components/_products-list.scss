@@ -87,6 +87,7 @@
 
       // .product-item__img
       &__img {
+        width: 30%;
         @include media-small-laptop {
           align-self: center;
           width: 30%;
@@ -165,6 +166,10 @@
         align-self: center;
         font-size: 1.9rem;
 
+        @include media-laptop {
+          font-size: 1.4rem;
+        }
+
         @include media-small-laptop {
           font-size: 1.2rem;
         }
@@ -173,7 +178,7 @@
       // .product-item__button
       &__button {
         & .button {
-          width: 19vw;
+          width: 20vw;
 
           @include media-small-laptop {
             padding: 10px;
@@ -226,6 +231,10 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+
+    @include media-small-laptop {
+      padding: 15px;
+    }
   }
 
   // .product-item__title
