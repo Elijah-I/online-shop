@@ -29,6 +29,10 @@
 	justify-content: center;
 	margin-bottom: 20px;
 
+	@include media-mobile-big {
+		margin-bottom: 0;
+	}
+
 	&__wrapper {
 		display: flex;
 		gap: 50px;

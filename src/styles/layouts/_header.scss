@@ -5,6 +5,10 @@
   padding: 10px 0 8px 0;
   margin-bottom: 60px;
 
+  @include media-mobile-big {
+    margin-bottom: 30px;
+  }
+
   &__wrapper {
     display: flex;
     align-items: center;
