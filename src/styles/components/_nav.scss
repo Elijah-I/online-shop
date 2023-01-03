@@ -45,9 +45,7 @@
 		right: 0;
 		top: -100%;
 		z-index: 10;
-		transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		background: $color-overlay;
-		border-bottom: 1px solid $color-border;
+		transition: all 0.3s ease-out;
 
 		& .icon--close {
 			position: absolute;
@@ -57,10 +55,11 @@
 		}
 
 		.nav__list {
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
 			height: 100px;
+			padding: 20px;
 			background: $color-light-bg;
 		}
 

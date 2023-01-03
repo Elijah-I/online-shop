@@ -201,8 +201,10 @@ export class View {
 
   initBurgerMenu() {
     const navigation = document.querySelector('.nav');
+    const overlay = Utils.create("overlay", "div");
 
     const handleNavButtonClick = () => {
+      document.body.removeChild(overlay);
       navigation?.classList.remove('nav--show');
       document.body.classList.remove('body--scroll__disable');
     }
@@ -210,7 +212,7 @@ export class View {
     Utils.addEvent(".burger-button", "click", () => {
       navigation?.classList.add('nav--show');
       document.body.classList.add('body--scroll__disable');
-
+      document.body.append(overlay);
       for (const navItem of Utils.id(
         ".nav__item"
       ) as NodeListOf<ExtendedElement>) {
@@ -220,7 +222,6 @@ export class View {
 
     Utils.addEvent(".nav", "click", (e) => {
       const target = e.target as HTMLElement;
-
       if (target.classList.contains('nav') || target.classList.contains('icon--close')){
         handleNavButtonClick();
       }

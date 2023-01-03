@@ -62,7 +62,8 @@
   &--cart-reset {
     background: inherit;
     padding: 0;
-
+    font-size: 1.4rem;
+    color: $color-border-text;
     &:hover {
       color: $color-primary;
     }

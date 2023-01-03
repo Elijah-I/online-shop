@@ -57,7 +57,8 @@ export class CartListView {
     return `<thead class="shopping-table__head">
                                     <tr class="shopping-table__head-row">
                                         <th>№</th>
-                                        <th>Товар</th>
+                                        <th>Фото</th>
+                                        <th>Название</th>
                                         <th>Категория</th>
                                         <th>Бренд</th>
                                         <th>Цена</th>
@@ -86,10 +87,12 @@ export class CartListView {
               <span class="table-item__number">${serialNumber}</span>
           </td>
           <td>
+              <div class="table-item__img">
+                  <img src="${product.thumbnail}" alt="Product photo">
+              </div>
+          </td>
+          <td>
               <div class="table-item__product">
-                  <div class="table-item__img">
-                      <img src="${product.thumbnail}" alt="Product photo">
-                  </div>
                   <span class="table-item__title">${product.title}</span>
               </div>
           </td>
@@ -99,7 +102,7 @@ export class CartListView {
           <td>
               <span class="table-item__brand">${product.brand.name}</span>
           </td>
-          <td>
+          <td class="table-item__price-td">
               <span class="table-item__price table-item__price--default">${
                 product.price
               } ₽</span>
@@ -123,7 +126,7 @@ export class CartListView {
               </div>
           </td>
 
-          <td>
+          <td class="table-item__amount-td">
               <span class="table-item__amount" id="amount">${
                 product.price * product.stockUsed
               } ₽</span>
@@ -143,13 +146,13 @@ export class CartListView {
     return `
       <tfoot class="shopping-table__footer">
           <tr class="shopping-table__footer-row">
-              <td colspan="2">
+              <td colspan="4">
                   <div class="table-item__items-on-page items-on-page">
                       <label class="items-on-page__label" for="items-on-page">Товаров на странице</label>
                       <input class="items-on-page__input" type="number" min=1 value="${perPage}" maxlength="4" id="items-on-page">
                   </div>
               </td>
-              <td colspan="2">
+              <td colspan="1">
                   <div class="table-item__pages">
                       <button class="button button--page" id="page-back">
                           <span class="icon icon--arrow-left"></span>

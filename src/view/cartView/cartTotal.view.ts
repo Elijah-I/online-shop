@@ -35,7 +35,7 @@ export class CartTotalView {
   }
 
   addTitle() {
-    return `<h3 class="cart-total__title title">Детали заказа</h3>`;
+    return `<h4 class="cart-total__title title">Детали заказа</h4>`;
   }
 
   addCartTotalContent() {

@@ -10,16 +10,31 @@
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
+  @extend %block-shadowed;
+  background-color: $color-light;
+  border-radius: 20px;
+  padding: 40px;
   margin-bottom: 40px;
 
   // .cart__shopping
   &__shopping {
-    flex-basis: 68%;
+    flex-basis: 60%;
   }
 
-  // .cart__total
   &__total-bill {
     flex-basis: 20%;
+  }
+
+  @include media-laptop {
+    flex-direction: column;
+
+    &__shopping {
+      margin-bottom: 30px;
+    }
+
+    &__total-bill {
+      width: 100%;
+    }
   }
 }
 
@@ -34,6 +49,7 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  @include font(1.4rem, 1.8rem, 300);
 
   // .shopping-table__head
   &__head {
@@ -42,7 +58,7 @@
   &__head-row,
   &__body-row {
     > * {
-      padding: 0.75rem;
+      padding: 0.55rem;
     }
   }
 
@@ -83,21 +99,29 @@
 .table-item {
   // .table-item__product
   &__product {
-    display: flex;
-    align-items: center;
+    width: 100px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    @include media-laptop {
+      width: auto;
+    }
   }
 
   // .table-item__img
   &__img {
-    width: 100px;
+    //width: 70px;
     > * {
-      width: 90px;
-      object-fit: cover;
+      width: 60px;
+      object-fit: contain;
     }
   }
 
   // .table-item__title
   &__title {
+    flex-grow: 1;
   }
 
   // .table-item__category
@@ -124,14 +148,25 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 80px;
     border: 1px solid #bdbdbd;
     border-radius: 46px;
+
+    @include media-laptop {
+      width: auto;
+    }
   }
 
   // .table-item__input
   &__input {
     padding: 5px 0;
     color: $color-text;
+  }
+
+
+  &__price-td,
+  &__amount-td {
+    white-space: nowrap;
   }
 
   // .table-item__amount
@@ -189,6 +224,10 @@
     background-color: $color-light-bg;
     border-radius: 20px;
     width: 360px;
+
+    @include media-laptop {
+      width: auto;
+    }
   }
 
   // .cart-total__title
@@ -231,12 +270,12 @@
 
   // .cart-total__sum-text
   &__default-sum-text {
-    @include font(1.8rem, 1.2rem);
+    @include font(1.6rem, 1.2rem);
   }
 
   // .cart-total__sum-value
   &__default-sum-value {
-    @include font(1.8rem, 1.2rem);
+    @include font(1.6rem, 1.2rem);
     color: $color-text;
     text-decoration: line-through;
   }
@@ -247,11 +286,11 @@
   }
 
   &__discount-sum-text {
-    @include font(2rem, 1.2rem);
+    @include font(1.8rem, 1.2rem);
   }
 
   &__discount-sum-value {
-    @include font(2rem, 1.2rem);
+    @include font(1.8rem, 1.2rem);
     color: $color-primary;
   }
 
@@ -290,6 +329,7 @@
   // .promo-code__input
   &__input {
     display: flex;
+    justify-content: space-between;
     gap: 10px;
   }
 

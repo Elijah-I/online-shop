@@ -64,10 +64,17 @@ export class CartView {
       this.root.append(this.cartWrapper);
       this.renderPurchaseModal();
     } else {
-      this.root.html("В корзине нет товаров, перейдите на главную страницу, чтобы добавить их");
+      this.fillNoProducts();
     }
 
     this.controller.applyCart();
+  }
+
+  fillNoProducts() {
+    const noProducts = Utils.create("cart-section", "div");
+    noProducts.innerText = "В корзине нет товаров, перейдите на главную страницу, чтобы добавить их";
+    noProducts.style.justifyContent = "center";
+    this.root.append(noProducts);
   }
 
   fillBreadcrumbsNav() {
