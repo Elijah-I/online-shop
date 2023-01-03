@@ -39,6 +39,9 @@ export class FilterView {
 
   private addFilters() {
     return `
+      <div class="filter__close-button close-button">
+        <span class="icon icon--close"></span>
+      </div>
       <div class="filter__price price-filter ">
         <div class="price-filter__wrapper">
             <h3 class="price-filter__title title">Цена</h3>

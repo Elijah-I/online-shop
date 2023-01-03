@@ -48,6 +48,12 @@
 	}
 }
 
+@mixin media-small-tablet {
+	@media screen and (max-width: $tablet-small-width) {
+		@content;
+	}
+}
+
 @mixin media-mobile-big {
 	@media screen and (max-width: $mobile-big-width) {
 		@content;
