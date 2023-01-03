@@ -80,6 +80,10 @@
 		padding: 0 10px;
 	}
 
+	&__input::placeholder {
+		color: $color-border-text;
+	}
+
 	&__button {
 		background-color: inherit;
 	}

@@ -21,6 +21,7 @@ export class View {
     this.renderHeader();
     this.renderContent();
     this.renderFooter();
+    this.initBurgerMenu();
 
     const main = Utils.id(".main__wrapper") as ExtendedElement;
     const onCartUpdate = (a: number, s: number, d: number) =>
@@ -129,6 +130,7 @@ export class View {
     header.innerHTML = `
             <div class="wrapper header__wrapper">
                 <a href="/" class="header__logo logo nav__link"><img src="${logo}" alt="Hobbies Art Logo"></a>
+                            
                 <nav class="header__nav nav">
                     <ul class="nav__list">
                         <li class="nav__item main-link"><a href="/" class="nav__link">Главная</a></li>
@@ -149,7 +151,14 @@ export class View {
                             </a>
                         </li>
                     </ul>
+                    <div class="header__close-button close-button">
+                        <span class="icon icon--close"></span>
+                    </div>
                 </nav>
+                
+                <div class="header__button burger-button">
+                  <span class="icon icon--burger"></span>
+                </div>
             </div>
     `;
 
@@ -188,5 +197,33 @@ export class View {
     `;
 
     this.root.append(footer);
+  }
+
+  initBurgerMenu() {
+    const navigation = document.querySelector('.nav');
+
+    const handleNavButtonClick = () => {
+      navigation?.classList.remove('nav--show');
+      document.body.classList.remove('body--scroll__disable');
+    }
+
+    Utils.addEvent(".burger-button", "click", () => {
+      navigation?.classList.add('nav--show');
+      document.body.classList.add('body--scroll__disable');
+
+      for (const navItem of Utils.id(
+        ".nav__item"
+      ) as NodeListOf<ExtendedElement>) {
+        Utils.addEvent(navItem, "click", () => handleNavButtonClick());
+      }
+    });
+
+    Utils.addEvent(".nav", "click", (e) => {
+      const target = e.target as HTMLElement;
+
+      if (target.classList.contains('nav') || target.classList.contains('icon--close')){
+        handleNavButtonClick();
+      }
+    })
   }
 }

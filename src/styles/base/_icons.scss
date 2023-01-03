@@ -70,6 +70,16 @@
   }
 }
 
+.icon--burger {
+	background-image: url("./../assets/svg/burger-menu-icon.svg");
+	@include icon-size(18px, 10px);
+	display: none;
+	@include media-tablet {
+		display: inline-flex;
+		filter: invert(40%);
+	}
+}
+
 .icon--default {
 	display: inline-flex;
 	background-image: url("./../assets/svg/cards/card.svg");
