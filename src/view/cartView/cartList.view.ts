@@ -23,7 +23,6 @@ export class CartListView {
 
   fill(root: HTMLElement) {
     root.append(this.addTitle());
-
     this.fillTable(root);
   }
 

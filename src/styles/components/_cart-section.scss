@@ -36,14 +36,12 @@
       width: 100%;
     }
   }
-}
 
-.shopping {
-  // .shopping__title
-  &__title {
-    margin-bottom: 30px;
+  @include media-small-tablet {
+    padding: 10px;
   }
 }
+
 
 .shopping-table {
   width: 100%;
@@ -93,6 +91,97 @@
 
   // .shopping-table__footer-row
   &__footer-row {
+  }
+
+  @include media-small-tablet {
+    &,
+    &__body,
+    &__head,
+    &__body-row,
+    td, {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__head,
+    &__head-row {
+      display: none;
+    }
+
+    &__body-row {
+      border: 1px solid #BDBDBD;
+    }
+
+    &__body {
+      align-self: center;
+      gap: 10px;
+    }
+
+    &__body-row {
+      >* {
+        position: relative;
+        padding-left: 50vw;
+        padding-right: 20px;
+        border-bottom: 1px solid #eee;
+      }
+    }
+
+    &__body-row {
+      >*:before {
+        position: absolute;
+        top: 1vw;
+        left: 5vw;
+        width: 40%;
+      }
+
+      td:nth-child(1):before {
+        content: "№";
+      }
+
+      td:nth-child(2):before {
+        content: "Фото";
+      }
+
+      td:nth-child(3):before {
+        content: "Название";
+      }
+
+      td:nth-child(4):before {
+        content: "Категория";
+      }
+
+      td:nth-child(5):before {
+        content: "Бренд";
+      }
+
+      td:nth-child(6):before {
+        content: "Цена";
+      }
+
+      td:nth-child(7):before {
+        content: "Наличие";
+      }
+
+      td:nth-child(8):before {
+        content: "Количество";
+      }
+
+      td:nth-child(9):before {
+        content: "Стоимость";
+      }
+    }
+
+    &__footer-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @include media-mobile-big {
+    &__body-row {
+      width: 300px;
+    }
   }
 }
 
@@ -331,6 +420,11 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
+
+    @include media-mobile-big {
+      flex-direction: column;
+      gap: 30px;
+    }
   }
 
   // .promo-code__text
