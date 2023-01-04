@@ -70,7 +70,7 @@ export type Pagination = {
 
 export const State: IState = {
   route: window.location.href,
-  deployPath: "/online-shop-release",
+  deployPath: "/online-shop",
 
   pagination: {
     perPage: 5,
