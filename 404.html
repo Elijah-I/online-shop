@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404</title>
+  </head>
+  <body style="width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 50px">
+    <script>
+      const wLocation = window.location.href
+      const base = "/online-shop-release/"
+      const { origin, pathname } = new URL(wLocation)
+
+      const validPaths = ["", "/", "cart", "product"]
+      const [path] = pathname.replace(base, "", wLocation).split("/")
+
+      if (validPaths.includes(path)) {
+        localStorage.setItem("restore", wLocation.replace(base, "/", wLocation))
+        window.location = origin + base
+      } else {
+        document.body.innerHTML = '<img style="display: block; width: 100%;" src="./assets/404.jpg" alt="" />'
+      }
+    </script>
+  </body>
+</html>
