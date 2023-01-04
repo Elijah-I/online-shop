@@ -4,10 +4,19 @@
 	max-width: $width-container;
 	margin: 0 auto;
 	@include media-laptop {
-		 padding: 0 46px;
+		 padding: 0 30px;
+	}
+
+	@include media-small-laptop {
+		gap: 0;
+		justify-content: space-between;
+	}
+
+	@include media-tablet {
+		padding: 0 20px;
 	}
 
 	@include media-mobile-big {
-		padding: 0 21px;
+		padding: 20px;
 	}
 }

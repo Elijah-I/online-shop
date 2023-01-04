@@ -45,6 +45,7 @@
 
 	// .filter-list__item-label
 	&__item-label {
+		@include font(1.4rem, 1.7rem, 400);
 		display: flex;
 		justify-content: space-between;
 		width: 100%;
@@ -53,10 +54,18 @@
 		text-decoration: none;
 
 		&:hover {
-			>* {
+			.filter-list__item-name {
 				color: $color-primary;
 			}
 		}
+	}
+
+	&__item-name {
+		padding-right: 5px;
+	}
+
+	&__item-amount {
+		color: $color-border-text;
 	}
 }
 

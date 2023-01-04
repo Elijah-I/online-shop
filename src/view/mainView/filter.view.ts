@@ -39,6 +39,9 @@ export class FilterView {
 
   private addFilters() {
     return `
+      <div class="filter__close-button close-button">
+        <span class="icon icon--close"></span>
+      </div>
       <div class="filter__price price-filter ">
         <div class="price-filter__wrapper">
             <h3 class="price-filter__title title">Цена</h3>
@@ -83,8 +86,8 @@ export class FilterView {
             <label 
               class="filter-list__item-label" 
               for="categories-${id}">
-              <span>${name}</span>
-              <span>(${this.model.amount.categories[id] || "0"})</span>
+              <span class="filter-list__item-name">${name}</span>
+              <span class="filter-list__item-amount">(${this.model.amount.categories[id] || "0"})</span>
             </label>
           </li>`;
     });
@@ -117,8 +120,8 @@ export class FilterView {
             <label 
               class="filter-list__item-label" 
               for="brands-${id}">
-              <span>${name}</span>
-              <span>(${this.model.amount.brands[id] || "0"})</span>
+              <span class="filter-list__item-name">${name}</span>
+              <span class="filter-list__item-amount">(${this.model.amount.brands[id] || "0"})</span>
             </label>
           </li>`;
     });

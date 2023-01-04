@@ -27,7 +27,36 @@ export class HeadControlsView {
     this.gridLayout.render(headControlsWrapper);
     this.search.render(headControlsWrapper);
     this.sortBy.render(headControlsWrapper);
+    this.fillFilterButton(headControlsWrapper);
 
     root.append(headControlsWrapper);
+  }
+
+  fillFilterButton(root: HTMLElement) {
+    const filterButton = Utils.create<HTMLButtonElement>(
+      "button button--bordered filter__button",
+      "button"
+    );
+
+    filterButton.innerText = "Фильтры";
+
+    root.append(filterButton);
+    this.addFilterHandler(filterButton);
+  }
+
+  addFilterHandler(button: HTMLButtonElement) {
+    button?.addEventListener("click", (e) => {
+      const filter = document.querySelector(".filter");
+      const target = e.target as HTMLElement;
+      filter?.classList.add("filter--show");
+      console.log(target);
+
+      Utils.addEvent(".filter", "click", (e) => {
+        const target = e.target as HTMLElement;
+        if (target.classList.contains('icon--close')){
+          filter?.classList.remove("filter--show");
+        }
+      })
+    })
   }
 }

@@ -116,12 +116,14 @@ export class ProductView {
       inCart ? " button--carted" : ""
     }`;
 
+    const priceOnly = !product.discountPercentage;
+
     return `
       <div class="product__content">
         <h2 class="product__title title">${product.title}</h2>
         <div class="product__desc">
             <h4 class="product__desc-title title">Описание товара</h4>
-            <span>${product.description}</span>                  
+            <span class="product__desc-content">${product.description}</span>                  
         </div>
 
         <div class="product__info">
@@ -145,10 +147,14 @@ export class ProductView {
                 </li>
             </ul>
         </div>
-
+                    
         <div class="product__price">
-            <span class="product__price-default">${product.price}₽</span>
-            <span class="product__price-discount">${(
+            <span class="product__price-default${
+              priceOnly ? " product__price-only" : ""
+              }">${product.price}₽</span>
+            <span class="product__price-discount${
+              priceOnly ? " product__price-only" : ""
+              }">${(
               product.price -
               (product.price / 100) * product.discountPercentage
             ).toFixed(2)}₽</span>

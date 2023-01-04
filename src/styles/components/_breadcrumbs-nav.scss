@@ -5,7 +5,12 @@
   &__list {
     display: flex;
     gap: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+
+    @include media-small-tablet {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 
   // .breadcrumbs-nav__item

@@ -2,8 +2,12 @@
 
 .header {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  padding: 15px 0 17px 0;
-  margin-bottom: 80px;
+  padding: 10px 0 8px 0;
+  margin-bottom: 60px;
+
+  @include media-mobile-big {
+    margin-bottom: 30px;
+  }
 
   &__wrapper {
     display: flex;
@@ -14,6 +18,12 @@
   &__logo {
     display: flex;
     flex-basis: 50%;
+    width: 30%;
+
+    >* {
+      max-width: 100px;
+      object-fit: contain;
+    }
   }
 
   &__nav {
@@ -30,6 +40,11 @@
     @extend %border;
     border-radius: 46px;
     padding: 5px 15px;
+    cursor: pointer;
+  }
+
+  &:hover &__text {
+    color: $color-primary;
   }
 
   // .cart__link
@@ -49,6 +64,7 @@
 
   // .cart__text
   &__text {
+    color: $color-border-text;
   }
 
   // .cart__total

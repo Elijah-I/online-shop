@@ -4,7 +4,6 @@
 	&__wrapper {
 		display: grid;
 		grid-area: footer;
-		padding: 10px;
 		grid-template: 1fr / minmax(auto, 300px) 1fr minmax(auto, 300px) 1fr minmax(auto, 300px);
 		align-items: center;
 	}

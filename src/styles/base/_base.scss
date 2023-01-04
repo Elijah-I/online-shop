@@ -10,6 +10,7 @@
 .body {
 	font-family: $font-family;
 	@include font(1.6rem, 2.6rem, normal);
+	background-color: $color-light-bg;
 }
 
 #root {
@@ -26,43 +27,51 @@
 	flex: 1 1 auto;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 20px;
+
+	@include media-mobile-big {
+		margin-bottom: 0;
+	}
 
 	&__wrapper {
 		display: flex;
 		gap: 50px;
+		@include media-small-laptop {
+			gap: 30px;
+		}
 	}
 	&__left-side {
 		flex-basis: 30%;
+
+		@include media-small-tablet {
+			flex-basis: 0;
+		}
 	}
 	&__right-side {
 		flex-basis: 70%;
+
+		@include media-small-laptop {
+			flex-basis: 50%;
+		}
+
+		@include media-small-tablet {
+			flex-basis: 100%;
+		}
 	}
 }
 
 h1 {
 	@include font(4.4rem, 5.4rem);
-	@include media-mobile-big {
-		@include font(3.2rem, 4.2rem);
-	}
 }
 
 h2 {
-	@include font(3.4rem, 4.6rem);
-	@include media-mobile-big {
-		@include font(2.4rem, 3.3rem);
-	}
+	@include font(2.8rem, 3.4rem, 600);
 }
 
 h3 {
-	@include font(2.0rem, 2.0rem);
-	@include media-mobile-big {
-		@include font(2.1rem, 3.1rem);
-	}
+	@include font(1.6rem, 2.0rem, 600);
 }
 
 h4 {
-	@include font(2.2rem, 3.0rem, 600);
-	@include media-tablet {
-		@include font(2.0rem, 3.0rem, 600);
-	}
+	@include font(1.8rem, 2.4rem, 600);
 }
