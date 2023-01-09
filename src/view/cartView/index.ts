@@ -30,8 +30,27 @@ export class CartView {
     this.addListeners();
   }
 
+  hasProductsOnPage() {
+    let has = false;
+    const { perPage, currentPage } = this.model.pagination;
+
+    this.model.cartItems.forEach((_, order) => {
+      const page = Math.ceil((order + 1) / perPage);
+
+      if (page === currentPage) {
+        has = true;
+      }
+    });
+    return has;
+  }
+
   addListeners() {
     const cartCallback = () => {
+      if (!this.hasProductsOnPage()) {
+        this.controller.switchPage(-1);
+        return;
+      }
+
       this.cartList.render(this.cartRoot);
       this.cartTotal.render(this.cartRoot);
 
@@ -72,7 +91,8 @@ export class CartView {
 
   fillNoProducts() {
     const noProducts = Utils.create("cart-section", "div");
-    noProducts.innerText = "В корзине нет товаров, перейдите на главную страницу, чтобы добавить их";
+    noProducts.innerText =
+      "В корзине нет товаров, перейдите на главную страницу, чтобы добавить их";
     noProducts.style.justifyContent = "center";
     this.root.append(noProducts);
   }
