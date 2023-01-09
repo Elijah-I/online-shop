@@ -1,0 +1,75 @@
+@use "../abstract" as *;
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: $color-overlay;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal {
+	position: relative;
+	border-radius: 10px;
+	background-color: $color-light;
+	width: 675px;
+	min-height: 120px;
+	max-height: 90%;
+	overflow: auto;
+	@include media-tablet {
+		width: 90%;
+	}
+}
+
+.modal__close-icon {
+	position: absolute;
+	top: 10px;
+	right: 1%;
+	width: 20px;
+	height: 20px;
+	z-index: 1;
+	cursor: pointer;
+	background-color: transparent;
+	svg {
+		pointer-events: none;
+	}
+}
+
+.modal__img {
+	width: 400px;
+
+	&-text {
+		padding-top: 20px;
+		text-align: center;
+		font-size: 1.2rem;
+	}
+
+	& .modal__img-origin {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	&-zoom {
+		position: absolute;
+		width: 200px;
+		height: 200px;
+		border: 1px solid $color-light;
+		border-radius: 50%;
+		opacity: 0;
+	}
+
+	&:hover,
+	&:active {
+		cursor: cell;
+		display: block;
+
+		.modal__img-zoom {
+			opacity: 1;
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "ES6",
+    "outDir": "../build/",
+    "module": "CommonJS",
+    "removeComments": true,
+    "sourceMap": true,
+    "watch": true,
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "lib": ["es2021", "DOM", "DOM.Iterable"],
+    "paths": {
+      "types/*": ["types/*"]
+    }
+  },
+  "files": ["src/index.ts"],
+  "exclude": ["node_modules"],
+  "include": ["./src/"]
+}

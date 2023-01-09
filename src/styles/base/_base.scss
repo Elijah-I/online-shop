@@ -1,0 +1,77 @@
+@use "../abstract" as *;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+.html {
+	font-size: 10px;
+	scroll-behavior: smooth;
+	height: 100%;
+}
+
+.body {
+	font-family: $font-family;
+	@include font(1.6rem, 2.6rem, normal);
+	background-color: $color-light-bg;
+}
+
+#root {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.body--scroll__disable {
+	overflow-y: hidden;
+}
+
+.main {
+	flex: 1 1 auto;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+
+	@include media-mobile-big {
+		margin-bottom: 0;
+	}
+
+	&__wrapper {
+		display: flex;
+		gap: 50px;
+		@include media-small-laptop {
+			gap: 30px;
+		}
+	}
+	&__left-side {
+		flex-basis: 30%;
+
+		@include media-small-tablet {
+			flex-basis: 0;
+		}
+	}
+	&__right-side {
+		flex-basis: 70%;
+
+		@include media-small-laptop {
+			flex-basis: 50%;
+		}
+
+		@include media-small-tablet {
+			flex-basis: 100%;
+		}
+	}
+}
+
+h1 {
+	@include font(4.4rem, 5.4rem);
+}
+
+h2 {
+	@include font(2.8rem, 3.4rem, 600);
+}
+
+h3 {
+	@include font(1.6rem, 2.0rem, 600);
+}
+
+h4 {
+	@include font(1.8rem, 2.4rem, 600);
+}

@@ -1,0 +1,336 @@
+@use "../abstract" as *;
+
+.products {
+  // .products__wrapper
+  &__wrapper {
+    gap: 40px;
+
+    @include media-tablet {
+      gap: 20px;
+    }
+  }
+
+  // .products__item
+  &__item {
+    text-decoration: none;
+    color: $color-text;
+  }
+
+  // .products__empt
+  &__empty {
+    flex-basis: 100%;
+    text-align: center;
+  }
+}
+
+.products {
+  .layout-columns {
+    .product-item {
+      flex-direction: column;
+
+      // product-item--carted
+      &--carted {
+        &:before {
+          top: 2px;
+          right: 4px;
+        }
+      }
+
+      // .product-item__info
+      &__info {
+        flex-direction: column;
+        justify-content: end;
+      }
+
+      &__rating-buy {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      // .product-item__price
+      &__price {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      // .product-item__button
+      &__button {
+        & .button {
+          max-width: 100%;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+.product-item__price-default.product-item__price-only {
+  text-decoration: none;
+}
+.product-item__price-discount.product-item__price-only {
+  display: none;
+}
+
+.products {
+  .layout-rows {
+    .product-item {
+      flex-direction: row;
+
+      // product-item--carted
+      &--carted {
+        &:before {
+          top: 2px;
+          right: 4px;
+        }
+      }
+
+      // .product-item__img
+      &__img {
+        width: 30%;
+        @include media-small-laptop {
+          align-self: center;
+          width: 30%;
+          height: 30%;
+        }
+
+        @include media-small-tablet {
+          width: 25%;
+          height: 25%;
+        }
+
+        @include media-mobile-big {
+          width: 20%;
+          height: 20%;
+        }
+      }
+
+      &__content {
+        @include media-small-laptop {
+          padding: 10px;
+        }
+      }
+
+      &__title {
+        justify-content: center;
+        text-align: center;
+        font-size: 2.2rem;
+
+        @include media-small-laptop {
+          font-size: 1.2rem;
+        }
+
+        @include media-small-tablet {
+          font-size: 2rem;
+        }
+
+        @include media-mobile-big {
+          font-size: 1.4rem;
+        }
+      }
+
+      // .product-item__info
+      &__info {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        font-size: 1.6rem;
+      }
+
+      &__desc {
+        gap: 5px;
+        text-align: right;
+
+        @include media-small-laptop {
+          font-size: 1rem;
+          line-height: 1.2rem;
+        }
+
+        @include media-small-tablet {
+          font-size: 1.2rem;
+          line-height: 1.4rem;
+        }
+
+        @include media-mobile-big {
+          font-size: 1rem;
+          line-height: 1.2rem;
+        }
+      }
+
+      // .product-item__price
+      &__price {
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &-default {
+          padding-top: 20px;
+        }
+
+        &-discount {
+          @include font(2.4rem, 1.8rem);
+          color: $color-primary;
+        }
+
+        @include media-small-laptop {
+          font-size: 1.5rem;
+
+          &-discount {
+            @include font(1.8rem, 2rem);
+          }
+        }
+      }
+
+      &__rating-buy {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      // .product-item__brand
+      &__brand {
+      }
+
+      &__rating {
+        align-self: center;
+        font-size: 1.9rem;
+
+        @include media-laptop {
+          font-size: 1.4rem;
+        }
+
+        @include media-small-laptop {
+          font-size: 1.2rem;
+        }
+
+        @include media-mobile-big {
+          font-size: 1rem;
+        }
+      }
+
+      // .product-item__button
+      &__button {
+        & .button {
+          max-width: 60vw;
+
+          @include media-small-laptop {
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.product-item {
+  @extend %block-shadowed;
+  display: flex;
+  background-color: $color-light;
+  transition: all 0.3s ease-out 0s;
+  cursor: pointer;
+
+  &:hover &__title {
+    color: $color-primary;
+  }
+
+  // product-item--carted
+  &--carted {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      display: inline-flex;
+      background-image: url("./../assets/svg/checkmark.svg");
+      @include icon-size(40px, 40px);
+      background-size: 100%;
+    }
+  }
+
+  // .product-item__img
+  &__img {
+    display: flex;
+    justify-content: center;
+    > * {
+      border-radius: 10px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  // .product-item__content
+  &__content {
+    padding: 10px 20px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    @include media-small-laptop {
+      padding: 15px;
+    }
+  }
+
+  // .product-item__title
+  &__title {
+    transition: all 0.3s ease-out 0s;
+    margin: 0 0 10px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  // .product-item__info
+  &__info {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    @include font(1.4rem, 1.8rem, 300)
+  }
+
+  // .product-item__price
+  &__price {
+    @include font(1.8rem, 1.8rem);
+    &-default {
+      text-decoration: line-through;
+    }
+
+    &-discount {
+      @include font(2.1rem, 1.8rem);
+      color: $color-primary;
+    }
+  }
+
+  // .product-item__category
+  &__category {
+  }
+
+  // .product-item__brand
+  &__brand {
+  }
+
+  &__rating-buy {
+  }
+
+  // .product-item__button
+  &__button {
+    text-align: center;
+
+    & .button {
+      @include font(1.4rem, 1.7rem, 400);
+
+      @include media-laptop {
+        @include font(1.2rem, 1.4rem, 400);
+      }
+    }
+  }
+
+  @include media-tablet {
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,168 @@
+@use "../abstract" as *;
+
+.icon {
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.icon-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  &--sec-color {
+    background-color: $color-secondary;
+  }
+}
+
+.icon--cart {
+  background-image: url("./../assets/svg/cart.svg");
+  @include icon-size(11px, 11px);
+}
+
+.icon--rows {
+  background-image: url("./../assets/svg/rows.svg");
+  @include icon-size(25px, 25px);
+  background-size: 100%;
+	@include media-small-laptop {
+		@include icon-size(20px, 20px);
+	}
+}
+
+.icon--columns {
+  background-image: url("./../assets/svg/columns.svg");
+  @include icon-size(25px, 25px);
+  background-size: 100%;
+		@include media-small-laptop {
+				@include icon-size(20px, 20px);
+		}
+}
+
+.icon--arrow-left {
+  background-image: url("./../assets/svg/left-arrow.svg");
+  @include icon-size(20px, 15px);
+  background-size: 100%;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.icon--arrow-right {
+  background-image: url("./../assets/svg/right-arrow.svg");
+  @include icon-size(20px, 15px);
+  background-size: 100%;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.icon--close {
+  background-image: url("./../assets/svg/close-icon.svg");
+  @include icon-size(20px, 20px);
+  background-size: 100%;
+
+  &:hover {
+		filter: invert(50%);
+  }
+}
+
+.icon--burger {
+	background-image: url("./../assets/svg/burger-menu-icon.svg");
+	@include icon-size(18px, 10px);
+	display: none;
+	@include media-tablet {
+		display: inline-flex;
+		filter: invert(40%);
+	}
+}
+
+.icon--default {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/card.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+.icon--visa {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/visa.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+.icon--mastercard {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/mastercard.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+.icon--american-express {
+	display: inline-flex;
+	background-image: url("./../assets/svg/cards/american-express.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+}
+
+.icon--github {
+	display: inline-flex;
+	background-image: url("./../assets/svg/footer/github.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+
+	transition: all 0.5s ease 0s;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+}
+
+.icon--gh {
+	display: inline-flex;
+	background-image: url("./../assets/svg/footer/gh.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+
+	transition: all 0.5s ease 0s;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+}
+
+.icon--gh-face {
+	display: inline-flex;
+	background-image: url("./../assets/svg/footer/github-face.svg");
+	@include icon-size(40px, 40px);
+	background-size: 100%;
+
+	transition: all 0.5s ease 0s;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+}
+
+.icon--rss {
+	display: inline-flex;
+	background-image: url("./../assets/svg/footer/logo_rs.svg");
+	@include icon-size(60px, 50px);
+	background-size: 100%;
+
+	transition: all 0.5s ease 0s;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+}
+
+.icon--zoom {
+	display: inline-flex;
+	background-image: url("./../assets/svg/zoom.svg");
+	@include icon-size(30px, 30px);
+	background-size: 100%;
+}

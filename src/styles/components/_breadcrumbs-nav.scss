@@ -1,0 +1,44 @@
+@use "../abstract" as *;
+
+.breadcrumbs-nav {
+  // .breadcrumbs-nav__list
+  &__list {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+
+    @include media-small-tablet {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  // .breadcrumbs-nav__item
+  &__item {
+    &:not(:last-child):after {
+      content: "";
+      background-image: url("./../assets/svg/arrow.svg");
+      @include icon-size(17px, 8px);
+      display: inline-flex;
+      position: relative;
+      left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: $color-text;
+    }
+
+    a:hover {
+      color: $color-primary;
+      cursor: pointer;
+    }
+
+    &:last-child {
+      a {
+        cursor: default;
+        pointer-events: none;
+      }
+    }
+  }
+}

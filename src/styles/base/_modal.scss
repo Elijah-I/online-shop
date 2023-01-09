@@ -1,0 +1,37 @@
+@use "../abstract" as *;
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: $color-overlay;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal {
+	position: relative;
+	border-radius: 10px;
+	width: 675px;
+	min-height: 120px;
+	max-height: 90%;
+	overflow: auto;
+}
+
+.modal__close-icon {
+	position: absolute;
+	top: 15px;
+	right: 12px;
+	z-index: 1;
+	cursor: pointer;
+	display: block;
+}
+
+.modal__content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

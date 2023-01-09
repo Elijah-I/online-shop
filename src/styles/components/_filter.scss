@@ -1,0 +1,158 @@
+@use "../abstract" as *;
+
+.filter {
+	// .filter__wrapper
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	// .filter__categories
+	&__categories {
+	}
+
+	// .filter__brands
+	&__brands {
+	}
+
+	// .filter__price
+	&__price {
+	}
+
+	// .filter__stock
+	&__stock {
+	}
+
+	&__buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		& .button {
+			background: $color-light-bg;
+			border: 1px solid $color-border;
+			color: $color-border-text;
+
+			&:hover {
+				border: 1px solid $color-primary;
+				color: $color-primary;
+				transition: all ease 0.3s;
+			}
+		}
+	}
+
+	&__button {
+		display: none;
+		background: inherit;
+
+		@include media-small-tablet {
+			display: block;
+		}
+	}
+
+	&__total-products {
+	}
+
+	& .title {
+		color: $color-subtitle;
+	}
+
+	@include media-small-tablet {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		right: 0;
+		top: 200%;
+		z-index: 10;
+		transition: all 0.3s ease-out;
+		background: $color-light-bg;
+		overflow: scroll;
+
+		&__wrapper {
+			padding: 30px;
+		}
+
+		& .icon--close {
+			position: absolute;
+			display: inline-flex;
+			top: 10px;
+			right: 10px;
+		}
+	}
+}
+
+.filter--show {
+	top: 0;
+}
+
+.categories-filter {
+	@extend %border-bottom;
+
+	// .categories-filter__title
+	&__title {
+	}
+
+	// .categories-filter__list
+	&__list {
+	}
+
+	// .categories-filter__item
+	&__item {
+	}
+}
+
+.brands-filter {
+	@extend %border-bottom;
+
+	// .brands-filter__title
+	&__title {
+	}
+
+	// .brands-filter__list
+	&__list {
+	}
+
+	// .brands-filter__item
+	&__item {
+	}
+}
+
+.price-filter {
+	@extend %border-bottom;
+
+	// .price-filter__wrapper
+	&__wrapper {
+	}
+
+	// .price-filter__title
+	&__title {
+		margin-bottom: 30px;
+	}
+}
+
+.stock-filter {
+	@extend %border-bottom;
+
+	// .stock-filter__wrapper
+	&__wrapper {
+	}
+
+	// .stock-filter__title
+	&__title {
+		margin-bottom: 30px;
+	}
+}
+
+.total-products {
+	display: flex;
+	justify-content: space-between;
+
+	&__text {
+
+	}
+
+	&__value {
+
+	}
+}

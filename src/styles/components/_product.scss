@@ -1,0 +1,278 @@
+@use "../abstract" as *;
+
+.product {
+
+	// .product__wrapper
+	&__wrapper {
+		display: flex;
+		justify-content: space-between;
+		padding: 20px 20px 0;
+		@extend %block-shadowed;
+		background-color: $color-light;
+		border-radius: 20px;
+		margin-bottom: 40px;
+
+		@include media-small-tablet {
+			flex-direction: column;
+			padding: 10px 30px 30px;
+			margin-bottom: 10px;
+		}
+	}
+
+	// .product__pictures
+	&__pictures {
+		flex-basis: 35%;
+	}
+
+	// .product__content
+	&__content {
+		flex-basis: 60%;
+		display: flex;
+		flex-direction: column;
+		padding: 20px 40px 40px 0;
+
+		@include media-small-laptop {
+			padding: 20px 20px 40px 0;
+		}
+
+		@include media-small-tablet {
+			padding: 0;
+		}
+	}
+
+	// .product__title
+	&__title {
+		padding-bottom: 30px;
+
+		@include media-small-tablet {
+			padding-top: 20px;
+			font-size: 2.6rem;
+			text-align: center;
+		}
+	}
+
+	// .product__desc
+	&__desc {
+		padding-bottom: 30px;
+	}
+
+	// .product__desc-title
+	&__desc-title {
+		font-weight: 500;
+		padding-bottom: 15px;
+	}
+
+	// .product__desc-title
+	&__desc-content {
+		@include font(1.6rem, 2.7rem, 300);
+
+		br {
+			display: none;
+		}
+
+		@include media-laptop {
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 8;
+			-webkit-box-orient: vertical;
+		}
+	}
+
+	// .product__info
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		font-size: 2rem;
+		padding-bottom: 30px;
+	}
+
+	// .product__info-title
+	&__info-title {
+		font-weight: 500;
+	}
+
+	// .product__info-list
+	&__info-list {
+	}
+
+	// .product__category
+	&__category {
+	}
+
+	// .product__brand
+	&__brand {
+	}
+
+	// .product__stock
+	&__stock {
+	}
+
+	// .product__price
+	&__price {
+		@include font(2rem, 1.8rem);
+		display: flex;
+		align-items: center;
+		justify-content: end;
+		gap: 10px;
+		margin-top: -70px;
+		padding-bottom: 40px;
+
+		@include media-small-laptop {
+			margin-top: 0;
+			padding-bottom: 0;
+		}
+	}
+
+	// .product__price-default
+	&__price-default {
+		padding-top: 20px;
+		text-decoration: line-through;
+	}
+
+	// .product__price-discount
+	&__price-discount {
+		@include font(4rem, 1.8rem);
+		color: $color-primary;
+
+		@include media-small-laptop {
+			font-size: 2.8rem;
+		}
+	}
+
+	// .product__rating
+	&__rating {
+		font-size: 1.9rem;
+		margin-bottom: 20px;
+		text-align: right;
+
+		@include media-small-laptop {
+			font-size: 1.4rem;
+			text-align: left;
+			margin-top: -20px;
+		}
+
+		@include media-small-tablet {
+			margin-top: 10px;
+		}
+	}
+
+	&__rating-stars {
+		&:before {
+			content: '★★★★★';
+			letter-spacing: 3px;
+			background: linear-gradient(90deg, #fc0 86%, #fff 86%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;}
+	}
+
+	// .product__buttons
+	&__buttons {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		>* {
+			width: 50%;
+		}
+
+		@include media-small-laptop {
+			>* {
+				@include font(1.2rem, 1.4rem, 400);
+			}
+		}
+
+		@include media-small-tablet {
+			flex-direction: column;
+			>* {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.product__price-default.product__price-only {
+	text-decoration: none;
+}
+.product__price-discount.product__price-only {
+	display: none;
+}
+
+.info-list {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+
+	// .info-list__item
+	&__item {
+		@extend %border-bottom;
+		@include font(1.6rem, 2.2rem, 300);
+		display: flex;
+		padding: 15px;
+		>* {
+			flex-basis: 50%;
+		}
+	}
+
+	@include media-small-laptop {
+		width: 100%;
+	}
+
+	// .info-list__name
+	&__name {
+	}
+
+	// .info-list__value
+	&__value {
+		text-align: center;
+		color: #5a5a5a;
+	}
+}
+
+.pictures {
+	// .pictures__main-pic
+	&__main-pic {
+		>* {
+			width: 100%;
+			height: 100%;
+			border-top-left-radius: 20px;
+		}
+
+		@include media-small-tablet {
+			width: 60%;
+			margin: 0 auto;
+		}
+	}
+
+	// .pictures__list
+	&__list {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	// .pictures__item
+	&__item {
+		position: relative;
+		width: 30%;
+		& img {
+			width: 100%;
+			object-fit: cover;
+			transition: ease 0.5s;
+			&:hover {
+				cursor: pointer;
+				transform: scale(1.05);
+			}
+		}
+
+		& .icon {
+			position: absolute;
+			top: 0;
+			right: 0;
+			filter: invert(60%);
+
+			&:hover {
+				filter: invert(0);
+			}
+		}
+	}
+}

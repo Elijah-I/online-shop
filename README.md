@@ -1,1 +1,1 @@
-online-shop task
+ONLINE STORE PROJECT

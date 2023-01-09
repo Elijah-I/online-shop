@@ -1,0 +1,97 @@
+@use "../abstract" as *;
+
+.button {
+  padding: 11px 25px 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: $font-family;
+  @include font(1.6rem, 2.2rem, normal);
+  //@extend %transition;
+  transition: all ease 0.3s;
+  text-align: center;
+  text-decoration: none;
+
+  &--bordered {
+    background: $color-light;
+    border: 1px solid $color-primary;
+    color: $color-primary;
+
+    &:hover {
+      background: $color-primary;
+      color: $color-light;
+      transition: all ease 0.3s;
+    }
+  }
+
+  &--colored {
+    background: $color-primary;
+    border: 1px solid $color-primary;
+    color: $color-light;
+
+    &:hover {
+      background: $color-secondary;
+      border-color: $color-secondary;
+    }
+  }
+
+  &--copy-clicked {
+    background: $color-primary;
+    transition: all ease 0.3s;
+
+    &:hover {
+      background: $color-primary;
+      color: $color-light;
+    }
+  }
+
+  &--page {
+    background: inherit;
+    padding: 0;
+  }
+
+  &--quantity {
+    padding: 0;
+    background: inherit;
+    color: $color-border;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  &--cart-reset {
+    background: inherit;
+    padding: 0;
+    font-size: 1.4rem;
+    color: $color-border-text;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &--icon {
+    background: inherit;
+    padding: 5px;
+    filter: invert(0.5);
+    &:hover {
+      filter: invert(0);
+      transform: scale(1.2);
+    }
+  }
+
+  &--icon-active {
+    filter: invert(0);
+    transform: scale(1.2);
+  }
+
+  &--carted,
+  .product-item--carted & {
+    background: $color-primary;
+    color: $color-light;
+
+    &:hover {
+      background: $color-secondary;
+      border-color: $color-secondary;
+    }
+  }
+}

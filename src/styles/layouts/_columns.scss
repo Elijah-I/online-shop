@@ -1,0 +1,46 @@
+@use "../abstract" as *;
+
+.layout-4-columns {
+	@include columns(21%);
+}
+
+.layout-columns {
+	@include columns(30%);
+	&:after {
+		content: '';
+		width: 30%;
+		display: block;
+	}
+
+	@include media-laptop {
+		@include columns(27%);
+		justify-content: flex-start;
+		>* {
+			flex-grow: 1;
+		}
+
+		&:after {
+			width: 46%;
+		}
+	}
+
+	@include media-small-laptop {
+		@include columns(27%);
+		justify-content: flex-start;
+		>* {
+			flex-grow: 0;
+		}
+
+		&:after {
+			width: 46%;
+		}
+	}
+}
+
+.layout-2-columns {
+	@include columns(49%);
+}
+
+.layout-rows {
+	@include rows(49%);
+}

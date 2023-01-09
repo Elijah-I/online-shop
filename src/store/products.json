@@ -1,0 +1,540 @@
+[
+  {
+    "id": 0,
+    "title": "Пряжа \"Ирис\"",
+    "description": "Нитки Ирис \"Gamma\" используются для машинного и ручного вязания ажурного трикотажа, салфеток, воротничков. Нитки Ирис \"Gamma\" изготавливаются из египетского хлопка на европейском оборудовании, с использованием качественных европейских красителей. Нитки мерсеризованные, гладкие, равномерной толщины, имеют стойкую окраску.",
+    "price": 93,
+    "discountPercentage": 7,
+    "rating": 4.3,
+    "stock": 76,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 0,
+      "name": "Gamma"
+    },
+    "category": {
+      "id": 0,
+      "name": "Вязание"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/0/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/0/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/0/1.jpg"
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Пряжа \"Ирис меланж\"",
+    "description": "Нитки Ирис меланж \"Gamma\" используются для машинного и ручного вязания ажурного трикотажа, салфеток, воротничков. Меланжевый Ирис \"Gamma\" - это палитра разнообразных цветов с гармоничным переходом оттенков. Секционная окраска нити дает неповторимый эффект при вязании и позволяет сделать готовое изделие уникальным при минимуме усилий. Даже самый простой узор будет выглядеть эффектно и оригинально.",
+    "price": 104,
+    "discountPercentage": 0,
+    "rating": 4.8,
+    "stock": 58,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 0,
+      "name": "Gamma"
+    },
+    "category": {
+      "id": 0,
+      "name": "Вязание"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/1/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/1/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/1/1.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Пряжа \"Ирис ассорти\"",
+    "description": "Нитки Ассорти Ирис \"Gamma\" используются для машинного и ручного вязания ажурного трикотажа, салфеток, воротничков. Ассорти Ирис \"Gamma\" - это 10 гармоничных цветовых сочетаний - от нежных пастельных до ярких радужных. Такой набор - отличный выбор для реализации разнообразных творческих идей и может стать прекрасным подарком для любителя рукоделия.",
+    "price": 925,
+    "discountPercentage": 0,
+    "rating": 5,
+    "stock": 17,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 0,
+      "name": "Gamma"
+    },
+    "category": {
+      "id": 0,
+      "name": "Вязание"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/2/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/2/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/2/1.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Шкатулка SBJ-010",
+    "description": "\"Gamma\" SBJ-010 шкатулка для швейных принадлежностей 31.5х31.5х19см. Квадратная шкатулка с ручкой, основа - дерево, лицевая поверхность крышки - гобелен с красивыми изящными рисунками. Боковая поверхность шкатулки отдекорирована плетеным шнуром, который идеально сочетается с рисунком. Шкатулка имеют пластиковую вставку с 8-ю делениями.",
+    "price": 3558,
+    "discountPercentage": 0,
+    "rating": 5,
+    "stock": 4,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 0,
+      "name": "Gamma"
+    },
+    "category": {
+      "id": 1,
+      "name": "Шкатулки"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/3/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/3/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/3/1.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Шкатулка ШКА-10",
+    "description": "\"Gamma\" ШКА-10 шкатулка 34 х 26 х 17 см. Шкатулка прямоугольной формы с ручкой, основа - дерево, лицевая поверхность из текстильных материалов. Шкатулка имеет в комплекте мини-органайзер для ниток из фанеры с логотипом \"Gamma\", подвешен к ручке шкатулки.",
+    "price": 2165,
+    "discountPercentage": 0,
+    "rating": 4.8,
+    "stock": 8,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 0,
+      "name": "Gamma"
+    },
+    "category": {
+      "id": 1,
+      "name": "Шкатулки"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/4/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/4/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/4/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/4/2.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Шкатулка ШКА-01",
+    "description": "\"Gamma\" ШКА-01 шкатулка 23.5х23.5х14.5см. Шкатулка квадратной формы с ручкой, основа - дерево, лицевая поверхность из текстильных материалов. Шкатулка имеет в комплекте мини-органайзер для ниток из фанеры с логотипом \"Gamma\", подвешен к ручке шкатулки. Предназначена для хранения мелочей.",
+    "price": 1909,
+    "discountPercentage": 3.7,
+    "rating": 5,
+    "stock": 3,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 0,
+      "name": "Gamma"
+    },
+    "category": {
+      "id": 1,
+      "name": "Шкатулки"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/5/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/5/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/5/1.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Бусина пластик",
+    "description": "Бусина под жемчуг пластик \"Zlatka\" PB  Диаметр 4 мм. Используются для изготовления бус, браслетов, колье и др. бижутерии, аксессуаров, для декоративного украшения одежды и творческих поделок. При производстве бусин №23 под золото и №24 под серебро окрашивание происходит вручную. Между окрашиваемыми бусинами размещают бусины меньшего размера и из пульверизатора распыляют на них краску, при этом бусины приобретают матовый эффект.",
+    "price": 47,
+    "discountPercentage": 0,
+    "rating": 4.1,
+    "stock": 153,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 1,
+      "name": "Zlatka"
+    },
+    "category": {
+      "id": 2,
+      "name": "Плетение из бисера"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/6/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/6/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/6/1.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Бусина пластик",
+    "description": "Бусина пластик \"Hobbius\" ABFC набор для рукоделия «Алфавитный коктейль» от ТМ Hobbius  Размер:6 мм Универсальный состав. Каждый набор содержит по 100 гр. бусин с нанесёнными русскими буквами. Широкое отверстие позволяет применять их в самых разных целях. Такие бусины можно использовать в поздравительных целях – «подписать» скрап-открытку, сделать праздничную гирлянду, подарок и т.д.",
+    "price": 517,
+    "discountPercentage": 4,
+    "rating": 5,
+    "stock": 99,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 2,
+      "name": "Hobbius"
+    },
+    "category": {
+      "id": 2,
+      "name": "Плетение из бисера"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/7/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/7/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/7/1.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Бусина MIX пластик",
+    "description": "Бусина пластик \"Zlatka\" MIX PBM ассорти под металл, с эффектом под старину. Состаривание – популярная сегодня техника декора, придание предметам антикварного вида. Используются для изготовления бус, браслетов, колье и др. бижутерии, декоративного украшения одежды, аксессуаров и т.д.",
+    "price": 202,
+    "discountPercentage": 0,
+    "rating": 4.7,
+    "stock": 136,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 1,
+      "name": "Zlatka"
+    },
+    "category": {
+      "id": 2,
+      "name": "Плетение из бисера"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/8/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/8/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/8/1.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Молд \"Fiorico\" \"Роза лист\"",
+    "description": "Используется для создания отпечатка фактуры на изделии при лепке и работе с фоамираном. Возможна небольшая разница в оттенках молдов. 7.6x5.1см",
+    "price": 185,
+    "discountPercentage": 0,
+    "rating": 5,
+    "stock": 315,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 3,
+      "name": "Blumentag"
+    },
+    "category": {
+      "id": 3,
+      "name": "Хобби и творчество"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/9/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/9/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/9/1.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Молд \"Fiorico\" \"Лепесток розы\"",
+    "description": "Используется для создания отпечатка фактуры на изделии при лепке и работе с фоамираном. Возможна небольшая разница в оттенках молдов. 6.4x6.2см",
+    "price": 185,
+    "discountPercentage": 5.5,
+    "rating": 4.5,
+    "stock": 227,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 3,
+      "name": "Blumentag"
+    },
+    "category": {
+      "id": 3,
+      "name": "Хобби и творчество"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/10/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/10/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/10/1.jpg"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Молд \"Fiorico\" \"Одуванчик лист\"",
+    "description": "Используется для создания отпечатка фактуры на изделии при лепке и работе с фоамираном. Возможна небольшая разница в оттенках молдов. 6.4x6.2см",
+    "price": 158,
+    "discountPercentage": 8.7,
+    "rating": 4.9,
+    "stock": 169,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 3,
+      "name": "Blumentag"
+    },
+    "category": {
+      "id": 3,
+      "name": "Хобби и творчество"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/11/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/11/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/11/1.jpg"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Декоративные элементы \"веточки\"",
+    "description": "Декоративные элементы \"Blumentag\" GPT-06 предназначены для создания миниатюрных садовых композиций в стиле \"Гарденинг\". Также можно использовать для декора флористических композиций, оформления подарков и т.п. 8х7см",
+    "price": 134,
+    "discountPercentage": 0,
+    "rating": 5,
+    "stock": 336,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 3,
+      "name": "Blumentag"
+    },
+    "category": {
+      "id": 4,
+      "name": "Флористика"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/12/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/12/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/12/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/12/2.jpg"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Декоративные элементы \"цветные веточки\"",
+    "description": "Декоративные элементы \"Blumentag\" GPT-06 предназначены для создания миниатюрных садовых композиций в стиле \"Гарденинг\". Также можно использовать для декора флористических композиций, оформления подарков и т.п. 8х7см",
+    "price": 134,
+    "discountPercentage": 3.3,
+    "rating": 5,
+    "stock": 478,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 3,
+      "name": "Blumentag"
+    },
+    "category": {
+      "id": 4,
+      "name": "Флористика"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/13/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/13/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/13/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/13/2.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Бомбочка для ванн аромат Земляника",
+    "description": "Бомбочка для ванн поможет восстановить запас энергии и наполнит пространство вокруг восхитительными ароматами, имеет форму сердца.",
+    "price": 149,
+    "discountPercentage": 0,
+    "rating": 5,
+    "stock": 57,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 4,
+      "name": "Lol&Pop"
+    },
+    "category": {
+      "id": 5,
+      "name": "Красота и уход"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/14/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/14/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/14/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/14/2.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Бурлящий шарик для ванны Аромат манго",
+    "description": "Бурлящий шар создаст эффект «джакузи» в вашей ванне, поможет восстановить запас энергии и наполнит пространство вокруг восхитительными ароматами.",
+    "price": 149,
+    "discountPercentage": 1.5,
+    "rating": 5,
+    "stock": 78,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 4,
+      "name": "Lol&Pop"
+    },
+    "category": {
+      "id": 5,
+      "name": "Красота и уход"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/15/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/15/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/15/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/15/2.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/15/3.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/15/4.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Скраб для тела Мандарин + корица",
+    "description": "Арома скраб для тела мандарин&корица Препятствует ожирению и потере упругости контуров тела. Предупреждает образование растяжек. Способствует устранению целлюлита. Снимает напряжение и раздражительность. Прекрасно увлажнят сухую шелушащуюся кожу, разглаживает и омолаживает придавая ей эластичность.",
+    "price": 229,
+    "discountPercentage": 23,
+    "rating": 3.9,
+    "stock": 331,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 4,
+      "name": "Lol&Pop"
+    },
+    "category": {
+      "id": 5,
+      "name": "Красота и уход"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/16/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/16/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/16/1.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Краска пальчиковая с Алоэ Вера",
+    "description": "Гелевые пальчиковые краски ArtBerry® с Алоэ Вера специально разработаны для маленьких детей и предназначены для рисования на бумаге и картоне, пальцами и ладошками, а также специальной кисточкой или губкой. Краски легко и равномерно смешиваются между собой, образуя новые оттенки. После высыхания цвета рисунка остаются сочными и яркими, картинка приобретает глянцевый блеск.",
+    "price": 755,
+    "discountPercentage": 0,
+    "rating": 5,
+    "stock": 174,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 5,
+      "name": "Artberry"
+    },
+    "category": {
+      "id": 6,
+      "name": "Детское творчество"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/17/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/17/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/17/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/17/2.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/17/3.jpg"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Восковые мелки 8 цв.",
+    "description": "Классические восковые мелки на основе пчелиного воска, который обеспечивает мягкость письма. Корпус круглый диаметром 7 мм, предварительно заточен, обернут в бумагу, устойчив к поломкам. Рисунки со временем не теряют яркости, благодаря компонентам отвечающим за УФ-защиту. Европейский сертификат качества гарантирует отсутствие в составе токсичных веществ.",
+    "price": 102,
+    "discountPercentage": 0,
+    "rating": 4.8,
+    "stock": 778,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 5,
+      "name": "Artberry"
+    },
+    "category": {
+      "id": 6,
+      "name": "Детское творчество"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/18/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/18/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/18/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/18/2.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/18/3.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/18/4.jpg"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Набор для раскрашивания \"Карамелька\"",
+    "description": "Любимых героев “ТРИ КОТА” теперь можно раскрасить самостоятельно! В комплект каждого набора входят специальные яркие краски, подобранные в соответствии с индивидуальной палитрой персонажа. Наборы развивают воображение, мелкую моторику и внимание.",
+    "price": 259,
+    "discountPercentage": 0,
+    "rating": 4.2,
+    "stock": 120,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 6,
+      "name": "1TOY"
+    },
+    "category": {
+      "id": 6,
+      "name": "Детское творчество"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/19/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/19/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/19/1.jpg"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Холст для раскрашивания с блестками \"Единорог\"",
+    "description": "Раскрашивать картину-антистресс легко и приятно: вам понадобятся любые фломастеры, акварельные краски или цветные карандаши, которые можно слегка растушевать по холсту пальцем или ватой. На участки с блестками карандаш не ложится, а фломастер выглядит бледнее, но все равно придает цвет.",
+    "price": 199,
+    "discountPercentage": 0.5,
+    "rating": 5,
+    "stock": 147,
+    "stockUsed": 0,
+    "show": true,
+    "cart": false,
+    "brand": {
+      "id": 6,
+      "name": "1TOY"
+    },
+    "category": {
+      "id": 6,
+      "name": "Детское творчество"
+    },
+    "thumbnail": "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/20/thumbnail.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/20/0.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/20/1.jpg",
+      "https://raw.githubusercontent.com/fogarea/assets/online-shop/products/20/2.jpg"
+    ]
+  }
+]
